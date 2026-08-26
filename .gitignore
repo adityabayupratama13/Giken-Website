@@ -1,0 +1,17 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python / Local Dev
+__pycache__/
+*.pyc
+*.log
+.env
+.venv/
+env/
+
+# Scratch & Extraction text files
+scratch/
+extracted_doc_text.txt
+extracted_pptx_8.2.txt

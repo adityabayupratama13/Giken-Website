@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIKEN Sakata (S) Limited | Integrated Precision Contract Manufacturing</title>
+  <meta name="description" content="GIKEN Sakata (S) Limited (SGX: GSS Energy Limited) - A Trusted Manufacturing Partner Built on Engineering Excellence since 1979. Integrated precision engineering, EMS, SMT assembly, plastic injection moulding, precision shafts, cleanroom medical manufacturing, and battery pack solutions across Singapore, Indonesia, and China.">
+  
+  <!-- Modern Corporate Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="corporate-body">
+
+  <!-- =========================================================================
+       1. FIXED CORPORATE HEADER & NAVIGATION
+       ========================================================================= -->
+  <header class="corp-header" id="corpHeader">
+    <div class="corp-header-inner">
+      <a href="#hero" class="corp-logo" onclick="smoothScrollTo('#hero'); return false;">
+        <span class="logo-text">GIKEN</span>
+        <span class="logo-tag">SGX: GSS ENERGY</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="corp-nav" id="corpNav">
+        <!-- ABOUT US -->
+        <div class="corp-nav-item corp-dropdown">
+          <a href="#about" class="corp-nav-link" data-i18n="nav_about">About Us <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <div class="corp-dropdown-menu">
+            <a href="javascript:void(0)" onclick="openDetailModal('about-giken')">About Giken</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('company-policies')">Company Policies & Missions</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('group-milestones')">Group Milestones (1979–2026+)</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('group-structure')">Group Operating Entities</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('governance')">Board of Directors & Governance</a>
+          </div>
+        </div>
+
+        <!-- CAPABILITIES -->
+        <div class="corp-nav-item corp-dropdown">
+          <a href="#capabilities" class="corp-nav-link" data-i18n="nav_capabilities">Services & Capabilities <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <div class="corp-dropdown-menu dropdown-wide">
+            <div class="dropdown-grid-2col">
+              <div>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-design')">Product Design & Development</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-tooling')">Tooling Design & Fabrication (30T–650T)</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-injection')">Precision Injection Moulding (18T–650T)</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-lpm')">Low Pressure Moulding (LPIM)</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-pcba')">PCB Assembly (720M Pts/Mo & 23 SMT)</a>
+              </div>
+              <div>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-assembly')">Product Box-Build & Integration</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-machining')">Precision Machining (OD 0.5–500mm)</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-printing')">Pad Printing & Silk Screen</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-testing')">Product Testing & Metrology</a>
+                <a href="javascript:void(0)" onclick="openDetailModal('srv-cleanroom')">Class 100 & 100K Cleanroom Facilities</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INDUSTRIES / MARKETS -->
+        <div class="corp-nav-item corp-dropdown">
+          <a href="#industries" class="corp-nav-link" data-i18n="nav_markets">Industries <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <div class="corp-dropdown-menu">
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-automotive')">Automotive Systems</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-medical')">Healthcare & Medical Equipment</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-consumer')">Consumer Electronics</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-home')">Home Appliances</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-industrial')">Industrial Equipment & Automation</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-gaming')">Gaming Consoles & Toys</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('ind-energy')">Energy Storage & Battery Solutions</a>
+          </div>
+        </div>
+
+        <!-- FACILITIES -->
+        <div class="corp-nav-item corp-dropdown">
+          <a href="#facilities" class="corp-nav-link" data-i18n="nav_facilities">Facilities <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <div class="corp-dropdown-menu">
+            <a href="javascript:void(0)" onclick="openDetailModal('fac-sg-hq')">Singapore (Global HQ) – 4K+ sq. ft</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('fac-sg-gpe')">Singapore (GPE Precision) – 14K sq. ft</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('fac-batam')">Batam, Indonesia (GPI & GTI) – 393K sq. ft</a>
+            <a href="javascript:void(0)" onclick="openDetailModal('fac-china')">Changzhou, China (CGP & CGT) – 151K sq. ft</a>
+            <a href="#expansion" onclick="smoothScrollTo('#expansion')">Batam 78,000 m² Expansion Campus</a>
+          </div>
+        </div>
+
+        <!-- QUALITY -->
+        <div class="corp-nav-item">
+          <a href="#quality" class="corp-nav-link" onclick="smoothScrollTo('#quality')" data-i18n="nav_quality">Quality & ESG</a>
+        </div>
+
+        <!-- CAREERS -->
+        <div class="corp-nav-item">
+          <a href="#careers" class="corp-nav-link" onclick="smoothScrollTo('#careers')" data-i18n="nav_careers">Careers</a>
+        </div>
+
+        <!-- THEME SWITCHER -->
+        <div class="corp-nav-item">
+          <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+            <span class="theme-label" id="themeLabel">Dark</span>
+          </button>
+        </div>
+
+        <!-- LANGUAGE SELECTOR -->
+        <div class="corp-nav-item corp-dropdown">
+          <button class="corp-lang-btn" id="navLangBtn" aria-label="Language Selector">
+            <i class="fa-solid fa-globe"></i>
+            <span id="navLangLabel">EN</span>
+            <i class="fa-solid fa-chevron-down" style="font-size:0.6rem;"></i>
+          </button>
+          <div class="corp-dropdown-menu right-aligned">
+            <a href="javascript:void(0)" onclick="switchLanguage('EN')">English (EN)</a>
+            <a href="javascript:void(0)" onclick="switchLanguage('CN')">中文 (简体)</a>
+            <a href="javascript:void(0)" onclick="switchLanguage('ID')">Bahasa Indonesia (ID)</a>
+            <a href="javascript:void(0)" onclick="switchLanguage('JP')">日本語 (JP)</a>
+          </div>
+        </div>
+
+        <!-- CONTACT / RFQ BUTTON -->
+        <div class="corp-nav-item">
+          <button class="corp-rfq-btn" onclick="openRfqModal()">
+            <i class="fa-regular fa-envelope"></i> Contact Us
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Toggle -->
+      <button class="corp-mobile-toggle" id="corpMobileToggle" aria-label="Toggle Navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       FLOATING ACTIONS
+       ========================================================================= -->
+  <div class="floating-actions-container">
+    <button class="btn-floating-rfq" onclick="openRfqModal()" aria-label="Request Quotation">
+      <i class="fa-regular fa-paper-plane"></i>
+      <span class="rfq-floating-text">Request Quotation</span>
+    </button>
+    <button class="btn-floating-top" id="btnBackToTop" onclick="smoothScrollTo('#hero')" aria-label="Back to Top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </div>
+
+  <!-- =========================================================================
+       SECTION 1: HERO SECTION
+       ========================================================================= -->
+  <section class="section-hero" id="hero">
+    <div class="hero-media-wrapper">
+      <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/giken_web/sliderman2.jpg">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-technology-digital-cube-loop-42867-large.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="section-container hero-container">
+      <div class="hero-badge-row">
+        <span class="corp-pill">ESTABLISHED 1979 &bull; SGX: GSS ENERGY LIMITED</span>
+        <span class="corp-pill-sub">INTEGRATED PRECISION CONTRACT MANUFACTURING</span>
+      </div>
+
+      <h1 class="hero-title" data-i18n="hero_title">
+        A Trusted Manufacturing Partner<br>
+        <span class="text-accent-gradient">Built on Engineering Excellence.</span>
+      </h1>
+
+      <p class="hero-description" data-i18n="hero_subtitle">
+        Providing integrated manufacturing solutions that combine precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and complete product integration across Singapore, Indonesia, and China.
+      </p>
+
+      <div class="hero-btn-group">
+        <button class="btn-primary" onclick="smoothScrollTo('#capabilities')">
+          <span data-i18n="hero_btn_capabilities">Our Capabilities</span>
+        </button>
+        <button class="btn-secondary" onclick="openCinemaStream('cad')">
+          <i class="fa-solid fa-circle-play"></i> <span>Watch Process Showcase</span>
+        </button>
+        <button class="btn-outline-hero" onclick="openRfqModal()">
+          <span data-i18n="hero_btn_rfq">Request a Quote</span>
+        </button>
+      </div>
+
+      <!-- Hero Key Metrics Bar -->
+      <div class="hero-stats-bar">
+        <div class="stat-item">
+          <span class="stat-number">45+ Years</span>
+          <span class="stat-label">Craftsmanship & Heritage</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">2,500+</span>
+          <span class="stat-label">Global Workforce (250+ Engineers)</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">562K+ sq. ft</span>
+          <span class="stat-label">Combined Manufacturing Area</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">IATF 16949 / ISO 13485</span>
+          <span class="stat-label">Automotive & Medical Certified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2: CORPORATE METRICS STRIP
+       ========================================================================= -->
+  <section class="section-metrics" id="metrics">
+    <div class="section-container">
+      <div class="metrics-grid">
+        <div class="metric-box" onclick="openDetailModal('about-giken')">
+          <div class="metric-value"><span class="counter" data-target="1979">1979</span></div>
+          <div class="metric-heading">Founded in Singapore</div>
+          <div class="metric-detail">Over 40 Years of Manufacturing Heritage</div>
+        </div>
+
+        <div class="metric-box" onclick="openDetailModal('about-giken')">
+          <div class="metric-value"><span class="counter" data-target="2500">2,500</span>+</div>
+          <div class="metric-heading">Employee Strength</div>
+          <div class="metric-detail">Including 250+ QA & R&D Engineers</div>
+        </div>
+
+        <div class="metric-box" onclick="openDetailModal('fac-sg-hq')">
+          <div class="metric-value"><span class="counter" data-target="9">9</span> Plants</div>
+          <div class="metric-heading">Global Facilities</div>
+          <div class="metric-detail">Singapore, Batam Indonesia & Changzhou China</div>
+        </div>
+
+        <div class="metric-box" onclick="openDetailModal('srv-pcba')">
+          <div class="metric-value"><span class="counter" data-target="720">720</span>M+</div>
+          <div class="metric-heading">SMT Points / Month</div>
+          <div class="metric-detail">23 SMT Lines & 0315 Chip Mounting</div>
+        </div>
+
+        <div class="metric-box" onclick="openDetailModal('srv-injection')">
+          <div class="metric-value"><span class="counter" data-target="100">100</span>+</div>
+          <div class="metric-heading">Injection Machines</div>
+          <div class="metric-detail">18T to 650T & Class 100K Cleanroom</div>
+        </div>
+
+        <div class="metric-box metric-box-featured" onclick="smoothScrollTo('#expansion')">
+          <div class="metric-value"><span class="counter" data-target="78000">78,000</span> m²</div>
+          <div class="metric-heading">Batam 2026 Expansion</div>
+          <div class="metric-detail">Solar Modules, ESS & High-Tech Lines</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 3: ABOUT GIKEN SAKATA
+       ========================================================================= -->
+  <section class="section-about" id="about">
+    <div class="section-container">
+      <div class="section-title-wrap">
+        <span class="corp-kicker">ABOUT GIKEN</span>
+        <h2 class="corp-heading">A Trusted Manufacturing Partner Built on Engineering Excellence</h2>
+        <p class="corp-subheading">From our origins as a precision machining specialist in Singapore in 1979, Giken has grown into an integrated manufacturing group delivering end-to-end solutions to global OEMs throughout the entire product lifecycle.</p>
+      </div>
+
+      <!-- Core Values 4-Card Strip -->
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-number">01</div>
+          <h4>Quality First</h4>
+          <p>Uncompromising commitment to zero-defect manufacturing, stringent quality controls, and international compliance.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-number">02</div>
+          <h4>Continuous Improvement</h4>
+          <p>Kaizen initiatives, workforce skills enhancement, and process optimization to drive long-term operational efficiency.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-number">03</div>
+          <h4>Customer Satisfaction</h4>
+          <p>Acting as an extension of our customers' engineering and procurement teams with responsive, dependable execution.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-number">04</div>
+          <h4>Continuous Innovation</h4>
+          <p>Investing in advanced automation, Cleanroom facilities, Low Pressure Moulding, and sustainable energy solutions.</p>
+        </div>
+      </div>
+
+      <!-- Group Operating Entities Grid -->
+      <div class="entities-grid">
+        <!-- GIKEN SAKATA HQ -->
+        <div class="entity-card" onclick="openDetailModal('fac-sg-hq')">
+          <div class="entity-badge">HQ & R&D</div>
+          <div class="entity-title-row">
+            <h3>Giken Sakata (S) Ltd</h3>
+            <span class="entity-location">Techplace 1, Singapore</span>
+          </div>
+          <p class="entity-description">Group corporate governance, New Product Introduction (NPI), Design for Manufacturing (DFM), testing, and global supply chain management.</p>
+          <ul class="entity-key-points">
+            <li>4K+ sq. ft Facility Area</li>
+            <li>SGX: GSS Energy Limited Listed Company</li>
+          </ul>
+          <span class="entity-link">View Facility Details &rarr;</span>
+        </div>
+
+        <!-- GPE SINGAPORE -->
+        <div class="entity-card" onclick="openDetailModal('fac-sg-gpe')">
+          <div class="entity-badge">PRECISION SHAFTS</div>
+          <div class="entity-title-row">
+            <h3>GPE Precision Engineering</h3>
+            <span class="entity-location">Ang Mo Kio, Singapore</span>
+          </div>
+          <p class="entity-description">Swiss-type automatic lathes (Escomatic), ultra-precision CNC turning, in-house induction heat treatment quenching, and centerless grinding.</p>
+          <ul class="entity-key-points">
+            <li>14K sq. ft Facility Area</li>
+            <li>OD 0.5–500mm &plusmn;0.002mm Tolerance</li>
+          </ul>
+          <span class="entity-link">View Shaft Capabilities &rarr;</span>
+        </div>
+
+        <!-- GPI & GTI BATAM -->
+        <div class="entity-card" onclick="openDetailModal('fac-batam')">
+          <div class="entity-badge">BATAM CAMPUS</div>
+          <div class="entity-title-row">
+            <h3>PT Giken Precision & Tech Indonesia</h3>
+            <span class="entity-location">Batamindo & Citra Buana, Batam</span>
+          </div>
+          <p class="entity-description">High-volume plastic injection moulding (18T–650T), Class 100K medical cleanroom, 23 SMT lines, box build assembly, and battery pack integration.</p>
+          <ul class="entity-key-points">
+            <li>393K sq. ft Operating Floor</li>
+            <li>Class 100 Cleanroom & IATF 16949 / ISO 13485</li>
+          </ul>
+          <span class="entity-link">View Batam Operations &rarr;</span>
+        </div>
+
+        <!-- CGP & CGT CHINA -->
+        <div class="entity-card" onclick="openDetailModal('fac-china')">
+          <div class="entity-badge">CHINA CAMPUS</div>
+          <div class="entity-title-row">
+            <h3>Changzhou Giken Precision & Tech</h3>
+            <span class="entity-location">Changzhou, Jiangsu, China</span>
+          </div>
+          <p class="entity-description">Precision 5-axis CNC milling, precision shaft machining, plastic injection moulding, product assembly, and Asia-Pacific export logistics.</p>
+          <ul class="entity-key-points">
+            <li>151K sq. ft Facility Area</li>
+            <li>Established in 1994 & Certified ISO 9001/14001</li>
+          </ul>
+          <span class="entity-link">View China Operations &rarr;</span>
+        </div>
+
+        <!-- GIKEN MOBILITY & GRES -->
+        <div class="entity-card" onclick="openDetailModal('ind-energy')">
+          <div class="entity-badge">ENERGY & EV</div>
+          <div class="entity-title-row">
+            <h3>Giken Mobility & GRES Solutions</h3>
+            <span class="entity-location">Singapore, Batam & Thailand</span>
+          </div>
+          <p class="entity-description">Lithium battery pack assembly, Portable Energy Storage Stations (PESS), electric 2-wheeler assembly, and solar PV module manufacturing.</p>
+          <ul class="entity-key-points">
+            <li>Partnered with Leading Cell Suppliers</li>
+            <li>Automated Laser Welding & BMS Testing</li>
+          </ul>
+          <span class="entity-link">View Energy Storage &rarr;</span>
+        </div>
+
+        <!-- GROUP MILESTONES CARD -->
+        <div class="entity-card entity-card-featured" onclick="openDetailModal('group-milestones')">
+          <div class="entity-badge">CHRONOLOGY</div>
+          <div class="entity-title-row">
+            <h3>Group Growth Milestones</h3>
+            <span class="entity-location">1979 &ndash; 2026+</span>
+          </div>
+          <p class="entity-description">From precision cassette mechanism maker to regional high-tech manufacturing solutions provider across Singapore, Indonesia, and China.</p>
+          <ul class="entity-key-points">
+            <li>Listed on SGX SESDAQ in 1993</li>
+            <li>Batam 78,000 m² Mega Expansion in 2026</li>
+          </ul>
+          <span class="entity-link">Explore Full Milestones &rarr;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: FULL ONE-STOP SERVICES & CAPABILITIES (BENTO GRID)
+       ========================================================================= -->
+  <section class="section-capabilities" id="capabilities">
+    <div class="section-container">
+      <div class="section-title-wrap">
+        <span class="corp-kicker">SERVICES & SUPPORT</span>
+        <h2 class="corp-heading">Integrated One-Stop Manufacturing Capabilities</h2>
+        <p class="corp-subheading">Delivering seamless synergy from product concept, tooling design, injection moulding, and SMT assembly to sub-micron machining and turnkey box-build.</p>
+      </div>
+
+      <!-- Pegatron-Style Bento Grid -->
+      <div class="bento-grid-wrapper">
+        
+        <!-- CARD 1: MAIN CAD / DFM VIDEO CARD -->
+        <div class="bento-item bento-main-video" onclick="openCinemaStream('cad')">
+          <div class="bento-media-box">
+            <video class="bento-video-player" autoplay muted loop playsinline poster="assets/giken_web/tech7.1-1.jpg">
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-automated-assembly-line-in-a-modern-factory-42998-large.mp4" type="video/mp4">
+            </video>
+            <div class="bento-media-overlay">
+              <div class="bento-hud-tag">
+                <span class="hud-pill-green">LIVE DFM & MOULDFLOW SIMULATION</span>
+                <span class="hud-text">30T TO 650T TOOLING &bull; PANASONIC ODM CO-DEVELOPMENT</span>
+              </div>
+              <div class="bento-play-cta">
+                <i class="fa-solid fa-circle-play"></i> Watch Process Showcase
+              </div>
+            </div>
+          </div>
+          <div class="bento-caption">
+            <h3>Product Design & Tooling Fabrication</h3>
+            <p>Complete product design solutions, Industrial Design (ID), 3D modeling, mechanical & electronic design, DFM analysis, and mould fabrication from 30 to over 650 tonnes.</p>
+          </div>
+        </div>
+
+        <!-- CARD 2: TALL CARD - PCB ASSEMBLY (720M PTS/MO) -->
+        <div class="bento-item bento-tall" onclick="openCinemaStream('smt')">
+          <div class="bento-img-bg" style="background-image: url('assets/giken_web/PCB-ASSEMBLY.jpg');"></div>
+          <div class="bento-dark-gradient"></div>
+          <div class="bento-tall-content">
+            <span class="bento-category-tag">PCB ASSEMBLY (PCBA)</span>
+            <h3>720M Points/Month Mounting Capacity</h3>
+            <p>23 SMT Lines supporting 0315 chip components and above, fine-pitch down to 0.25mm, 12-Zone Nitrogen Reflow, 3D SPI, and Saki 3D AOI inspection.</p>
+          </div>
+        </div>
+
+        <!-- CARD 3: TALL CARD - PRECISION MACHINING (OD 0.5-500MM) -->
+        <div class="bento-item bento-tall" onclick="openCinemaStream('cnc')">
+          <div class="bento-img-bg" style="background-image: url('assets/giken_web/8.jpg');"></div>
+          <div class="bento-dark-gradient"></div>
+          <div class="bento-tall-content">
+            <span class="bento-category-tag">PRECISION MACHINING</span>
+            <h3>Sub-Micron Turning & Shaft Machining</h3>
+            <p>Swiss-type Escomatic lathes, ultra-precision CNC turning, induction quenching heat treatment, centerless grinding, and Ry 0.4 (Ra 0.025) surface finish.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT SUBGRID: 4 CARDS -->
+        <div class="bento-subgrid-col">
+          
+          <!-- SUB-CARD 1: INJECTION MOULDING & CLEANROOM -->
+          <div class="bento-item bento-square" onclick="openCinemaStream('cleanroom')">
+            <div class="bento-img-bg" style="background-image: url('assets/giken_web/sliderman2.jpg');"></div>
+            <div class="bento-dark-gradient"></div>
+            <div class="bento-card-top-content">
+              <span class="bento-badge">18T TO 650T MOULDING</span>
+              <h3>Class 100K Cleanroom<br><span class="accent-sub">Medical & Optical Plastics</span></h3>
+            </div>
+          </div>
+
+          <!-- SUB-CARD 2: BATTERY PACK & PESS -->
+          <div class="bento-item bento-square" onclick="openCinemaStream('battery')">
+            <div class="bento-img-bg" style="background-image: url('assets/giken_web/Battery-pack1-e1743752338791.png'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#081528;"></div>
+            <div class="bento-dark-gradient"></div>
+            <div class="bento-card-top-content">
+              <span class="bento-badge">BATTERY & ENERGY STORAGE</span>
+              <h3>Lithium Pack Assembly<br><span class="accent-sub">PESS & BMS Integration</span></h3>
+            </div>
+          </div>
+
+          <!-- SUB-CARD 3: LOW PRESSURE MOULDING (LPIM) -->
+          <div class="bento-item bento-rect" onclick="openDetailModal('srv-lpm')">
+            <div class="bento-img-bg" style="background-image: url('assets/giken_web/tech7.1-1.jpg');"></div>
+            <div class="bento-dark-gradient"></div>
+            <div class="bento-rect-content">
+              <span class="bento-tag-news">LOW PRESSURE MOULDING</span>
+              <h4>Polyamide Encapsulation for Sensitive PCBAs & Sensors</h4>
+            </div>
+          </div>
+
+          <!-- SUB-CARD 4: TURNKEY BOX-BUILD ASSEMBLY -->
+          <div class="bento-item bento-rect" onclick="openDetailModal('srv-assembly')">
+            <div class="bento-img-bg" style="background-image: url('assets/giken_web/F3.3.jpg');"></div>
+            <div class="bento-dark-gradient"></div>
+            <div class="bento-rect-content">
+              <span class="bento-tag-news">PRODUCT ASSEMBLY</span>
+              <h4>Turnkey Box Build, System Integration & Global Logistics</h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Machinery & Technical Parameters Table Matrix -->
+      <div class="matrix-card">
+        <div class="matrix-card-header">
+          <h3>Machinery & Engineering Specifications</h3>
+          <div class="matrix-nav-tabs">
+            <button class="matrix-tab-btn active" onclick="switchMatrixTab('pcba')">PCB Assembly (SMT)</button>
+            <button class="matrix-tab-btn" onclick="switchMatrixTab('moulding')">Injection Moulding</button>
+            <button class="matrix-tab-btn" onclick="switchMatrixTab('machining')">Precision Machining</button>
+            <button class="matrix-tab-btn" onclick="switchMatrixTab('testing')">Testing & Metrology</button>
+          </div>
+        </div>
+
+        <div class="matrix-body-content" id="matrixContent">
+          <!-- Dynamically injected via script.js -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 5: BATAM MEGA EXPANSION 2026 (78,000 m² CAMPUS SPOTLIGHT)
+       ========================================================================= -->
+  <section class="section-expansion" id="expansion">
+    <div class="section-container">
+      <div class="expansion-hero-card">
+        <div class="expansion-intro-row">
+          <div>
+            <span class="corp-kicker">CAMPUS EXPANSION 2026</span>
+            <h2 class="expansion-heading">Batam Mega Production Campus &ndash; 78,000 m²</h2>
+            <p class="expansion-intro-p">Significantly scaling Giken's high-volume manufacturing capacity in Batam, Indonesia across four dedicated industrial facilities for Solar Module encapsulation, Portable Energy Storage Stations (PESS), and Next-Gen assembly lines.</p>
+          </div>
+          <div class="expansion-badge-box">
+            <span class="expansion-badge-num">78,000 m²</span>
+            <span class="expansion-badge-lbl">Total Land Parcel</span>
+          </div>
+        </div>
+
+        <!-- 4 Buildings Grid -->
+        <div class="buildings-grid-4col">
+          <!-- BUILDING E1 -->
+          <div class="building-item" onclick="openDetailModal('expansion-e1')">
+            <div class="building-code">BUILDING E1</div>
+            <div class="building-area">10,940 m² Built-up</div>
+            <h4>Solar Panel Production</h4>
+            <p>Level 1 (6,480 m²) + Level 2 (4,460 m²). Fully automated solar module tabber stringing, lamination, and flash simulator testing.</p>
+            <div class="building-card-footer">
+              <span>Solar PV Modules</span>
+              <span class="link-arrow">Layout Details &rarr;</span>
+            </div>
+          </div>
+
+          <!-- BUILDING A7 -->
+          <div class="building-item" onclick="openDetailModal('expansion-a7')">
+            <div class="building-code">BUILDING A7</div>
+            <div class="building-area">7,736 m² Built-up</div>
+            <h4>Portable Power Station Production</h4>
+            <p>Level 1 (3,868 m²) + Level 2 (3,868 m²). Lithium battery pack laser welding, BMS integration, inverter testing, and packaging.</p>
+            <div class="building-card-footer">
+              <span>Portable Energy Storage</span>
+              <span class="link-arrow">Layout Details &rarr;</span>
+            </div>
+          </div>
+
+          <!-- BUILDING A10 -->
+          <div class="building-item" onclick="openDetailModal('expansion-a10')">
+            <div class="building-code">BUILDING A10</div>
+            <div class="building-area">4,338 m² Built-up</div>
+            <h4>Material Warehouse & Logistics</h4>
+            <p>Level 1 (4,338 m²). Automated high-density racking, humidity-controlled dry storage, and bonded trade fulfillment.</p>
+            <div class="building-card-footer">
+              <span>Smart Logistics</span>
+              <span class="link-arrow">Layout Details &rarr;</span>
+            </div>
+          </div>
+
+          <!-- BUILDING G3 & G3A -->
+          <div class="building-item" onclick="openDetailModal('expansion-g3')">
+            <div class="building-code">BUILDINGS G3 & G3A</div>
+            <div class="building-area">5,832 m² Total Built-up</div>
+            <h4>Next-Gen Production Lines</h4>
+            <p>G3 (2,916 m²) + G3A (2,916 m²). Reserved for strategic tier-1 OEM new model launches, specialized medical cleanrooms, and EV sub-assemblies.</p>
+            <div class="building-card-footer">
+              <span>Clean Production Floor</span>
+              <span class="link-arrow">Layout Details &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="expansion-footer-banner">
+          <div class="expansion-footer-text">
+            <strong>Planning a High-Volume Product Launch?</strong> Reserve dedicated floor capacity at Batamindo Industrial Park.
+          </div>
+          <button class="btn-primary" onclick="openRfqModal()">
+            <span>Inquire About Facility Capacity</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 6: SEVEN CORE INDUSTRIES (MARKETS)
+       ========================================================================= -->
+  <section class="section-markets" id="industries">
+    <div class="section-container">
+      <div class="section-title-wrap">
+        <span class="corp-kicker">MARKETS & INDUSTRIES</span>
+        <h2 class="corp-heading">Seven Core Industries Served</h2>
+        <p class="corp-subheading">Partnering with global industry leaders across mission-critical sectors requiring uncompromising quality, reliability, and international regulatory compliance.</p>
+      </div>
+
+      <!-- 7 Industries Grid -->
+      <div class="markets-grid-3col">
+        <!-- 1. AUTOMOTIVE -->
+        <div class="market-card" onclick="openDetailModal('ind-automotive')">
+          <div class="market-card-icon"><i class="fa-solid fa-car-side"></i></div>
+          <h3>Automotive Systems</h3>
+          <p>Safety-critical automotive components including airbag capsule initiators, headlamp assemblies, precision camshafts, and electric/ICE motorcycle assembly.</p>
+          <div class="market-tags">
+            <span>IATF 16949</span>
+            <span>Airbag Capsule</span>
+            <span>Pioneer Audio</span>
+          </div>
+        </div>
+
+        <!-- 2. HEALTHCARE & MEDICAL -->
+        <div class="market-card" onclick="openDetailModal('ind-medical')">
+          <div class="market-card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3>Healthcare & Medical Equipment</h3>
+          <p>Class 100K (ISO Class 8) cleanroom moulding for medical disposables, Olympus surgical light guide cables, blood bag accessories, and cardiac monitoring chargers.</p>
+          <div class="market-tags">
+            <span>ISO 13485</span>
+            <span>Olympus</span>
+            <span>JMS Medical</span>
+          </div>
+        </div>
+
+        <!-- 3. CONSUMER ELECTRONICS -->
+        <div class="market-card" onclick="openDetailModal('ind-consumer')">
+          <div class="market-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3>Consumer Electronics</h3>
+          <p>High-speed SMT assembly, cosmetic plastic enclosures, Low Pressure Moulding (LPIM), and box build assembly for personal care, IoT devices, and smart wearables.</p>
+          <div class="market-tags">
+            <span>Philips</span>
+            <span>Smart Wearables</span>
+            <span>LPIM SMT</span>
+          </div>
+        </div>
+
+        <!-- 4. HOME APPLIANCES -->
+        <div class="market-card" onclick="openDetailModal('ind-home')">
+          <div class="market-card-icon"><i class="fa-solid fa-blender"></i></div>
+          <h3>Home Appliances</h3>
+          <p>Integrating precision tooling, plastic moulding, electronics manufacturing, and box-build assembly for smart connected appliances, ice makers, and power controls.</p>
+          <div class="market-tags">
+            <span>Ice Makers</span>
+            <span>Smart Controls</span>
+            <span>Durability</span>
+          </div>
+        </div>
+
+        <!-- 5. INDUSTRIAL EQUIPMENT -->
+        <div class="market-card" onclick="openDetailModal('ind-industrial')">
+          <div class="market-card-icon"><i class="fa-solid fa-gears"></i></div>
+          <h3>Industrial & Automation</h3>
+          <p>Precision-engineered components, DC motor precision shafts (OD 0.5–500mm), wireless IoT tree-tilt sensors, and automated fare collection (AFC) devices.</p>
+          <div class="market-tags">
+            <span>GPE Singapore</span>
+            <span>AFC IoT</span>
+            <span>Motor Shafts</span>
+          </div>
+        </div>
+
+        <!-- 6. GAMING & TOYS -->
+        <div class="market-card" onclick="openDetailModal('ind-gaming')">
+          <div class="market-card-icon"><i class="fa-solid fa-gamepad"></i></div>
+          <h3>Gaming Consoles & Toys</h3>
+          <p>SEGA, Nintendo, and Microsoft game console complete assembly, drive assembly, optical pick-up units, cash recognition systems, and phthalate-compliant toys.</p>
+          <div class="market-tags">
+            <span>SEGA</span>
+            <span>Nintendo</span>
+            <span>Xbox</span>
+          </div>
+        </div>
+
+        <!-- 7. ENERGY STORAGE SOLUTIONS -->
+        <div class="market-card" onclick="openDetailModal('ind-energy')">
+          <div class="market-card-icon"><i class="fa-solid fa-battery-bolt"></i></div>
+          <h3>Battery Pack Solutions</h3>
+          <p>Integrated manufacturing for lithium-ion battery packs, Portable Energy Storage Stations (PESS), automated cell matching, laser welding, and BMS testing.</p>
+          <div class="market-tags">
+            <span>PESS Systems</span>
+            <span>BMS Testing</span>
+            <span>Lithium-Ion</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategic Client Marquee -->
+      <div class="client-marquee-card">
+        <div class="marquee-heading">STRATEGIC OEM / ODM CUSTOMERS & ALLIANCES</div>
+        <div class="marquee-logos-row">
+          <div class="marquee-logo"><strong>PANASONIC</strong></div>
+          <div class="marquee-logo"><strong>PHILIPS</strong></div>
+          <div class="marquee-logo"><strong>OLYMPUS</strong></div>
+          <div class="marquee-logo"><strong>NINTENDO</strong></div>
+          <div class="marquee-logo"><strong>SEGA</strong></div>
+          <div class="marquee-logo"><strong>MICROSOFT</strong></div>
+          <div class="marquee-logo"><strong>PIONEER</strong></div>
+          <div class="marquee-logo"><strong>TAKATA</strong></div>
+          <div class="marquee-logo"><strong>JMS MEDICAL</strong></div>
+          <div class="marquee-logo"><strong>OMRON</strong></div>
+          <div class="marquee-logo"><strong>BROTHER</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 7: QUALITY CERTIFICATIONS & ESG SUSTAINABILITY
+       ========================================================================= -->
+  <section class="section-quality" id="quality">
+    <div class="section-container">
+      <div class="quality-card-container">
+        <div class="quality-info-col">
+          <span class="corp-kicker">QUALITY MANAGEMENT SYSTEM</span>
+          <h2 class="corp-heading">Structured Framework for Zero-Defect Manufacturing</h2>
+          <p class="quality-text">Through standardised procedures, rigorous quality control, comprehensive inspection and validation, and ongoing performance measurement, we ensure consistent product quality, regulatory compliance and operational excellence.</p>
+
+          <!-- 4 Quality Certifications -->
+          <div class="certifications-2col">
+            <div class="cert-card" onclick="openDetailModal('quality-cert')">
+              <div class="cert-icon-box"><i class="fa-solid fa-award"></i></div>
+              <div class="cert-content">
+                <strong>ISO 9001 : 2015</strong>
+                <span>Quality Management System</span>
+              </div>
+            </div>
+            <div class="cert-card" onclick="openDetailModal('quality-cert')">
+              <div class="cert-icon-box"><i class="fa-solid fa-kit-medical"></i></div>
+              <div class="cert-content">
+                <strong>ISO 13485 : 2016</strong>
+                <span>Medical Device Quality Management</span>
+              </div>
+            </div>
+            <div class="cert-card" onclick="openDetailModal('quality-cert')">
+              <div class="cert-icon-box"><i class="fa-solid fa-leaf"></i></div>
+              <div class="cert-content">
+                <strong>ISO 14001 : 2015</strong>
+                <span>Environmental Management System</span>
+              </div>
+            </div>
+            <div class="cert-card" onclick="openDetailModal('quality-cert')">
+              <div class="cert-icon-box"><i class="fa-solid fa-car"></i></div>
+              <div class="cert-content">
+                <strong>IATF 16949 : 2016</strong>
+                <span>Automotive Quality Management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="esg-info-col">
+          <div class="esg-card-box">
+            <span class="esg-tag">SUSTAINABILITY & ETHICS</span>
+            <h3>Amfori BSCI & UN Global Compact</h3>
+            <p>Giken Sakata is committed to sustainable contract manufacturing, environmental protection, and upholding international social and labor standards.</p>
+            
+            <ul class="esg-key-list">
+              <li>
+                <div class="esg-icon"><i class="fa-solid fa-check"></i></div>
+                <div>
+                  <strong>Amfori BSCI Audited & Compliant</strong>
+                  <p>Adhering to fair wages, safe workplaces, and social compliance across manufacturing sites.</p>
+                </div>
+              </li>
+              <li>
+                <div class="esg-icon"><i class="fa-solid fa-check"></i></div>
+                <div>
+                  <strong>United Nations Global Compact (UNGC)</strong>
+                  <p>Active participant upholding principles on Human Rights, Labor, Environment, and Anti-Corruption.</p>
+                </div>
+              </li>
+              <li>
+                <div class="esg-icon"><i class="fa-solid fa-check"></i></div>
+                <div>
+                  <strong>RoHS & REACH Compliant Lead-Free Soldering</strong>
+                  <p>12-zone nitrogen reflow ovens and environmental controls reducing hazardous substances.</p>
+                </div>
+              </li>
+            </ul>
+
+            <button class="btn-outline" onclick="openDetailModal('quality-cert')">
+              <span>View Quality & ESG Details</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 8: GLOBAL MANUFACTURING FACILITIES
+       ========================================================================= -->
+  <section class="section-facilities" id="facilities">
+    <div class="section-container">
+      <div class="section-title-wrap">
+        <span class="corp-kicker">MANUFACTURING FOOTPRINT</span>
+        <h2 class="corp-heading">562K+ sq. ft Combined Manufacturing Infrastructure</h2>
+        <p class="corp-subheading">Strategically located operations across Singapore, Batam Indonesia, and Changzhou China providing supply chain resilience and regional integration.</p>
+      </div>
+
+      <!-- Facility Cards Grid -->
+      <div class="facilities-grid-4col">
+        <!-- FACILITY 1: SINGAPORE HQ -->
+        <div class="facility-item" onclick="openDetailModal('fac-sg-hq')">
+          <div class="facility-thumb" style="background-image: url('assets/giken_web/p1.jpg');"></div>
+          <div class="facility-info">
+            <span class="facility-country-label">SINGAPORE (HQ)</span>
+            <h3>Giken Sakata (S) Ltd</h3>
+            <p>4K+ sq. ft. Consultancy, product design & development, DFM, customer service, product testing, and global supply chain management.</p>
+            <div class="facility-chips">
+              <span>SGX Listed</span>
+              <span>R&D / DFM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FACILITY 2: GPE SINGAPORE -->
+        <div class="facility-item" onclick="openDetailModal('fac-sg-gpe')">
+          <div class="facility-thumb" style="background-image: url('assets/giken_web/p3.jpg');"></div>
+          <div class="facility-info">
+            <span class="facility-country-label">SINGAPORE</span>
+            <h3>GPE Precision Engineering</h3>
+            <p>14K sq. ft. Precision motor shafts, customized turned parts, induction quenching heat treatment, centerless grinding, and NPI prototyping.</p>
+            <div class="facility-chips">
+              <span>ISO 9001/14001</span>
+              <span>IATF 16949</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FACILITY 3: BATAM INDONESIA (GPI & GTI) -->
+        <div class="facility-item" onclick="openDetailModal('fac-batam')">
+          <div class="facility-thumb" style="background-image: url('assets/giken_web/GPI-Factory-photo-1.jpg');"></div>
+          <div class="facility-info">
+            <span class="facility-country-label">BATAM, INDONESIA</span>
+            <h3>PT Giken Precision & Tech (GPI/GTI)</h3>
+            <p>393K sq. ft. Precision plastic injection, 100K medical cleanroom, Class 100 PCBA cleanroom, battery packs, PESS, and electric motorcycles.</p>
+            <div class="facility-chips">
+              <span>ISO 13485</span>
+              <span>IATF 16949</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FACILITY 4: CHANGZHOU CHINA (CGP & CGT) -->
+        <div class="facility-item" onclick="openDetailModal('fac-china')">
+          <div class="facility-thumb" style="background-image: url('assets/giken_web/CGP-Factory.jpg');"></div>
+          <div class="facility-info">
+            <span class="facility-country-label">CHANGZHOU, CHINA</span>
+            <h3>Changzhou Giken Precision & Tech</h3>
+            <p>151K sq. ft. 5-axis CNC milling, precision shafts, plastic injection moulding, product assembly, and export supply chain support.</p>
+            <div class="facility-chips">
+              <span>ISO 9001/14001</span>
+              <span>IATF 16949</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 9: CAREERS SECTION
+       ========================================================================= -->
+  <section class="section-careers" id="careers">
+    <div class="section-container">
+      <div class="careers-card" onclick="openDetailModal('careers-info')">
+        <div class="careers-image-bg" style="background-image: url('assets/giken_web/276.jpg');"></div>
+        <div class="careers-dark-layer"></div>
+        <div class="careers-text-content">
+          <span class="careers-pill">CAREERS AT GIKEN</span>
+          <h2>People-Oriented Culture & Multidimensional Career Growth</h2>
+          <p>We create a consultation-and-sharing based team environment to assist people in learning from each other. With established career progression frameworks, incentive welfare packages, and periodic team building, we foster personal fulfilment and professional excellence.</p>
+          <div class="careers-pill-row">
+            <span>Continuous Training</span>
+            <span>Career Progression Framework</span>
+            <span>Sharing-Based Team Culture</span>
+          </div>
+          <button class="btn-primary" onclick="openDetailModal('careers-info'); event.stopPropagation();">
+            <span>Learn More About Working at Giken &rarr;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 10: 6-COLUMN MEGA FOOTER & CONTACT
+       ========================================================================= -->
+  <footer class="corp-mega-footer">
+    <div class="section-container">
+      <div class="footer-grid-6col">
+        
+        <!-- COL 1: ABOUT US -->
+        <div class="footer-col">
+          <h4>About Giken</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('about-giken')">About Giken</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('company-policies')">Company Policies</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('group-milestones')">Group Milestones</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('group-structure')">Operating Entities</a></li>
+            <li><a href="#expansion" onclick="smoothScrollTo('#expansion')">Batam 78,000 m² Campus</a></li>
+          </ul>
+        </div>
+
+        <!-- COL 2: SERVICES & CAPABILITIES -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('srv-design')">Design & Development</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('srv-tooling')">Tooling Fabrication</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('srv-injection')">Injection Moulding</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('srv-lpm')">Low Pressure Moulding</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('srv-pcba')">PCB Assembly (PCBA)</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('srv-machining')">Precision Machining</a></li>
+          </ul>
+        </div>
+
+        <!-- COL 3: INDUSTRIES -->
+        <div class="footer-col">
+          <h4>Industries</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('ind-automotive')">Automotive Systems</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('ind-medical')">Healthcare & Medical</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('ind-consumer')">Consumer Electronics</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('ind-home')">Home Appliances</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('ind-industrial')">Industrial & Automation</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('ind-energy')">Energy Storage & Battery</a></li>
+          </ul>
+        </div>
+
+        <!-- COL 4: QUALITY & STANDARDS -->
+        <div class="footer-col">
+          <h4>Quality & ESG</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('quality-cert')">ISO 9001 : 2015</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('quality-cert')">ISO 13485 : 2016</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('quality-cert')">ISO 14001 : 2015</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('quality-cert')">IATF 16949 : 2016</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('quality-cert')">Amfori BSCI Compliance</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('quality-cert')">UN Global Compact</a></li>
+          </ul>
+        </div>
+
+        <!-- COL 5: MANUFACTURING HUBS -->
+        <div class="footer-col">
+          <h4>Global Sites</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('fac-sg-hq')">Singapore (Global HQ)</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('fac-sg-gpe')">Singapore (GPE Precision)</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('fac-batam')">Batam, Indonesia (GPI/GTI)</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('fac-china')">Changzhou, China (CGP/CGT)</a></li>
+            <li><a href="javascript:void(0)" onclick="openRfqModal()">Request Quotation (RFQ)</a></li>
+          </ul>
+        </div>
+
+        <!-- COL 6: CORPORATE CONTACT -->
+        <div class="footer-col">
+          <h4>Global HQ</h4>
+          <div class="footer-contact-block">
+            <p><strong>Giken Sakata (S) Ltd</strong></p>
+            <p>4012 Ang Mo Kio Ave 10<br>#05-01 Techplace 1<br>Singapore 569628</p>
+            <p style="margin-top:6px;"><i class="fa-solid fa-phone" style="font-size:0.75rem;"></i> (65) 6354 6661</p>
+            <p><i class="fa-solid fa-envelope" style="font-size:0.75rem;"></i> mcenquiry@giken.com.sg</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy">
+          <p>&copy; 2026 Giken Sakata (S) Ltd (SGX: GSS Energy Limited). All Rights Reserved.</p>
+        </div>
+        <div class="footer-social-links">
+          <div class="footer-icons-row">
+            <a href="https://giken.com.sg/" target="_blank" rel="noopener" aria-label="Official Website"><i class="fa-solid fa-globe"></i></a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+          <span class="footer-pipe">|</span>
+          <a href="javascript:void(0)" onclick="openDetailModal('privacy')">Privacy Policy</a>
+          <span class="footer-pipe">|</span>
+          <a href="javascript:void(0)" onclick="openDetailModal('disclaimer')">Disclaimer</a>
+          <span class="footer-pipe">|</span>
+          <a href="javascript:void(0)" onclick="openRfqModal()">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS: CINEMA THEATER, CORPORATE DETAIL & RFQ
+       ========================================================================= -->
+
+  <!-- CINEMA VIDEO STREAM MODAL -->
+  <div class="corp-modal-backdrop" id="cinemaModal">
+    <div class="cinema-modal-box">
+      <button class="modal-close-btn" onclick="closeCinemaStream()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="cinema-frame">
+        <video id="modalCinemaVideo" controls autoplay playsinline></video>
+      </div>
+      <div class="cinema-meta">
+        <span class="cinema-tag-lbl" id="cinemaTag">MANUFACTURING SHOWCASE</span>
+        <h3 id="cinemaTitle">Process Simulation & Showcase</h3>
+        <p id="cinemaDesc">Precision contract manufacturing and automated assembly simulation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORPORATE DETAIL MODAL -->
+  <div class="corp-modal-backdrop" id="detailModal">
+    <div class="detail-modal-box">
+      <button class="modal-close-btn" onclick="closeDetailModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="detail-modal-header">
+        <span class="detail-tag-lbl" id="detailModalTag">ABOUT GIKEN</span>
+        <h2 id="detailModalTitle">Corporate Overview</h2>
+      </div>
+      <div class="detail-modal-body" id="detailModalBody">
+        <!-- Dynamic Content from official Giken dossier -->
+      </div>
+    </div>
+  </div>
+
+  <!-- REQUEST FOR QUOTATION (RFQ) / CONTACT MODAL -->
+  <div class="corp-modal-backdrop" id="rfqModal">
+    <div class="rfq-modal-box">
+      <button class="modal-close-btn" onclick="closeRfqModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="rfq-modal-header">
+        <span class="detail-tag-lbl">CONTACT GIKEN</span>
+        <h2>Send Us a Message / Request for Quotation</h2>
+        <p style="color:var(--text-muted); font-size:0.88rem; margin-top:4px;">Please fill in the form and provide as much detail as possible so we can better assist you. Our engineering team will get back to you promptly.</p>
+      </div>
+      <form class="rfq-form" id="pegaRfqForm" onsubmit="handleRfqSubmit(event)">
+        <div class="form-grid-2col">
+          <div class="form-field">
+            <label for="rfqName">Your Name / Title *</label>
+            <input type="text" id="rfqName" required placeholder="e.g. Jonathan Lee">
+          </div>
+          <div class="form-field">
+            <label for="rfqCompany">Company Name *</label>
+            <input type="text" id="rfqCompany" required placeholder="e.g. Panasonic, Philips, Olympus">
+          </div>
+        </div>
+        <div class="form-grid-2col">
+          <div class="form-field">
+            <label for="rfqEmail">Corporate Email *</label>
+            <input type="email" id="rfqEmail" required placeholder="name@company.com">
+          </div>
+          <div class="form-field">
+            <label for="rfqPhone">Phone Number</label>
+            <input type="tel" id="rfqPhone" placeholder="+65 xxxx xxxx / +62 xxxx xxxx">
+          </div>
+        </div>
+        <div class="form-grid-2col">
+          <div class="form-field">
+            <label for="rfqService">Primary Service Required *</label>
+            <select id="rfqService" required>
+              <option value="Product Design & DFM">Product Design & DFM</option>
+              <option value="Tooling Design & Fabrication (30T–650T)">Tooling Design & Fabrication (30T–650T)</option>
+              <option value="Precision Injection Moulding (18T–650T)">Precision Injection Moulding (18T–650T)</option>
+              <option value="Low Pressure Moulding (LPIM)">Low Pressure Moulding (LPIM)</option>
+              <option value="PCB Assembly (SMT & THT)">PCB Assembly (SMT & THT)</option>
+              <option value="Precision Machining (OD 0.5–500mm)">Precision Machining (OD 0.5–500mm)</option>
+              <option value="Product Assembly & Box-Build">Product Assembly & Box-Build</option>
+              <option value="Battery Pack Solutions (PESS & BMS)">Battery Pack Solutions (PESS & BMS)</option>
+              <option value="Class 100 / 100K Cleanroom Manufacturing">Class 100 / 100K Cleanroom Manufacturing</option>
+              <option value="Batam 78,000 m² Facility Inquiry">Batam 78,000 m² Facility Inquiry</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="rfqVolume">Production Volume Scope</label>
+            <select id="rfqVolume">
+              <option value="Prototype / NPI Build">Prototype / NPI Build</option>
+              <option value="Low Volume Production">Low Volume Production</option>
+              <option value="Medium Volume Production (10k–100k/yr)">Medium Volume Production (10k–100k/yr)</option>
+              <option value="High Volume Manufacturing (>100k+/yr)">High Volume Manufacturing (>100k+/yr)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="rfqMessage">Project Scope / Technical Specifications *</label>
+          <textarea id="rfqMessage" rows="4" required placeholder="Please describe target materials (ABS, PC, POM, PBT, SUS304, etc.), dimensional tolerances, drawing formats (STEP/CAD), target delivery schedule, and compliance requirements..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-block">
+          <span>Submit Inquiry to Giken Engineering Team</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript Controller -->
+  <script src="script.js"></script>
+</body>
+</html>
