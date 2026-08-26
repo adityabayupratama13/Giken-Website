@@ -7,6 +7,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeEngine();
+  initHeroKineticGiken();
   initNavigation();
   initMatrixTabs();
   initCounters();
@@ -46,7 +47,322 @@ function applyTheme(theme) {
 }
 
 /* ==========================================================================
-   2. NAVIGATION & SMOOTH SCROLL
+   2. PEGATRON-STYLE GIKEN KINETIC TYPOGRAPHY & SPHERE PHYSICS CANVAS
+   ========================================================================== */
+function initHeroKineticGiken() {
+  const canvas = document.getElementById('heroGikenCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = 0;
+  let height = 0;
+  let dpr = window.devicePixelRatio || 1;
+  let particles = [];
+  let animId = null;
+  let mouse = { x: -1000, y: -1000, active: false };
+
+  // 5 Letters geometry definitions (relative to canvas dimensions)
+  const letters = ['G', 'I', 'K', 'E', 'N'];
+  let letterBounds = [];
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+
+    computeLetterBounds();
+    initParticles();
+  }
+
+  function computeLetterBounds() {
+    letterBounds = [];
+    const isMobile = width < 768;
+    const marginX = isMobile ? width * 0.04 : width * 0.08;
+    const availW = width - marginX * 2;
+    const gap = isMobile ? availW * 0.02 : availW * 0.035;
+    const letterW = (availW - gap * (letters.length - 1)) / letters.length;
+    
+    // Vertical placement: center-upper half of the hero
+    const letterH = isMobile ? height * 0.38 : Math.min(height * 0.58, letterW * 1.55);
+    const topY = isMobile ? height * 0.16 : height * 0.18;
+
+    letters.forEach((char, i) => {
+      const leftX = marginX + i * (letterW + gap);
+      const chuteX = leftX + letterW * 0.5;
+      letterBounds.push({
+        char: char,
+        x: leftX,
+        y: topY,
+        w: letterW,
+        h: letterH,
+        bottomY: topY + letterH,
+        chuteX: chuteX,
+        chuteTop: 0,
+        chuteBottom: topY
+      });
+    });
+  }
+
+  class SphereParticle {
+    constructor(bound, initial = false) {
+      this.bound = bound;
+      this.radius = Math.max(3.5, Math.min(8.5, width * 0.0055));
+      this.reset(initial);
+    }
+
+    reset(initial = false) {
+      // Spawn either inside top dropper chute or scattered initially
+      const b = this.bound;
+      this.x = b.chuteX + (Math.random() - 0.5) * (b.w * 0.25);
+      this.y = initial ? b.y + Math.random() * b.h : b.chuteTop - Math.random() * (height * 0.4);
+      this.vx = (Math.random() - 0.5) * 1.2;
+      this.vy = initial ? (Math.random() * 2) : (2.5 + Math.random() * 3.5);
+      this.gravity = 0.18 + Math.random() * 0.06;
+      this.bounce = 0.45;
+      this.friction = 0.985;
+      this.settled = false;
+      this.settleTime = 0;
+      this.alpha = 1;
+      
+      // Color tone: Steel metallic, ice blue, and subtle titanium
+      const randType = Math.random();
+      if (randType < 0.55) {
+        this.baseColor = '#CBD5E1'; // Steel Silver
+        this.highlightColor = '#FFFFFF';
+        this.shadowColor = '#475569';
+      } else if (randType < 0.85) {
+        this.baseColor = '#93C5FD'; // Ice Navy Blue
+        this.highlightColor = '#FFFFFF';
+        this.shadowColor = '#1E3A8A';
+      } else {
+        this.baseColor = '#E2E8F0'; // White Pearl
+        this.highlightColor = '#FFFFFF';
+        this.shadowColor = '#64748B';
+      }
+    }
+
+    update() {
+      const b = this.bound;
+
+      // Mouse interactivity (gentle magnetic / dispersion effect)
+      if (mouse.active) {
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 90;
+        if (dist < maxDist && dist > 0) {
+          const force = (1 - dist / maxDist) * 3;
+          this.vx += (dx / dist) * force;
+          this.vy += (dy / dist) * force;
+          this.settled = false;
+          this.settleTime = 0;
+        }
+      }
+
+      this.vy += this.gravity;
+      this.vx *= this.friction;
+      this.vy *= this.friction;
+
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Chute descent constraint
+      if (this.y < b.y) {
+        const chuteHalfW = b.w * 0.18;
+        if (this.x < b.chuteX - chuteHalfW) {
+          this.x = b.chuteX - chuteHalfW;
+          this.vx = Math.abs(this.vx) * 0.5;
+        } else if (this.x > b.chuteX + chuteHalfW) {
+          this.x = b.chuteX + chuteHalfW;
+          this.vx = -Math.abs(this.vx) * 0.5;
+        }
+      } else {
+        // Inside letter boundary
+        const padding = this.radius + 4;
+        const minX = b.x + padding;
+        const maxX = b.x + b.w - padding;
+        const maxY = b.bottomY - padding;
+
+        if (this.x < minX) {
+          this.x = minX;
+          this.vx = Math.abs(this.vx) * this.bounce;
+        } else if (this.x > maxX) {
+          this.x = maxX;
+          this.vx = -Math.abs(this.vx) * this.bounce;
+        }
+
+        // Bottom floor bounce & settling
+        if (this.y >= maxY) {
+          this.y = maxY;
+          this.vy = -this.vy * this.bounce;
+          if (Math.abs(this.vy) < 0.6) {
+            this.vy = 0;
+            this.settled = true;
+          }
+        }
+      }
+
+      // Settled circulation / continuous loop
+      if (this.settled) {
+        this.settleTime++;
+        if (this.settleTime > 320 + Math.random() * 200) {
+          this.alpha -= 0.03;
+          if (this.alpha <= 0) {
+            this.reset(false);
+          }
+        }
+      }
+    }
+
+    draw(ctx) {
+      if (this.alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+
+      // 3D Realistic Metallic Sphere Gradient
+      const grad = ctx.createRadialGradient(
+        this.x - this.radius * 0.35,
+        this.y - this.radius * 0.35,
+        this.radius * 0.1,
+        this.x,
+        this.y,
+        this.radius
+      );
+      grad.addColorStop(0, this.highlightColor);
+      grad.addColorStop(0.4, this.baseColor);
+      grad.addColorStop(1, this.shadowColor);
+
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Specular highlight spot
+      ctx.beginPath();
+      ctx.arc(
+        this.x - this.radius * 0.35,
+        this.y - this.radius * 0.35,
+        this.radius * 0.28,
+        0,
+        Math.PI * 2
+      );
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    const countPerLetter = width < 768 ? 24 : 50;
+    letterBounds.forEach(b => {
+      for (let i = 0; i < countPerLetter; i++) {
+        particles.push(new SphereParticle(b, true));
+      }
+    });
+  }
+
+  // Render the glassmorphic GIKEN letter tubes and top chutes
+  function drawGlassChutes() {
+    letterBounds.forEach(b => {
+      ctx.save();
+
+      // 1. Top Dropper Feeder Tube
+      const chuteHalfW = b.w * 0.16;
+      ctx.fillStyle = 'rgba(10, 37, 64, 0.15)';
+      ctx.fillRect(b.chuteX - chuteHalfW, 0, chuteHalfW * 2, b.y);
+
+      // Chute Glass Borders
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(b.chuteX - chuteHalfW, 0);
+      ctx.lineTo(b.chuteX - chuteHalfW, b.y);
+      ctx.moveTo(b.chuteX + chuteHalfW, 0);
+      ctx.lineTo(b.chuteX + chuteHalfW, b.y);
+      ctx.stroke();
+
+      // Metal Mounting Collar Bracket at Top of Letter
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.roundRect(b.chuteX - chuteHalfW - 4, b.y - 12, chuteHalfW * 2 + 8, 12, 3);
+      ctx.fill();
+      ctx.stroke();
+
+      // 2. Main Glass Letter Channel Outline
+      const fontSize = Math.floor(b.h * 0.96);
+      ctx.font = `900 ${fontSize}px "Outfit", "Inter", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      const centerX = b.x + b.w * 0.5;
+      const centerY = b.y + b.h * 0.5;
+
+      // Inner subtle glass wash
+      ctx.fillStyle = 'rgba(10, 37, 64, 0.2)';
+      ctx.fillText(b.char, centerX, centerY);
+
+      // Outer thick glass tube wall
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeText(b.char, centerX, centerY);
+
+      // Inner crisp neon glass highlight
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeText(b.char, centerX, centerY);
+
+      ctx.restore();
+    });
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. Draw Glass Tubes
+    drawGlassChutes();
+
+    // 2. Update & Draw Rolling Particles
+    particles.forEach(p => {
+      p.update();
+      p.draw(ctx);
+    });
+
+    animId = requestAnimationFrame(loop);
+  }
+
+  // Mouse Listener
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+    mouse.active = true;
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    mouse.active = false;
+  });
+
+  window.addEventListener('resize', () => {
+    resize();
+  });
+
+  resize();
+  loop();
+}
+
+/* ==========================================================================
+   3. NAVIGATION & SMOOTH SCROLL
    ========================================================================== */
 function initNavigation() {
   const header = document.getElementById('corpHeader');
@@ -75,6 +391,27 @@ function initNavigation() {
         backToTopBtn.style.display = 'none';
       }
     }
+
+    // Update side indicator active state
+    updateSideIndicator(scrollY);
+  });
+}
+
+function updateSideIndicator(scrollY) {
+  const dots = document.querySelectorAll('.indicator-dot');
+  const sections = ['#hero', '#about', '#capabilities', '#expansion', '#industries'];
+  if (!dots.length) return;
+
+  sections.forEach((secId, i) => {
+    const sec = document.querySelector(secId);
+    if (sec) {
+      const top = sec.offsetTop - 120;
+      const bottom = top + sec.offsetHeight;
+      if (scrollY >= top && scrollY < bottom) {
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[i]) dots[i].classList.add('active');
+      }
+    }
   });
 }
 
@@ -92,7 +429,7 @@ function initMobileMenu() {
 }
 
 /* ==========================================================================
-   3. MACHINERY & TECHNICAL PARAMETERS MATRIX
+   4. MACHINERY & TECHNICAL PARAMETERS MATRIX
    ========================================================================== */
 const matrixData = {
   pcba: `
@@ -280,7 +617,7 @@ function initMatrixTabs() {
 }
 
 /* ==========================================================================
-   4. METRIC COUNTERS
+   5. METRIC COUNTERS
    ========================================================================== */
 function initCounters() {
   const counters = document.querySelectorAll('.counter');
@@ -316,7 +653,7 @@ function initCounters() {
 }
 
 /* ==========================================================================
-   5. CINEMA VIDEO STREAM MODAL
+   6. CINEMA VIDEO STREAM MODAL
    ========================================================================== */
 const cinemaStreams = {
   cad: {
@@ -380,7 +717,7 @@ window.closeCinemaStream = function() {
 };
 
 /* ==========================================================================
-   6. CORPORATE DETAIL DOSSIER MODALS (FROM OFFICIAL DOC & PPTX)
+   7. CORPORATE DETAIL DOSSIER MODALS (OFFICIAL MANAGEMENT DOSSIER)
    ========================================================================= */
 const detailContents = {
   // ABOUT GIKEN
@@ -394,10 +731,6 @@ const detailContents = {
       <p style="font-size:0.92rem; line-height:1.65; color:var(--text-secondary); margin-bottom:14px;">
         Today, with manufacturing operations in Singapore, China and Indonesia, Giken supports customers throughout the entire product lifecycle—from product development and New Product Introduction (NPI) to prototype builds, volume production, testing and supply chain management.
       </p>
-      <p style="font-size:0.92rem; line-height:1.65; color:var(--text-secondary); margin-bottom:18px;">
-        Giken serves customers across a broad range of industries, including automotive, medical and healthcare, consumer electronics, home appliances, industrial equipment, environmental technologies and energy storage. More than a contract manufacturer, Giken works as an extension of its customers' engineering, procurement and operations teams, delivering reliable, cost-effective manufacturing solutions that improve manufacturability, strengthen supply chain resilience and accelerate time-to-market.
-      </p>
-
       <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); border-radius:6px; padding:16px; margin-bottom:16px;">
         <strong style="color:var(--brand-primary); font-size:0.92rem; display:block; margin-bottom:6px;">Core Values:</strong>
         <p style="margin:0; font-size:0.88rem; color:var(--text-primary); font-weight:600;">
@@ -413,10 +746,7 @@ const detailContents = {
     title: 'Giken Quality Systems & Customer Commitment',
     body: `
       <p style="font-size:0.95rem; line-height:1.7; margin-bottom:14px;">
-        At Giken, we strive to meet the diverse needs of our customers by delivering high-quality, cost-effective products and services, supported by timely delivery and responsive after-sales support. Through continuous improvement, operational excellence, and a customer-focused approach, we aim to create lasting value and exceed expectations.
-      </p>
-      <p style="font-size:0.92rem; line-height:1.65; color:var(--text-secondary); margin-bottom:16px;">
-        We foster strong, long-term relationships with our customers, suppliers, and business associates, built on trust, collaboration, and mutual respect. By working together and leveraging our collective strengths, we create sustainable value, enhance competitiveness, and drive shared growth in an evolving global marketplace.
+        At Giken, we strive to meet the diverse needs of our customers by delivering high-quality, cost-effective products and services, supported by timely delivery and responsive after-sales support.
       </p>
       <div style="background:var(--bg-page-subtle); border-left:3px solid var(--brand-primary); padding:12px 16px; border-radius:0 6px 6px 0;">
         <strong style="font-size:0.9rem; color:var(--text-primary);">We Are Committed To:</strong>
@@ -432,9 +762,6 @@ const detailContents = {
     tag: 'ABOUT US / GROUP MILESTONES',
     title: 'Group Chronology (1979 – 2026+)',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:16px;">
-        From a precision engineering company established in Singapore to a regional manufacturing solutions provider with operations across Singapore, Indonesia and China, Giken's growth journey reflects its commitment to quality, innovation and long-term customer partnerships.
-      </p>
       <div style="display:flex; flex-direction:column; gap:10px; font-size:0.86rem;">
         <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1979</strong><span>Founded in Singapore manufacturing precision cassette mechanisms.</span></div>
         <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1991</strong><span>Establishment of PT. Giken Precision Indonesia (GPI) in Batam.</span></div>
@@ -486,355 +813,207 @@ const detailContents = {
     tag: 'ABOUT US / GOVERNANCE',
     title: 'Board of Directors & Corporate Governance',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; color:var(--text-secondary); margin-bottom:14px;">
+      <p style="font-size:0.92rem; line-height:1.65; color:var(--text-secondary);">
         Giken Sakata (S) Limited adheres to rigorous corporate governance practices as mandated by the Singapore Exchange (SGX: GSS Energy Limited).
       </p>
-      <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:14px; border-radius:6px;">
-        <strong style="font-size:0.9rem; color:var(--text-primary); display:block; margin-bottom:4px;">Executive Leadership & Engineering Directorate</strong>
-        <p style="font-size:0.84rem; color:var(--text-muted); line-height:1.5; margin:0;">
-          Over 45+ years of combined manufacturing management expertise directing 250+ Quality/R&D engineers, automated lines, and customer programs with Fortune 500 OEMs.
-        </p>
-      </div>
     `
   },
 
-  // SERVICES: DESIGN
+  // SERVICES
   'srv-design': {
     tag: 'SERVICES / DESIGN & DEVELOPMENT',
     title: 'Comprehensive Product Design & Rapid Prototyping',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        At Giken, we provide comprehensive product design and development services that integrate industrial design, engineering expertise and manufacturing knowledge to optimise product performance, enhance manufacturability and accelerate time-to-market.
-      </p>
-      <strong style="font-size:0.88rem; color:var(--brand-primary); display:block; margin-bottom:6px;">Giken Capabilities:</strong>
       <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Complete product design solutions</li>
-        <li>Industrial design & 3D modeling</li>
-        <li>Mechanical design & electronic design</li>
-        <li>Software design & firmware development</li>
-        <li>Functional prototyping & rapid validation</li>
-        <li>Product development & reliability testing</li>
-        <li>Regulatory compliance application support</li>
+        <li>Complete product design solutions & Industrial design (ID) 3D modeling</li>
+        <li>Mechanical design, electronic design & software firmware</li>
+        <li>Functional prototyping & validation</li>
+        <li>Product testing & regulatory compliance support</li>
       </ul>
     `
   },
-
-  // SERVICES: TOOLING
   'srv-tooling': {
     tag: 'SERVICES / TOOLING DESIGN & FABRICATION',
     title: 'Precision Tooling Fabrication (30T to over 650 Tonnes)',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Successful products begin with precision tooling. At Giken, our experienced team of tooling engineers, designers, and mould makers delivers high-quality injection moulds ranging from 30 to over 650 tonnes, supporting both prototype development and high-volume production.
-      </p>
-      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:14px;">
-        Every tooling project is supported by comprehensive <strong>Design for Manufacturing (DFM)</strong> analysis and <strong>Mould Flow Simulation</strong> to validate the design before fabrication.
-      </p>
-      <strong style="font-size:0.88rem; color:var(--brand-primary); display:block; margin-bottom:6px;">Giken Capabilities:</strong>
       <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
         <li>Injection mould design and fabrication (30T to 650T+)</li>
         <li>DFM analysis & Mold Flow simulation</li>
         <li>Prototype and high-volume production tooling</li>
         <li>Jigs, fixtures and custom production tooling</li>
-        <li>In-house tool maintenance, modification and engineering support</li>
       </ul>
     `
   },
-
-  // SERVICES: INJECTION
   'srv-injection': {
     tag: 'SERVICES / INJECTION MOULDING',
     title: 'Precision Plastic Injection Moulding (18T to 650 Tonnes)',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Since 1992, precision plastic injection moulding has been one of Giken's core manufacturing capabilities. Our comprehensive fleet of injection moulding machines, ranging from 18 to 650 tonnes, enables us to support projects from small, high-precision components to large and complex plastic parts.
+      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:10px;">
+        <strong>Engineering Thermoplastics:</strong> ABS, PC, PA, POM, PVC, PSU, LCP, PPSU, PBT, PPS, PP + Gamma Resistance, and glass-filled Nylon.
       </p>
-      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:14px;">
-        <strong>Engineering Thermoplastics:</strong> ABS, PC, PA, POM, PVC, PSU, LCP, PPSU, PBT, PPS, PP + Gamma Resistance, and glass-filled high-temperature Nylon.
-      </p>
-      <strong style="font-size:0.88rem; color:var(--brand-primary); display:block; margin-bottom:6px;">Giken Capabilities:</strong>
       <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Precision plastic injection moulding (18 – 650 tonnes)</li>
-        <li>NPI and scalable mass production support</li>
-        <li>In-house mould maintenance, repair and modification</li>
-        <li>Cleanroom injection moulding (Class 100,000 / ISO Class 8)</li>
-        <li>Equipment including CNC, EDM, wire cut, copper drilling and laser welding</li>
+        <li>18 to 650 Tonnes (100+ injection units)</li>
+        <li>Class 100K Cleanroom (ISO Class 8) medical moulding</li>
+        <li>In-house CNC, EDM, wire cut, and laser welding</li>
       </ul>
     `
   },
-
-  // SERVICES: LPM
   'srv-lpm': {
     tag: 'SERVICES / LOW PRESSURE MOULDING (LPIM)',
     title: 'Low Pressure Polyamide Over-Moulding & Encapsulation',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Low Pressure Injection Moulding (LPIM) is an advanced over-moulding technology designed to protect sensitive electronic components and assemblies from harsh operating environments. Using specialised polyamide materials, the process encapsulates printed circuit board assemblies (PCBAs), sensors, connectors and cable assemblies within a durable protective housing.
-      </p>
-      <strong style="font-size:0.88rem; color:var(--brand-primary); display:block; margin-bottom:6px;">Giken Capabilities:</strong>
       <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
         <li>Custom aluminium mould design and fabrication</li>
-        <li>PCB over-moulding solutions</li>
-        <li>Encapsulation of sensors, connectors, and critical cable assemblies</li>
-        <li>Low-pressure polyamide injection moulding</li>
-        <li>IC underfill application & Conformal coating services</li>
-        <li>Integrated assembly, testing and quality inspection</li>
+        <li>PCB over-moulding & sensor encapsulation</li>
+        <li>IC underfill application & Conformal coating</li>
       </ul>
     `
   },
-
-  // SERVICES: PCBA
   'srv-pcba': {
     tag: 'SERVICES / PCB ASSEMBLY',
     title: 'High-Speed SMT & Through-Hole Electronics Assembly',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Since 1994, Giken has been providing high-quality, flexible-volume PCB Assembly (PCBA) services across automotive, medical, IoT, and industrial sectors.
-      </p>
-      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:14px; text-align:center;">
-        <div style="background:var(--bg-page-subtle); padding:10px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong style="color:var(--brand-primary); font-size:1.1rem; display:block;">720M</strong>
-          <span style="font-size:0.7rem; color:var(--text-muted);">Chip Pts / Mo</span>
-        </div>
-        <div style="background:var(--bg-page-subtle); padding:10px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong style="color:var(--brand-primary); font-size:1.1rem; display:block;">10M</strong>
-          <span style="font-size:0.7rem; color:var(--text-muted);">Radial Pts / Mo</span>
-        </div>
-        <div style="background:var(--bg-page-subtle); padding:10px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong style="color:var(--brand-primary); font-size:1.1rem; display:block;">5M</strong>
-          <span style="font-size:0.7rem; color:var(--text-muted);">Axial Pts / Mo</span>
-        </div>
-      </div>
-      <strong style="font-size:0.88rem; color:var(--brand-primary); display:block; margin-bottom:6px;">Key Technical Highlights:</strong>
       <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Components: 0315 chips and above, SOP, PLCC, QFP, BGA, CSP</li>
-        <li>Fine pitch assembly down to 0.25 mm; up to 8-layer multi-layer PCBs</li>
-        <li>12-Zone Nitrogen Reflow Oven & Wave Soldering</li>
-        <li>Solder Paste Inspection (SPI), 3D AOI, Real-time X-Ray, ICT, and FCT</li>
-        <li>Bluetooth & Wi-Fi RF IoT integrated testing</li>
-        <li>Class 100 Cleanroom facility for high-precision optical & sensor assemblies</li>
+        <li>720M Chip points/mo + 10M Radial + 5M Axial (23 SMT lines)</li>
+        <li>0315 chip components and above; fine pitch down to 0.25 mm</li>
+        <li>12-Zone Nitrogen Reflow, Wave Solder, 3D SPI, 3D AOI & Dage Real-Time X-Ray</li>
+        <li>Bluetooth & Wi-Fi RF testing; Class 100 Cleanroom facility</li>
       </ul>
     `
   },
-
-  // SERVICES: ASSEMBLY
   'srv-assembly': {
     tag: 'SERVICES / PRODUCT ASSEMBLY',
     title: 'Turnkey Box-Build & Complete Product Integration',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Giken provides comprehensive box build and product assembly services that transform individual components into fully assembled, tested and market-ready products.
-      </p>
-      <strong style="font-size:0.88rem; color:var(--brand-primary); display:block; margin-bottom:6px;">Giken Capabilities:</strong>
       <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Mechanical and electromechanical assembly</li>
-        <li>Box build and complete product integration</li>
-        <li>Battery pack assembly and integration</li>
-        <li>Portable Energy Storage Solution (ESS/PESS) assembly</li>
-        <li>Prototype, low-to-high volume scalable production</li>
-        <li>Integrated assembly, functional testing, packaging, labelling and global distribution</li>
+        <li>Mechanical & electromechanical assembly</li>
+        <li>Box build & system integration</li>
+        <li>Battery pack & Portable Energy Storage (PESS) assembly</li>
+        <li>Testing, packaging, labelling and global distribution</li>
       </ul>
     `
   },
-
-  // SERVICES: MACHINING
   'srv-machining': {
     tag: 'SERVICES / PRECISION MACHINING',
     title: 'Sub-Micron Turning & Precision Motor Shafts',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        With more than 40 years of precision engineering experience, Giken specialises in producing complex precision-machined components with exceptionally tight tolerances, superior surface finishes and outstanding dimensional accuracy.
-      </p>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; font-size:0.82rem;">
-        <div style="background:var(--bg-page-subtle); padding:8px 12px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Outer Diameter:</strong> 0.5 mm to 500 mm
+        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
+          <strong>OD:</strong> 0.5 mm to 500 mm
         </div>
-        <div style="background:var(--bg-page-subtle); padding:8px 12px; border-radius:4px; border:1px solid var(--border-color);">
+        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
           <strong>Length:</strong> 0.8 mm to 1000 mm
         </div>
-        <div style="background:var(--bg-page-subtle); padding:8px 12px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Diameter Tolerance:</strong> &plusmn;0.002 mm (2 microns)
+        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
+          <strong>Tolerance:</strong> &plusmn;0.002 mm
         </div>
-        <div style="background:var(--bg-page-subtle); padding:8px 12px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Roundness:</strong> 0.0003 mm (0.3 microns)
-        </div>
-        <div style="background:var(--bg-page-subtle); padding:8px 12px; border-radius:4px; border:1px solid var(--border-color);">
+        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
           <strong>Surface Finish:</strong> Ry 0.4 (Ra 0.025)
         </div>
-        <div style="background:var(--bg-page-subtle); padding:8px 12px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Concentricity:</strong> 0.001 mm
-        </div>
       </div>
-      <p style="font-size:0.84rem; color:var(--text-muted);">
-        <strong>In-House Secondary Processes:</strong> Swiss-type Escomatic lathes, centreless grinding, cylindrical grinding, induction quenching heat treatment, barrel polishing, and ultrasonic degreasing.
-      </p>
     `
   },
-
-  // SERVICES: PRINTING
   'srv-printing': {
-    tag: 'SERVICES / TEMPO & PAD PRINTING',
-    title: 'Value-Added Pad Printing & Silk Screen Services',
+    tag: 'SERVICES / PRINTING',
+    title: 'Pad Printing & Silk Screen Services',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        At Giken, we offer a range of value-added printing services that enhance both the appearance and functionality of finished products for branding, traceability, and decorative graphics.
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Pad printing for complex curved surfaces and high-durability silk screen printing for front panels and enclosures.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li><strong>Pad Printing:</strong> High-resolution transfer onto flat, curved or irregular surfaces; ideal for corporate logos, product ID, control panels, and serial numbers.</li>
-        <li><strong>Silk Screen Printing:</strong> High-adhesion, durable graphics for front panels, enclosures, and operating instructions.</li>
-      </ul>
     `
   },
-
-  // SERVICES: TESTING
   'srv-testing': {
-    tag: 'SERVICES / PRODUCT TESTING',
-    title: 'Comprehensive Product Validation & Metrology',
+    tag: 'SERVICES / TESTING',
+    title: 'Product Validation & Metrology',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        As a one-stop manufacturing partner, we provide comprehensive testing and validation services to verify product performance, reliability and compliance with customer and industry standards.
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        EMC, wireless RF, cyclic temperature/humidity burn-in aging, vibration, drop impact, IPX4 water spray, and air leakage sealing testing.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Electromagnetic compatibility (EMC) & Wireless RF testing</li>
-        <li>Reliability testing & Burn-In cyclic aging</li>
-        <li>Temperature & humidity chamber testing</li>
-        <li>Vibration testing, drop & impact testing</li>
-        <li>Water resistance IPX4 spray chamber & Air leakage sealing testing</li>
-      </ul>
     `
   },
-
-  // SERVICES: CLEANROOM
   'srv-cleanroom': {
-    tag: 'SERVICES / CLEANROOM FACILITIES',
-    title: 'Class 100 & Class 100K Cleanroom Environments',
+    tag: 'SERVICES / CLEANROOM',
+    title: 'Class 100 & Class 100K Cleanrooms',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Giken operates certified Cleanroom manufacturing facilities in Batam, Indonesia engineered for high-precision electronics, optics, and medical devices:
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Class 100 cleanroom dedicated to high-precision PCBA/optical components, and Class 100K (ISO Class 8) cleanroom for ISO 13485 medical moulding.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li><strong>Class 100 Cleanroom:</strong> Dedicated for unique, ultra-high precision PCBA, micro-sensor integration, and optical pick-up units.</li>
-        <li><strong>Class 100,000 (ISO Class 8) Cleanroom:</strong> 32 electric injection moulding machines dedicated to ISO 13485 medical disposables, surgical cables, and clean packaging.</li>
-      </ul>
     `
   },
 
-  // 7 INDUSTRIES / MARKETS
+  // 7 INDUSTRIES
   'ind-automotive': {
     tag: 'MARKETS / AUTOMOTIVE',
     title: 'Safety-Critical Automotive Components & Assemblies',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Giken combines precision engineering, advanced manufacturing technologies and disciplined process control under <strong>IATF 16949</strong> certification.
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Airbag capsules (Takata/Joyson 1M/mo), headlamps, camshafts, and EV/ICE motorcycle assembly under IATF 16949.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Airbag capsule initiators (1M units/month for Takata/Joyson)</li>
-        <li>Headlamp assemblies & Pioneer car audio systems (5M sets)</li>
-        <li>Precision camshafts and high-precision turned parts</li>
-        <li>Assembly of electric motorcycles and internal combustion engine (ICE) motorcycles</li>
-        <li>Full process traceability and ISO 9001, ISO 14001, IATF 16949 certified sites</li>
-      </ul>
     `
   },
   'ind-medical': {
-    tag: 'MARKETS / HEALTHCARE & MEDICAL',
+    tag: 'MARKETS / MEDICAL',
     title: 'ISO 13485 Medical Devices & Cleanroom Manufacturing',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Medical devices demand the highest standards of precision, quality, and regulatory compliance under <strong>ISO 13485</strong>.
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Olympus surgical light guide cables, JMS medical blood bag accessories, and Class 100K cleanroom medical moulding.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Class 100K (ISO Class 8) cleanroom injection moulding</li>
-        <li>Olympus surgical light guide cables & endoscope components</li>
-        <li>JMS medical blood bag accessories & infusion disposables</li>
-        <li>Cardiac monitoring battery chargers & sterile sub-assemblies</li>
-        <li>Design for Manufacturing (DFM) and validation risk mitigation</li>
-      </ul>
     `
   },
   'ind-consumer': {
     tag: 'MARKETS / CONSUMER ELECTRONICS',
     title: 'Cosmetic Plastics, SMT & Smart IoT Devices',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Delivering consistent quality, cosmetic excellence, and efficient production for global brands like Philips and other leaders:
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Personal care grooming, smart home wearables, and wireless IoT devices with LPIM encapsulation.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Cosmetic plastic parts, mechanical parts and SMT PCBA</li>
-        <li>Low Pressure Injection Moulding (LPIM) for moisture/dust protection</li>
-        <li>Personal care grooming products & smart home appliances</li>
-        <li>Smart wearables and connected wireless IoT devices</li>
-      </ul>
     `
   },
   'ind-home': {
     tag: 'MARKETS / HOME APPLIANCES',
     title: 'Intelligent Connected Home Appliance Solutions',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Integrating precision tooling, plastic injection, SMT electronics, and complete box build to simplify production and reduce supply chain complexity.
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Ice makers, smart control panels, and durable appliance assemblies.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Ice maker assemblies and refrigeration mechanisms</li>
-        <li>Smart connected appliance control panels & wire harnesses</li>
-        <li>High-durability plastic enclosures and full-system testing</li>
-      </ul>
     `
   },
   'ind-industrial': {
-    tag: 'MARKETS / INDUSTRIAL & AUTOMATION',
+    tag: 'MARKETS / INDUSTRIAL',
     title: 'Continuous-Duty Industrial Controls & Sub-Micron Shafts',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Precision components and electromechanical assemblies engineered for continuous-duty environments:
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Precision DC motor shafts, IoT tilt sensors, and automated fare collection (AFC) systems.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Precision DC motor shafts and stepper motor shafts (OD 0.5–500mm)</li>
-        <li>Wireless IoT tree-tilt monitoring sensors & environmental gateways</li>
-        <li>Automated fare collection (AFC) validation readers</li>
-        <li>Semiconductor and industrial automation tooling</li>
-      </ul>
     `
   },
   'ind-gaming': {
     tag: 'MARKETS / GAMING & TOYS',
     title: 'Game Consoles, Entertainment & Safety-Compliant Toys',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Precision-engineered components and complete console assembly compliant with international safety standards:
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        SEGA, Nintendo, Microsoft console integration, optical drive mechanisms, and cash recognition units.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>SEGA, Nintendo, and Microsoft Xbox console assembly & sub-modules</li>
-        <li>Optical pickup drive mechanisms and cash recognition gaming systems</li>
-        <li>Phthalate-compliant and food-grade material processing</li>
-      </ul>
     `
   },
   'ind-energy': {
     tag: 'MARKETS / ENERGY STORAGE SOLUTIONS',
     title: 'Lithium Battery Packs & Portable Energy Storage (PESS)',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        Integrated manufacturing for lithium battery packs and Portable Energy Storage Stations (PESS) across electric mobility and energy storage:
+      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
+        Portable Energy Storage Stations (PESS), automated laser cell welding, and battery management system (BMS) integration.
       </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Battery pack design support & custom enclosure moulding</li>
-        <li>Cell matching, automated laser welding, and battery pack balancing</li>
-        <li>Battery Management System (BMS) integration & high-voltage safety testing</li>
-        <li>Collaborations with tier-1 battery cell suppliers and e2W manufacturers</li>
-      </ul>
     `
   },
 
-  // 4 GLOBAL FACILITIES
+  // FACILITIES
   'fac-sg-hq': {
     tag: 'FACILITIES / SINGAPORE (HQ)',
     title: 'Giken Sakata (Singapore) Ltd – 4K+ sq. ft',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Location:</strong> 4012 Ang Mo Kio Ave 10, #05-01 Techplace 1, Singapore 569628.<br>
-        <strong>Facility Size:</strong> 4,000+ sq. ft.<br>
-        <strong>Core Capabilities:</strong> Group Corporate Governance, Engineering Consultancy, Product Design & Development, Design for Manufacturing (DFM), Customer Service, Product Testing & Validation, and Global Supply Chain Management.
+        4012 Ang Mo Kio Ave 10, #05-01 Techplace 1, Singapore 569628.<br>
+        Governance, R&D Product Development, DFM, Customer Service, Testing, and Global Supply Chain.
       </p>
     `
   },
@@ -843,10 +1022,7 @@ const detailContents = {
     title: 'Giken Precision Engineering (S) Pte. Ltd. – 14K sq. ft',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Location:</strong> Ang Mo Kio Industrial Park, Singapore.<br>
-        <strong>Facility Size:</strong> 14,000 sq. ft.<br>
-        <strong>Core Capabilities:</strong> Swiss-type Escomatic automatic lathes, ultra-precision CNC turning, in-house induction quenching heat treatment (HRC 55-62), centreless and step grinding, secondary machining, precision metrology, and NPI prototype builds.<br>
-        <strong>Certifications:</strong> ISO 9001, ISO 14001, IATF 16949.
+        Ang Mo Kio Industrial Park, Singapore. Precision shafts, induction quenching heat treatment, centreless grinding. Certified ISO 9001, ISO 14001, IATF 16949.
       </p>
     `
   },
@@ -855,10 +1031,8 @@ const detailContents = {
     title: 'PT Giken Precision & PT Giken Technology Indonesia – 393K sq. ft',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Location:</strong> Batamindo Industrial Park, Mukakuning & Citra Buana / Horizon Industrial Parks, Batam.<br>
-        <strong>Facility Size:</strong> 393,000 sq. ft.<br>
-        <strong>Core Capabilities:</strong> Precision plastic injection moulding (18T–650T), Class 100K medical cleanroom (32 electric machines), 23 SMT lines (720M pts/mo), Class 100 cleanroom PCBA, box-build system assembly, battery packs, PESS, and electric motorcycle assembly.<br>
-        <strong>Certifications:</strong> ISO 9001, ISO 13485, ISO 14001, IATF 16949.
+        Batamindo Industrial Park, Mukakuning & Citra Buana / Horizon Industrial Parks, Batam.<br>
+        Plastic injection (18T–650T), 100K medical cleanroom, 23 SMT lines, Class 100 cleanroom PCBA, box-build, battery packs, PESS. Certified ISO 9001, ISO 13485, ISO 14001, IATF 16949.
       </p>
     `
   },
@@ -867,10 +1041,7 @@ const detailContents = {
     title: 'Changzhou Giken Precision & Tech Co., Ltd – 151K sq. ft',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Location:</strong> Changzhou City, Jiangsu Province, China.<br>
-        <strong>Facility Size:</strong> 151,000 sq. ft.<br>
-        <strong>Core Capabilities:</strong> Precision 5-axis CNC milling, precision motor shafts and machining components, plastic injection moulding, product assembly, precision inspection, and export logistics for Asia-Pacific supply chains.<br>
-        <strong>Certifications:</strong> ISO 9001, ISO 14001, IATF 16949.
+        Changzhou City, Jiangsu Province, China. 5-axis CNC milling, precision motor shafts, injection moulding, and product assembly. Certified ISO 9001, ISO 14001, IATF 16949.
       </p>
     `
   },
@@ -881,9 +1052,7 @@ const detailContents = {
     title: 'Building E1: 10,940 m² Solar Panel Production Line',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Building E1 (10,940 m² Total Built-up):</strong><br>
-        &bull; <strong>Level 1 (6,480 m²):</strong> Solar PV cell tabber stringing, EVA lay-up, automatic vacuum lamination, and framing lines.<br>
-        &bull; <strong>Level 2 (4,460 m²):</strong> Solar simulator flash testing, electroluminescence (EL) defect detection, and packaging.
+        Level 1 (6,480 m²) + Level 2 (4,460 m²). Fully automated solar module tabber stringing, lamination, and flash simulator testing.
       </p>
     `
   },
@@ -892,9 +1061,7 @@ const detailContents = {
     title: 'Building A7: 7,736 m² Portable Power Station Production',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Building A7 (7,736 m² Total Built-up):</strong><br>
-        &bull; <strong>Level 1 (3,868 m²):</strong> Automated lithium battery module laser welding, BMS integration, and insulation testing.<br>
-        &bull; <strong>Level 2 (3,868 m²):</strong> Inverter assembly, full-load cyclic discharge burn-in aging, and boxed packaging.
+        Level 1 (3,868 m²) + Level 2 (3,868 m²). Lithium battery pack laser welding, BMS integration, inverter testing, and packaging.
       </p>
     `
   },
@@ -903,7 +1070,7 @@ const detailContents = {
     title: 'Building A10: 4,338 m² Material Warehouse & Logistics',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Building A10 (4,338 m² Level 1):</strong> Central bonded material warehouse and smart fulfillment center for Batam campus, featuring humidity-controlled dry cabinets (MSL 2/3/4) and automated inventory management.
+        Central bonded material warehouse and smart fulfillment center for Batam campus with humidity-controlled dry storage.
       </p>
     `
   },
@@ -912,78 +1079,59 @@ const detailContents = {
     title: 'Buildings G3 & G3A: 5,832 m² Next-Gen Production Lines',
     body: `
       <p style="font-size:0.92rem; line-height:1.65;">
-        <strong>Buildings G3 (2,916 m²) & G3A (2,916 m²):</strong> 5,832 m² of flexible, high-spec manufacturing clean floor area reserved for strategic tier-1 client launches and specialized ISO 13485 cleanroom medical lines.
+        5,832 m² of flexible, high-spec clean manufacturing floor area reserved for strategic tier-1 client launches.
       </p>
     `
   },
 
-  // QUALITY CERTIFICATIONS
+  // QUALITY
   'quality-cert': {
     tag: 'QUALITY & ESG DOSSIER',
     title: 'Certified Quality Management & ESG Framework',
     body: `
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; font-size:0.84rem;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; font-size:0.84rem;">
         <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong style="color:var(--brand-primary); display:block;">ISO 9001 : 2015</strong>
-          <span style="color:var(--text-muted);">General Quality Management System</span>
+          <strong>ISO 9001 : 2015</strong><br><span style="color:var(--text-muted);">Quality Management</span>
         </div>
         <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong style="color:var(--brand-primary); display:block;">ISO 13485 : 2016</strong>
-          <span style="color:var(--text-muted);">Medical Devices Quality Management</span>
+          <strong>ISO 13485 : 2016</strong><br><span style="color:var(--text-muted);">Medical Devices</span>
         </div>
         <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong style="color:var(--brand-primary); display:block;">ISO 14001 : 2015</strong>
-          <span style="color:var(--text-muted);">Environmental Management System</span>
+          <strong>ISO 14001 : 2015</strong><br><span style="color:var(--text-muted);">Environmental</span>
         </div>
         <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong style="color:var(--brand-primary); display:block;">IATF 16949 : 2016</strong>
-          <span style="color:var(--text-muted);">Automotive Quality Management</span>
+          <strong>IATF 16949 : 2016</strong><br><span style="color:var(--text-muted);">Automotive</span>
         </div>
       </div>
       <p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.6;">
-        <strong>Sustainability & Ethics:</strong> Audited and compliant with Amfori BSCI; active participant in the United Nations Global Compact (UNGC). Strict adherence to RoHS, REACH, conflict-free minerals, and fair workplace principles.
+        Audited and compliant with Amfori BSCI; active participant in the United Nations Global Compact (UNGC). Strict adherence to RoHS and REACH.
       </p>
     `
   },
 
-  // CAREERS INFO
+  // CAREERS
   'careers-info': {
     tag: 'CAREERS AT GIKEN',
     title: 'People-Oriented Human Resources & Talent Development',
     body: `
       <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        We are an integrated engineering group with over 40 years of history. Highly people oriented, we take care of every aspect of human resources management.
-      </p>
-      <p style="font-size:0.88rem; line-height:1.6; color:var(--text-secondary); margin-bottom:14px;">
-        We create a consultation-and-sharing based team environment to assist people in learning from each other. We organize competition activities that evoke creativity and initiatives, and spur our people to make an impact in improving production efficiency, cost structure, and overall performance.
-      </p>
-      <p style="font-size:0.88rem; line-height:1.6; color:var(--text-secondary); margin-bottom:16px;">
-        We have established a career progression framework that people can visualize their growth path in the years ahead. With the well-designed incentive and welfare package, as well as periodical team building activities, we engineered a multidimensional career development system that brings forth the personal fulfilment of our employees.
+        We create a consultation-and-sharing based team environment with established career progression frameworks and incentive packages.
       </p>
       <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:12px; border-radius:4px; font-size:0.84rem; color:var(--text-muted);">
-        <em>Note: There is currently no job vacancy or job opening available. For future inquiries, you may reach out to hr@giken.com.sg.</em>
+        <em>Note: There is currently no job vacancy or job opening available. For future inquiries: hr@giken.com.sg.</em>
       </div>
     `
   },
 
-  // PRIVACY & DISCLAIMER
   'privacy': {
     tag: 'LEGAL',
     title: 'Privacy Policy',
-    body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Giken Sakata (S) Ltd respects the privacy of all visitors and clients. Any information submitted via our quotation forms or contact channels is strictly used for official business correspondence and engineering evaluation in compliance with Singapore Personal Data Protection Act (PDPA).
-      </p>
-    `
+    body: `<p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">Giken Sakata (S) Ltd respects the privacy of all visitors and clients under the Singapore Personal Data Protection Act (PDPA).</p>`
   },
   'disclaimer': {
     tag: 'LEGAL',
     title: 'Corporate Disclaimer',
-    body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        All technical specifications, machine counts, and product capabilities presented herein reflect the official engineering profile of Giken Sakata (S) Ltd (SGX: GSS Energy Limited). Trademarks of client partners (Panasonic, Philips, Olympus, Takata, SEGA, Nintendo, Microsoft, Pioneer) remain the property of their respective owners.
-      </p>
-    `
+    body: `<p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">All technical specifications reflect the official engineering profile of Giken Sakata (S) Ltd (SGX: GSS Energy Limited).</p>`
   }
 };
 
@@ -1009,7 +1157,7 @@ window.closeDetailModal = function() {
 };
 
 /* ==========================================================================
-   7. RFQ MODAL & SUBMISSION
+   8. RFQ MODAL & SUBMISSION
    ========================================================================= */
 window.openRfqModal = function() {
   const modal = document.getElementById('rfqModal');
@@ -1059,7 +1207,7 @@ document.addEventListener('click', (e) => {
 });
 
 /* ==========================================================================
-   8. MULTI-LANGUAGE TRANSLATION (EN / CN / ID / JP)
+   9. MULTI-LANGUAGE TRANSLATION (EN / CN / ID / JP)
    ========================================================================= */
 const translations = {
   EN: {
@@ -1069,8 +1217,9 @@ const translations = {
     nav_facilities: 'Facilities',
     nav_quality: 'Quality & ESG',
     nav_careers: 'Careers',
-    hero_title: 'A Trusted Manufacturing Partner<br><span class="text-accent-gradient">Built on Engineering Excellence.</span>',
-    hero_subtitle: 'Providing integrated manufacturing solutions that combine precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and complete product integration across Singapore, Indonesia, and China.',
+    hero_headline_sub: 'INNOVATIVE MINDSET,',
+    hero_headline_main: 'STRIVING FOR EXCELLENCE.',
+    hero_subtitle: 'A Trusted Manufacturing Partner Built on Engineering Excellence since 1979. Providing integrated precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and turnkey product integration across Singapore, Indonesia, and China.',
     hero_btn_capabilities: 'Our Capabilities',
     hero_btn_rfq: 'Request a Quote'
   },
@@ -1081,7 +1230,8 @@ const translations = {
     nav_facilities: '全球制造基地',
     nav_quality: '质量与ESG',
     nav_careers: '人才发展',
-    hero_title: '值得信赖的制造伙伴<br><span class="text-accent-gradient">奠基于卓越的工程技术。</span>',
+    hero_headline_sub: '创新思维，',
+    hero_headline_main: '追求卓越制造。',
     hero_subtitle: '自1979年在新加坡成立以来，技研坂田为全球客户提供精密工程、电子制造服务（EMS）、模具开发、注塑成型、电池包组装及整机系统集成的一站式制造解决方案。',
     hero_btn_capabilities: '探索制造能力',
     hero_btn_rfq: '获取工程报价'
@@ -1093,8 +1243,9 @@ const translations = {
     nav_facilities: 'Fasilitas Global',
     nav_quality: 'Kualitas & ESG',
     nav_careers: 'Karir',
-    hero_title: 'Mitra Manufaktur Tepercaya<br><span class="text-accent-gradient">Berlandaskan Keunggulan Rekayasa.</span>',
-    hero_subtitle: 'Menghadirkan solusi manufaktur terintegrasi yang menggabungkan rekayasa presisi, Electronics Manufacturing Services (EMS), perkakas cetakan, injeksi plastik, perakitan baterai, dan integrasi produk lengkap di Singapura, Indonesia, dan Tiongkok.',
+    hero_headline_sub: 'POLA PIKIR INOVATIF,',
+    hero_headline_main: 'MENGEJAR KEUNGGULAN.',
+    hero_subtitle: 'Mitra Manufaktur Tepercaya Berlandaskan Keunggulan Rekayasa sejak 1979. Menghadirkan solusi manufaktur terintegrasi yang menggabungkan rekayasa presisi, Electronics Manufacturing Services (EMS), perkakas cetakan, injeksi plastik, perakitan baterai, dan integrasi produk lengkap di Singapura, Indonesia, dan Tiongkok.',
     hero_btn_capabilities: 'Kapabilitas Kami',
     hero_btn_rfq: 'Minta Penawaran'
   },
@@ -1105,7 +1256,8 @@ const translations = {
     nav_facilities: '生産拠点',
     nav_quality: '品質とESG',
     nav_careers: '採用情報',
-    hero_title: '信頼される製造パートナー<br><span class="text-accent-gradient">卓越したエンジニアリング技術。</span>',
+    hero_headline_sub: '革新的なマインドセット、',
+    hero_headline_main: '卓越性の追求。',
     hero_subtitle: '1979年のシンガポール設立以来、精密エンジニアリング、EMS、金型製作、プラスチック射出成形、バッテリー組立、および完成品組立を統合したワンストップ製造ソリューションをシンガポール、インドネシア、中国から提供しています。',
     hero_btn_capabilities: '製造能力を見る',
     hero_btn_rfq: 'お見積り依頼'

@@ -154,14 +154,31 @@
   </div>
 
   <!-- =========================================================================
-       SECTION 1: HERO SECTION
+       SECTION 1: HERO SECTION (PEGATRON-STYLE GIKEN KINETIC TYPOGRAPHY)
        ========================================================================= -->
   <section class="section-hero" id="hero">
+    <!-- Hero Background Video & Canvas Layer -->
     <div class="hero-media-wrapper">
       <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/giken_web/sliderman2.jpg">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-technology-digital-cube-loop-42867-large.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
+      
+      <!-- Interactive Kinetic GIKEN Glass Chute & Sphere Canvas -->
+      <canvas id="heroGikenCanvas" class="hero-kinetic-canvas"></canvas>
+    </div>
+
+    <!-- Right Side Section Slider Indicator (Pegatron Style) -->
+    <div class="hero-side-indicator">
+      <span class="indicator-tag">Intro</span>
+      <div class="indicator-line"><span class="indicator-progress"></span></div>
+      <div class="indicator-dots">
+        <button class="indicator-dot active" onclick="smoothScrollTo('#hero')" title="Intro"></button>
+        <button class="indicator-dot" onclick="smoothScrollTo('#about')" title="About Us"></button>
+        <button class="indicator-dot" onclick="smoothScrollTo('#capabilities')" title="Capabilities"></button>
+        <button class="indicator-dot" onclick="smoothScrollTo('#expansion')" title="Batam Expansion"></button>
+        <button class="indicator-dot" onclick="smoothScrollTo('#industries')" title="Industries"></button>
+      </div>
     </div>
 
     <div class="section-container hero-container">
@@ -170,25 +187,25 @@
         <span class="corp-pill-sub">INTEGRATED PRECISION CONTRACT MANUFACTURING</span>
       </div>
 
-      <h1 class="hero-title" data-i18n="hero_title">
-        A Trusted Manufacturing Partner<br>
-        <span class="text-accent-gradient">Built on Engineering Excellence.</span>
-      </h1>
+      <div class="hero-slogan-box">
+        <h2 class="hero-headline-sub" data-i18n="hero_headline_sub">INNOVATIVE MINDSET,</h2>
+        <h1 class="hero-headline-main" data-i18n="hero_headline_main">STRIVING FOR EXCELLENCE.</h1>
+        
+        <p class="hero-description" data-i18n="hero_subtitle">
+          A Trusted Manufacturing Partner Built on Engineering Excellence since 1979. Providing integrated precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and turnkey product integration across Singapore, Indonesia, and China.
+        </p>
 
-      <p class="hero-description" data-i18n="hero_subtitle">
-        Providing integrated manufacturing solutions that combine precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and complete product integration across Singapore, Indonesia, and China.
-      </p>
-
-      <div class="hero-btn-group">
-        <button class="btn-primary" onclick="smoothScrollTo('#capabilities')">
-          <span data-i18n="hero_btn_capabilities">Our Capabilities</span>
-        </button>
-        <button class="btn-secondary" onclick="openCinemaStream('cad')">
-          <i class="fa-solid fa-circle-play"></i> <span>Watch Process Showcase</span>
-        </button>
-        <button class="btn-outline-hero" onclick="openRfqModal()">
-          <span data-i18n="hero_btn_rfq">Request a Quote</span>
-        </button>
+        <div class="hero-btn-group">
+          <button class="btn-primary" onclick="smoothScrollTo('#capabilities')">
+            <span data-i18n="hero_btn_capabilities">Our Capabilities</span>
+          </button>
+          <button class="btn-secondary" onclick="openCinemaStream('cad')">
+            <i class="fa-solid fa-circle-play"></i> <span>Watch Process Showcase</span>
+          </button>
+          <button class="btn-outline-hero" onclick="openRfqModal()">
+            <span data-i18n="hero_btn_rfq">Request a Quote</span>
+          </button>
+        </div>
       </div>
 
       <!-- Hero Key Metrics Bar -->
