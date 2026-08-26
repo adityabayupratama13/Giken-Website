@@ -127,7 +127,7 @@
 
         <!-- CONTACT / RFQ BUTTON -->
         <div class="corp-nav-item">
-          <button class="corp-rfq-btn" onclick="openRfqModal()">
+          <button class="corp-rfq-btn" onclick="smoothScrollTo('#contact')">
             <i class="fa-regular fa-envelope"></i> Contact Us
           </button>
         </div>
@@ -144,10 +144,6 @@
        FLOATING ACTIONS
        ========================================================================= -->
   <div class="floating-actions-container">
-    <button class="btn-floating-rfq" onclick="openRfqModal()" aria-label="Request Quotation">
-      <i class="fa-regular fa-paper-plane"></i>
-      <span class="rfq-floating-text">Request Quotation</span>
-    </button>
     <button class="btn-floating-top" id="btnBackToTop" onclick="smoothScrollTo('#hero')" aria-label="Back to Top">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
@@ -177,6 +173,7 @@
         <button class="side-nav-dot" data-section="industries" title="Industries"></button>
         <button class="side-nav-dot" data-section="quality" title="Quality & ESG"></button>
         <button class="side-nav-dot" data-section="facilities" title="Facilities"></button>
+        <button class="side-nav-dot" data-section="contact" title="Contact"></button>
         <button class="side-nav-dot" data-section="careers" title="Careers"></button>
       </div>
     </div>
@@ -854,8 +851,62 @@
     </div>
   </section>
 
+
   <!-- =========================================================================
-       SECTION 9: CAREERS SECTION
+       SECTION 9: CONTACT — GROUP OFFICES
+       ========================================================================= -->
+  <section class="section-contact" id="contact">
+    <div class="section-container">
+      <div class="section-title-wrap">
+        <span class="corp-kicker">CONTACT US</span>
+        <h2 class="corp-heading">Talk to Our Engineering Team</h2>
+        <p class="corp-subheading">Tell us about your product, materials, tolerances and volumes &mdash; our engineers will respond with a manufacturability review and indicative quotation.</p>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card">
+          <span class="contact-country">SINGAPORE (HQ)</span>
+          <h3>Giken Sakata (S) Ltd</h3>
+          <p class="contact-role">Electronics Manufacturing Services</p>
+          <address>4012 Ang Mo Kio Ave 10, #05-01 Techplace 1, Singapore 569628</address>
+          <a href="tel:+6563546661">(65) 6354 6661</a>
+          <a href="mailto:mcenquiry@giken.com.sg">mcenquiry@giken.com.sg</a>
+        </article>
+
+        <article class="contact-card">
+          <span class="contact-country">BATAM, INDONESIA</span>
+          <h3>PT Giken Precision Indonesia</h3>
+          <p class="contact-role">Electronics Manufacturing Services</p>
+          <address>Citra Buana Industrial Park &amp; Horizon Industrial Park, Batam, Indonesia</address>
+          <a href="mailto:mcenquiry@giken.com.sg">mcenquiry@giken.com.sg</a>
+        </article>
+
+        <article class="contact-card">
+          <span class="contact-country">SINGAPORE</span>
+          <h3>Giken Precision Engineering (S) Pte. Ltd.</h3>
+          <p class="contact-role">Precision Shafts</p>
+          <address>Ang Mo Kio, Singapore</address>
+          <a href="mailto:mcenquiry@giken.com.sg">mcenquiry@giken.com.sg</a>
+        </article>
+
+        <article class="contact-card">
+          <span class="contact-country">CHANGZHOU, CHINA</span>
+          <h3>Changzhou Giken Precision Co., Ltd.</h3>
+          <p class="contact-role">Precision Machining</p>
+          <address>Changzhou, Jiangsu, China</address>
+          <a href="mailto:mcenquiry@giken.com.sg">mcenquiry@giken.com.sg</a>
+        </article>
+      </div>
+
+      <div class="contact-cta">
+        <p>Prefer a structured enquiry? Send drawings, tolerances and target volumes through our RFQ form.</p>
+        <button class="btn-primary" onclick="openRfqModal()"><span>Send Us a Message</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 10: CAREERS SECTION
        ========================================================================= -->
   <section class="section-careers" id="careers">
     <div class="section-container">

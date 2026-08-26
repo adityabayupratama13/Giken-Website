@@ -50,139 +50,53 @@ function applyTheme(theme) {
    One scroll = jump to next/previous section with smooth transition + easing
    ========================================================================== */
 function initFullPageScroll() {
-  const sectionIds = ['hero','about','capabilities','expansion','industries','quality','facilities','careers'];
-  const sectionLabels = ['Intro','About Us','Capabilities','Batam Expansion','Industries','Quality & ESG','Facilities','Careers'];
+  const sectionIds = ['hero','about','capabilities','expansion','industries','quality','facilities','contact','careers'];
+  const sectionLabels = ['Intro','About Us','Capabilities','Batam Expansion','Industries','Quality & ESG','Facilities','Contact','Careers'];
   const header = document.getElementById('corpHeader');
   const backToTopBtn = document.getElementById('btnBackToTop');
   const navLabel = document.getElementById('sideNavLabel');
+  const progress = document.getElementById('sideNavProgress');
+  const dots = [...document.querySelectorAll('.side-nav-dot')];
 
-  let currentIndex = 0;
-  let isScrolling = false;
-  const SCROLL_COOLDOWN = 900; // ms between snaps
-
-  // Helper: get section element by index
-  function getSection(idx) {
-    return document.getElementById(sectionIds[idx]);
-  }
-
-  // Snap to a specific section index
-  function snapTo(idx) {
-    if (idx < 0 || idx >= sectionIds.length) return;
-    const target = getSection(idx);
-    if (!target) return;
-
-    currentIndex = idx;
-    isScrolling = true;
-
-    // Smooth scroll to target
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // Update UI
-    updateSideNav(idx);
-    updateHeader();
-
-    // Release lock after animation completes
-    setTimeout(() => { isScrolling = false; }, SCROLL_COOLDOWN);
-  }
-
-  // Public smoothScrollTo (used by buttons)
   window.smoothScrollTo = function(selector) {
-    const id = selector.replace('#', '');
-    const idx = sectionIds.indexOf(id);
-    if (idx !== -1) {
-      snapTo(idx);
-    } else {
-      const el = document.querySelector(selector);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
+    const el = document.querySelector(selector);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Wheel event: intercept and snap
-  let wheelDelta = 0;
-  let wheelTimer = null;
+  dots.forEach(dot => dot.addEventListener('click', () => {
+    window.smoothScrollTo('#' + dot.getAttribute('data-section'));
+  }));
 
-  window.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (isScrolling) return;
-
-    wheelDelta += e.deltaY;
-    clearTimeout(wheelTimer);
-    wheelTimer = setTimeout(() => { wheelDelta = 0; }, 150);
-
-    if (Math.abs(wheelDelta) >= 30) {
-      wheelDelta = 0;
-      if (e.deltaY > 0) {
-        snapTo(currentIndex + 1); // scroll down → next
-      } else {
-        snapTo(currentIndex - 1); // scroll up → previous
-      }
-    }
-  }, { passive: false });
-
-  // Keyboard arrow navigation
-  window.addEventListener('keydown', (e) => {
-    if (isScrolling) return;
-    if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); snapTo(currentIndex + 1); }
-    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); snapTo(currentIndex - 1); }
-  });
-
-  // Touch swipe support
-  let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
-  window.addEventListener('touchend', (e) => {
-    if (isScrolling) return;
-    const diff = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? snapTo(currentIndex + 1) : snapTo(currentIndex - 1);
-    }
-  }, { passive: true });
-
-  // Dot clicks in side navigator
-  document.querySelectorAll('.side-nav-dot').forEach((dot) => {
-    dot.addEventListener('click', () => {
-      const secId = dot.getAttribute('data-section');
-      const idx = sectionIds.indexOf(secId);
-      if (idx !== -1) snapTo(idx);
-    });
-  });
-
-  // Update side navigator dots + label
-  function updateSideNav(idx) {
-    const dots = document.querySelectorAll('.side-nav-dot');
+  function setActive(idx) {
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     if (navLabel) navLabel.textContent = sectionLabels[idx] || '';
   }
 
-  // Update header style on scroll
-  function updateHeader() {
-    const scrollY = window.scrollY;
-    if (header) header.classList.toggle('scrolled', scrollY > 40);
-    if (backToTopBtn) backToTopBtn.style.display = scrollY > 400 ? 'flex' : 'none';
-  }
+  // Active section = the one covering the top third of the viewport.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = sectionIds.indexOf(e.target.id);
+      if (idx !== -1) setActive(idx);
+    });
+  }, { rootMargin: '-33% 0px -60% 0px' });
 
-  // Passive scroll listener just for header & back-to-top state
-  // (actual page movement is handled by snapTo)
-  window.addEventListener('scroll', () => {
-    updateHeader();
-    // Re-sync currentIndex when browser scrolls (e.g. hash links)
-    if (!isScrolling) {
-      const scrollY = window.scrollY;
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const sec = document.getElementById(sectionIds[i]);
-        if (sec && sec.offsetTop <= scrollY + window.innerHeight * 0.4) {
-          if (i !== currentIndex) {
-            currentIndex = i;
-            updateSideNav(i);
-          }
-          break;
-        }
-      }
-    }
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
   });
 
-  // Initial state
-  updateSideNav(0);
-  updateHeader();
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (header) header.classList.toggle('scrolled', y > 40);
+    if (backToTopBtn) backToTopBtn.style.display = y > 400 ? 'flex' : 'none';
+    if (progress) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.height = (max > 0 ? (y / max) * 100 : 0) + '%';
+    }
+  }, { passive: true });
+
+  setActive(0);
 }
 
 function initMobileMenu() {
@@ -458,6 +372,14 @@ const cinemaStreams = {
   }
 };
 
+/* Open/close any modal and keep the page behind it from scrolling. */
+function setModalOpen(id, on) {
+  const m = document.getElementById(id);
+  if (m) m.classList.toggle('open', on);
+  document.body.classList.toggle('modal-open', !!document.querySelector('.corp-modal-backdrop.open'));
+  return m;
+}
+
 window.openCinemaStream = function(type) {
   const data = cinemaStreams[type] || cinemaStreams['cad'];
   const modal = document.getElementById('cinemaModal');
@@ -471,7 +393,7 @@ window.openCinemaStream = function(type) {
     titleEl.innerText = data.title;
     descEl.innerText = data.desc;
     videoEl.src = data.video;
-    modal.classList.add('open');
+    setModalOpen('cinemaModal', true);
     videoEl.currentTime = 0;
     videoEl.play().catch(() => {});
   }
@@ -481,7 +403,7 @@ window.closeCinemaStream = function() {
   const modal = document.getElementById('cinemaModal');
   const videoEl = document.getElementById('modalCinemaVideo');
   if (modal) {
-    modal.classList.remove('open');
+    setModalOpen('cinemaModal', false);
     if (videoEl) videoEl.pause();
   }
 };
@@ -917,26 +839,23 @@ window.openDetailModal = function(key) {
     tagEl.innerText = content.tag;
     titleEl.innerText = content.title;
     bodyEl.innerHTML = content.body;
-    modal.classList.add('open');
+    setModalOpen('detailModal', true);
   }
 };
 
 window.closeDetailModal = function() {
-  const modal = document.getElementById('detailModal');
-  if (modal) modal.classList.remove('open');
+  setModalOpen('detailModal', false);
 };
 
 /* ==========================================================================
    8. RFQ MODAL & SUBMISSION
    ========================================================================= */
 window.openRfqModal = function() {
-  const modal = document.getElementById('rfqModal');
-  if (modal) modal.classList.add('open');
+  setModalOpen('rfqModal', true);
 };
 
 window.closeRfqModal = function() {
-  const modal = document.getElementById('rfqModal');
-  if (modal) modal.classList.remove('open');
+  setModalOpen('rfqModal', false);
 };
 
 window.handleRfqSubmit = function(e) {
