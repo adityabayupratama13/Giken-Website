@@ -21,6 +21,8 @@ Official modern corporate web portal for **GIKEN Sakata (S) Limited**, built to 
 - **Seven Core Industries**: Automotive (IATF 16949), Medical Equipment (ISO 13485), Consumer Electronics, Home Appliances, Industrial Automation, Gaming & Toys, and Energy Storage Solutions.
 - **Multi-Language Support**: One-click switching across English (EN), Chinese (CN), Bahasa Indonesia (ID), and Japanese (JP).
 - **Interactive Dossiers & Cinema Player**: In-depth modal dialogs for technical specifications, facility tours, and process video streaming.
+- **Official Content Brief Integration**: All service, market, policy, milestone, careers and quality copy — plus the 67 embedded images — come from `Giken website contents 03 Aug 2026.doc`.
+- **Contact Section**: Four group offices (Singapore HQ, Batam GPI, GPE Singapore, Changzhou CGP) with address, phone and email.
 - **Interactive RFQ Form**: Engineering inquiry modal with instant validation and client-side confirmation.
 
 ---
@@ -41,6 +43,7 @@ Official modern corporate web portal for **GIKEN Sakata (S) Limited**, built to 
 ├── styles.css            # Corporate stylesheet (Light/Dark tokens, Bento Grid, Responsive layout)
 ├── script.js             # Theme controller, translation engine, modals, matrix tabs, counters
 ├── assets/               # Extracted images & media assets from official profile
+│   ├── site/             # Optimised imagery carved from the Word content brief
 │   ├── giken_web/        # High-resolution web assets
 │   └── pptx_2026/        # Technical diagrams & facility photography
 └── README.md             # Project documentation
