@@ -2580,3 +2580,173 @@ body.modal-open {
 @media (max-width: 640px) {
   .contact-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ==========================================================================
+   DOSSIER MODAL CONTENT (official content brief, 03 Aug 2026)
+   ========================================================================== */
+.dossier-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border-card);
+  margin-bottom: 16px;
+}
+
+.dossier-lead {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin-bottom: 12px;
+}
+
+.dossier-h4 {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  margin: 18px 0 8px;
+}
+
+.dossier-list {
+  display: grid;
+  gap: 6px;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.dossier-list li {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-body);
+}
+
+.dossier-spec {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.dossier-spec div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  background: var(--bg-page-alt);
+  border: 1px solid var(--border-card);
+  border-radius: 5px;
+}
+
+.dossier-spec strong {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+.dossier-spec span {
+  font-size: 0.82rem;
+  color: var(--text-body);
+}
+
+.cert-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.cert-gallery img {
+  width: 100%;
+  height: auto;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .dossier-spec { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   FULL ONE-STOP SERVICES STRIP
+   ========================================================================== */
+.services-strip {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.service-tile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.service-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand-primary);
+}
+
+.service-tile img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.service-tile span {
+  padding: 10px 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--text-heading);
+}
+
+@media (max-width: 1100px) {
+  .services-strip { grid-template-columns: repeat(5, 1fr); }
+}
+
+@media (max-width: 620px) {
+  .services-strip { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Industry card thumbnails */
+.market-thumb {
+  width: calc(100% + 2px);
+  height: 140px;
+  margin: -1px -1px 14px;
+  border-radius: 7px 7px 0 0;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.contact-hero-img,
+.about-journey-img {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-card);
+  margin-bottom: 24px;
+}
+
+.contact-map {
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border-card);
+}

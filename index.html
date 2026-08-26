@@ -155,7 +155,7 @@
   <section class="section-hero" id="hero">
     <!-- Hero Background Video -->
     <div class="hero-media-wrapper">
-      <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/giken_web/sliderman2.jpg">
+      <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/site/hero-skyline.jpg">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-technology-digital-cube-loop-42867-large.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
@@ -252,6 +252,8 @@
         <h2 class="corp-heading">A Trusted Manufacturing Partner Built on Engineering Excellence</h2>
         <p class="corp-subheading">From our origins as a precision machining specialist in Singapore in 1979, Giken has grown into an integrated manufacturing group delivering end-to-end solutions to global OEMs throughout the entire product lifecycle.</p>
       </div>
+
+      <img class="about-journey-img" src="assets/site/journey-banner.jpg" alt="Giken journey 1979 to the future" loading="lazy">
 
       <!-- Core Values 4-Card Strip -->
       <div class="values-grid">
@@ -389,7 +391,7 @@
         <!-- CARD 1: MAIN CAD / DFM VIDEO CARD -->
         <div class="bento-item bento-main-video" onclick="openCinemaStream('cad')">
           <div class="bento-media-box">
-            <video class="bento-video-player" autoplay muted loop playsinline poster="assets/giken_web/tech7.1-1.jpg">
+            <video class="bento-video-player" autoplay muted loop playsinline poster="assets/site/proc-design.jpg">
               <source src="https://assets.mixkit.co/videos/preview/mixkit-automated-assembly-line-in-a-modern-factory-42998-large.mp4" type="video/mp4">
             </video>
             <div class="bento-media-overlay">
@@ -410,7 +412,7 @@
 
         <!-- CARD 2: TALL CARD - PCB ASSEMBLY (720M PTS/MO) -->
         <div class="bento-item bento-tall" onclick="openCinemaStream('smt')">
-          <div class="bento-img-bg" style="background-image: url('assets/giken_web/PCB-ASSEMBLY.jpg');"></div>
+          <div class="bento-img-bg" style="background-image: url('assets/site/proc-pcba.jpg');"></div>
           <div class="bento-dark-gradient"></div>
           <div class="bento-tall-content">
             <span class="bento-category-tag">PCB ASSEMBLY (PCBA)</span>
@@ -421,7 +423,7 @@
 
         <!-- CARD 3: TALL CARD - PRECISION MACHINING (OD 0.5-500MM) -->
         <div class="bento-item bento-tall" onclick="openCinemaStream('cnc')">
-          <div class="bento-img-bg" style="background-image: url('assets/giken_web/8.jpg');"></div>
+          <div class="bento-img-bg" style="background-image: url('assets/site/proc-machining.jpg');"></div>
           <div class="bento-dark-gradient"></div>
           <div class="bento-tall-content">
             <span class="bento-category-tag">PRECISION MACHINING</span>
@@ -435,7 +437,7 @@
           
           <!-- SUB-CARD 1: INJECTION MOULDING & CLEANROOM -->
           <div class="bento-item bento-square" onclick="openCinemaStream('cleanroom')">
-            <div class="bento-img-bg" style="background-image: url('assets/giken_web/sliderman2.jpg');"></div>
+            <div class="bento-img-bg" style="background-image: url('assets/site/proc-injection.jpg');"></div>
             <div class="bento-dark-gradient"></div>
             <div class="bento-card-top-content">
               <span class="bento-badge">18T TO 650T MOULDING</span>
@@ -445,7 +447,7 @@
 
           <!-- SUB-CARD 2: BATTERY PACK & PESS -->
           <div class="bento-item bento-square" onclick="openCinemaStream('battery')">
-            <div class="bento-img-bg" style="background-image: url('assets/giken_web/Battery-pack1-e1743752338791.png'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#081528;"></div>
+            <div class="bento-img-bg" style="background-image: url('assets/site/ico-energy.jpg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#081528;"></div>
             <div class="bento-dark-gradient"></div>
             <div class="bento-card-top-content">
               <span class="bento-badge">BATTERY & ENERGY STORAGE</span>
@@ -455,7 +457,7 @@
 
           <!-- SUB-CARD 3: LOW PRESSURE MOULDING (LPIM) -->
           <div class="bento-item bento-rect" onclick="openDetailModal('srv-lpm')">
-            <div class="bento-img-bg" style="background-image: url('assets/giken_web/tech7.1-1.jpg');"></div>
+            <div class="bento-img-bg" style="background-image: url('assets/site/proc-lpim.jpg');"></div>
             <div class="bento-dark-gradient"></div>
             <div class="bento-rect-content">
               <span class="bento-tag-news">LOW PRESSURE MOULDING</span>
@@ -465,7 +467,7 @@
 
           <!-- SUB-CARD 4: TURNKEY BOX-BUILD ASSEMBLY -->
           <div class="bento-item bento-rect" onclick="openDetailModal('srv-assembly')">
-            <div class="bento-img-bg" style="background-image: url('assets/giken_web/F3.3.jpg');"></div>
+            <div class="bento-img-bg" style="background-image: url('assets/site/proc-assembly.jpg');"></div>
             <div class="bento-dark-gradient"></div>
             <div class="bento-rect-content">
               <span class="bento-tag-news">PRODUCT ASSEMBLY</span>
@@ -474,6 +476,47 @@
           </div>
 
         </div>
+      </div>
+
+
+      <!-- Full One-Stop Services (official content brief) -->
+      <div class="services-strip">
+        <button class="service-tile" onclick="openDetailModal('srv-design')">
+          <img src="assets/site/svc-design.jpg" alt="Design" loading="lazy">
+          <span>Design</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-tooling')">
+          <img src="assets/site/svc-tooling.jpg" alt="Tooling Design and Fabrication" loading="lazy">
+          <span>Tooling Design &amp; Fabrication</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-injection')">
+          <img src="assets/site/svc-injection.jpg" alt="Injection Moulding" loading="lazy">
+          <span>Injection Moulding</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-lpm')">
+          <img src="assets/site/svc-lpim.jpg" alt="Low Pressure Moulding" loading="lazy">
+          <span>Low Pressure Moulding</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-pcba')">
+          <img src="assets/site/svc-pcba.jpg" alt="PCB Assembly" loading="lazy">
+          <span>PCB Assembly</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-assembly')">
+          <img src="assets/site/svc-assembly.jpg" alt="Product Assembly" loading="lazy">
+          <span>Product Assembly</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-machining')">
+          <img src="assets/site/svc-machining.jpg" alt="Precision Machining" loading="lazy">
+          <span>Precision Machining</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-printing')">
+          <img src="assets/site/svc-printing.jpg" alt="Tempo Printing" loading="lazy">
+          <span>Tempo Printing</span>
+        </button>
+        <button class="service-tile" onclick="openDetailModal('srv-testing')">
+          <img src="assets/site/svc-testing.jpg" alt="Product Testing" loading="lazy">
+          <span>Product Testing</span>
+        </button>
       </div>
 
       <!-- Machinery & Technical Parameters Table Matrix -->
@@ -592,7 +635,7 @@
       <div class="markets-grid-3col">
         <!-- 1. AUTOMOTIVE -->
         <div class="market-card" onclick="openDetailModal('ind-automotive')">
-          <div class="market-card-icon"><i class="fa-solid fa-car-side"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-automotive.jpg');"></div>
           <h3>Automotive Systems</h3>
           <p>Safety-critical automotive components including airbag capsule initiators, headlamp assemblies, precision camshafts, and electric/ICE motorcycle assembly.</p>
           <div class="market-tags">
@@ -604,7 +647,7 @@
 
         <!-- 2. HEALTHCARE & MEDICAL -->
         <div class="market-card" onclick="openDetailModal('ind-medical')">
-          <div class="market-card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-medical.jpg');"></div>
           <h3>Healthcare & Medical Equipment</h3>
           <p>Class 100K (ISO Class 8) cleanroom moulding for medical disposables, Olympus surgical light guide cables, blood bag accessories, and cardiac monitoring chargers.</p>
           <div class="market-tags">
@@ -616,7 +659,7 @@
 
         <!-- 3. CONSUMER ELECTRONICS -->
         <div class="market-card" onclick="openDetailModal('ind-consumer')">
-          <div class="market-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-consumer.jpg');"></div>
           <h3>Consumer Electronics</h3>
           <p>High-speed SMT assembly, cosmetic plastic enclosures, Low Pressure Moulding (LPIM), and box build assembly for personal care, IoT devices, and smart wearables.</p>
           <div class="market-tags">
@@ -628,7 +671,7 @@
 
         <!-- 4. HOME APPLIANCES -->
         <div class="market-card" onclick="openDetailModal('ind-home')">
-          <div class="market-card-icon"><i class="fa-solid fa-blender"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-home.jpg');"></div>
           <h3>Home Appliances</h3>
           <p>Integrating precision tooling, plastic moulding, electronics manufacturing, and box-build assembly for smart connected appliances, ice makers, and power controls.</p>
           <div class="market-tags">
@@ -640,7 +683,7 @@
 
         <!-- 5. INDUSTRIAL EQUIPMENT -->
         <div class="market-card" onclick="openDetailModal('ind-industrial')">
-          <div class="market-card-icon"><i class="fa-solid fa-gears"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-industrial.jpg');"></div>
           <h3>Industrial & Automation</h3>
           <p>Precision-engineered components, DC motor precision shafts (OD 0.5–500mm), wireless IoT tree-tilt sensors, and automated fare collection (AFC) devices.</p>
           <div class="market-tags">
@@ -652,7 +695,7 @@
 
         <!-- 6. GAMING & TOYS -->
         <div class="market-card" onclick="openDetailModal('ind-gaming')">
-          <div class="market-card-icon"><i class="fa-solid fa-gamepad"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-gaming.jpg');"></div>
           <h3>Gaming Consoles & Toys</h3>
           <p>SEGA, Nintendo, and Microsoft game console complete assembly, drive assembly, optical pick-up units, cash recognition systems, and phthalate-compliant toys.</p>
           <div class="market-tags">
@@ -664,7 +707,7 @@
 
         <!-- 7. ENERGY STORAGE SOLUTIONS -->
         <div class="market-card" onclick="openDetailModal('ind-energy')">
-          <div class="market-card-icon"><i class="fa-solid fa-battery-bolt"></i></div>
+          <div class="market-thumb" style="background-image: url('assets/site/ind-energy.jpg');"></div>
           <h3>Battery Pack Solutions</h3>
           <p>Integrated manufacturing for lithium-ion battery packs, Portable Energy Storage Stations (PESS), automated cell matching, laser welding, and BMS testing.</p>
           <div class="market-tags">
@@ -794,7 +837,7 @@
       <div class="facilities-grid-4col">
         <!-- FACILITY 1: SINGAPORE HQ -->
         <div class="facility-item" onclick="openDetailModal('fac-sg-hq')">
-          <div class="facility-thumb" style="background-image: url('assets/giken_web/p1.jpg');"></div>
+          <div class="facility-thumb" style="background-image: url('assets/site/site-gss.jpg');"></div>
           <div class="facility-info">
             <span class="facility-country-label">SINGAPORE (HQ)</span>
             <h3>Giken Sakata (S) Ltd</h3>
@@ -808,7 +851,7 @@
 
         <!-- FACILITY 2: GPE SINGAPORE -->
         <div class="facility-item" onclick="openDetailModal('fac-sg-gpe')">
-          <div class="facility-thumb" style="background-image: url('assets/giken_web/p3.jpg');"></div>
+          <div class="facility-thumb" style="background-image: url('assets/site/site-gpe.jpg');"></div>
           <div class="facility-info">
             <span class="facility-country-label">SINGAPORE</span>
             <h3>GPE Precision Engineering</h3>
@@ -822,7 +865,7 @@
 
         <!-- FACILITY 3: BATAM INDONESIA (GPI & GTI) -->
         <div class="facility-item" onclick="openDetailModal('fac-batam')">
-          <div class="facility-thumb" style="background-image: url('assets/giken_web/GPI-Factory-photo-1.jpg');"></div>
+          <div class="facility-thumb" style="background-image: url('assets/site/site-gpi.jpg');"></div>
           <div class="facility-info">
             <span class="facility-country-label">BATAM, INDONESIA</span>
             <h3>PT Giken Precision & Tech (GPI/GTI)</h3>
@@ -836,7 +879,7 @@
 
         <!-- FACILITY 4: CHANGZHOU CHINA (CGP & CGT) -->
         <div class="facility-item" onclick="openDetailModal('fac-china')">
-          <div class="facility-thumb" style="background-image: url('assets/giken_web/CGP-Factory.jpg');"></div>
+          <div class="facility-thumb" style="background-image: url('assets/site/site-cgp.jpg');"></div>
           <div class="facility-info">
             <span class="facility-country-label">CHANGZHOU, CHINA</span>
             <h3>Changzhou Giken Precision & Tech</h3>
@@ -863,6 +906,7 @@
         <p class="corp-subheading">Tell us about your product, materials, tolerances and volumes &mdash; our engineers will respond with a manufacturability review and indicative quotation.</p>
       </div>
 
+      <img class="contact-hero-img" src="assets/site/office.jpg" alt="Giken office">
       <div class="contact-grid">
         <article class="contact-card">
           <span class="contact-country">SINGAPORE (HQ)</span>
@@ -899,6 +943,7 @@
       </div>
 
       <div class="contact-cta">
+        <img class="contact-map" src="assets/site/map-hq.jpg" alt="Map to Giken Sakata (S) Ltd, Techplace 1 Singapore">
         <p>Prefer a structured enquiry? Send drawings, tolerances and target volumes through our RFQ form.</p>
         <button class="btn-primary" onclick="openRfqModal()"><span>Send Us a Message</span></button>
       </div>
@@ -911,7 +956,7 @@
   <section class="section-careers" id="careers">
     <div class="section-container">
       <div class="careers-card" onclick="openDetailModal('careers-info')">
-        <div class="careers-image-bg" style="background-image: url('assets/giken_web/276.jpg');"></div>
+        <div class="careers-image-bg" style="background-image: url('assets/site/careers-team.jpg');"></div>
         <div class="careers-dark-layer"></div>
         <div class="careers-text-content">
           <span class="careers-pill">CAREERS AT GIKEN</span>

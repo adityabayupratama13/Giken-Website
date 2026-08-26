@@ -15,3 +15,6 @@ env/
 scratch/
 extracted_doc_text.txt
 extracted_pptx_8.2.txt
+
+# Raw carved images from the Word brief (optimised copies live in assets/site)
+assets/doc_2026/

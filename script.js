@@ -435,38 +435,27 @@ const detailContents = {
   // COMPANY POLICIES
   'company-policies': {
     tag: 'ABOUT US / COMPANY POLICIES',
-    title: 'Giken Quality Systems & Customer Commitment',
+    title: 'Company Policies',
     body: `
-      <p style="font-size:0.95rem; line-height:1.7; margin-bottom:14px;">
-        At Giken, we strive to meet the diverse needs of our customers by delivering high-quality, cost-effective products and services, supported by timely delivery and responsive after-sales support.
-      </p>
-      <div style="background:var(--bg-page-subtle); border-left:3px solid var(--brand-primary); padding:12px 16px; border-radius:0 6px 6px 0;">
-        <strong style="font-size:0.9rem; color:var(--text-primary);">We Are Committed To:</strong>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:4px; margin-bottom:0;">
-          Providing top-notch-quality, cost-effective products and services, complemented by timely delivery and good after-sales services to satisfy the diverse needs of our customers.
-        </p>
-      </div>
+      <img class="dossier-img" src="assets/site/policies.jpg" alt="Company policies">
+      <p class="dossier-lead">At Giken, we strive to meet the diverse needs of our customers by delivering high-quality, cost-effective products and services, supported by timely delivery and responsive after-sales support. Through continuous improvement, operational excellence, and a customer-focused approach, we aim to create lasting value and exceed expectations.</p>
+      <p class="dossier-lead">We foster strong, long-term relationships with our customers, suppliers, and business associates, built on trust, collaboration, and mutual respect. By working together and leveraging our collective strengths, we create sustainable value, enhance competitiveness, and drive shared growth in an evolving global marketplace.</p>
+      <h4 class="dossier-h4">We Are Committed To</h4>
+      <ul class="dossier-list"><li>Providing top-notch-quality, cost-effective products and services, complemented by timely delivery and good after-sales services to satisfy the diverse needs of our customers.</li></ul>
+      <img class="dossier-img" src="assets/site/core-values.jpg" alt="Core values">
     `
   },
 
   // GROUP MILESTONES
   'group-milestones': {
     tag: 'ABOUT US / GROUP MILESTONES',
-    title: 'Group Chronology (1979 – 2026+)',
+    title: 'Group Milestones &mdash; 1979 to Today',
     body: `
-      <div style="display:flex; flex-direction:column; gap:10px; font-size:0.86rem;">
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1979</strong><span>Founded in Singapore manufacturing precision cassette mechanisms.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1991</strong><span>Establishment of PT. Giken Precision Indonesia (GPI) in Batam.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1992</strong><span>Relocated headquarters from Japan to Singapore.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1993</strong><span>Listed on Singapore Stock Exchange (SESDAQ / SGX: GSS Energy Limited).</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">1994</strong><span>Establishment of Changzhou Giken Precision Co., Ltd (CGP) in China.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">2016</strong><span>Establishment of GPE Precision Engineering Pte. Ltd. in Singapore.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">2017</strong><span>Establishment of Changzhou Giken Technology Co., Ltd (CGT) in China.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">2018</strong><span>Establishment of PT Giken Technology Indonesia (GTI) in Batam.</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">2020</strong><span>Audited & compliant with Amfori BSCI; embarked on UN Global Compact (UNGC).</span></div>
-        <div style="display:flex; gap:12px;"><strong style="color:var(--brand-primary); min-width:65px;">2023</strong><span>Entered into Energy Storage Business & Panasonic battery pack production.</span></div>
-        <div style="display:flex; gap:12px; background:var(--brand-accent-bg); padding:8px 12px; border-radius:4px;"><strong style="color:var(--brand-primary); min-width:65px;">2025–26</strong><span style="font-weight:600;">78,000 m² Mega Industrial Campus Expansion across Buildings E1, A7, A10, and G3/G3A in Batam.</span></div>
-      </div>
+      <img class="dossier-img" src="assets/site/journey-banner.jpg" alt="Giken journey 1979 to the future">
+      <p class="dossier-lead">From a precision engineering company established in Singapore to a regional manufacturing solutions provider with operations across Singapore, Indonesia and China, Giken's growth journey reflects its commitment to quality, innovation and long-term customer partnerships. Building on more than four decades of manufacturing excellence, the Group continues to strengthen its capabilities through operational excellence, technological advancement, regional integration and sustainable growth.</p>
+      <img class="dossier-img" src="assets/site/milestones-1.jpg" alt="Milestones 1979 to 1994">
+      <img class="dossier-img" src="assets/site/milestones-2.jpg" alt="Milestones 2000 to 2024">
+      <img class="dossier-img" src="assets/site/milestones-3.jpg" alt="Milestones 2025 to today">
     `
   },
 
@@ -513,114 +502,118 @@ const detailContents = {
 
   // SERVICES
   'srv-design': {
-    tag: 'SERVICES / DESIGN & DEVELOPMENT',
-    title: 'Comprehensive Product Design & Rapid Prototyping',
+    tag: 'SERVICES / DESIGN',
+    title: 'Product Design &amp; Development',
     body: `
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Complete product design solutions & Industrial design (ID) 3D modeling</li>
-        <li>Mechanical design, electronic design & software firmware</li>
-        <li>Functional prototyping & validation</li>
-        <li>Product testing & regulatory compliance support</li>
-      </ul>
+      <img class="dossier-img" src="assets/site/proc-design.jpg" alt="Product Design &amp; Development">
+      <p class="dossier-lead">In today's competitive marketplace, bringing innovative products to market quickly and efficiently is essential for success. At Giken, we provide comprehensive product design and development services that integrate industrial design, engineering expertise and manufacturing knowledge to optimise product performance, enhance manufacturability and accelerate time-to-market.</p><p class="dossier-lead">Our experienced multidisciplinary engineering team works closely with customers throughout every stage of the product development process&mdash;from concept creation and engineering design to functional prototyping, validation and production readiness.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Complete product design solutions</li><li>Industrial design &amp; 3D modeling</li><li>Mechanical design</li><li>Electronic design</li><li>Software design</li><li>Functional prototyping</li><li>Product development &amp; testing</li><li>Regulatory compliance application</li></ul>
     `
   },
   'srv-tooling': {
-    tag: 'SERVICES / TOOLING DESIGN & FABRICATION',
-    title: 'Precision Tooling Fabrication (30T to over 650 Tonnes)',
+    tag: 'SERVICES / TOOLING',
+    title: 'Tooling Design &amp; Fabrication',
     body: `
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Injection mould design and fabrication (30T to 650T+)</li>
-        <li>DFM analysis & Mold Flow simulation</li>
-        <li>Prototype and high-volume production tooling</li>
-        <li>Jigs, fixtures and custom production tooling</li>
-      </ul>
+      <img class="dossier-img" src="assets/site/proc-tooling.jpg" alt="Tooling Design &amp; Fabrication">
+      <p class="dossier-lead">Successful products begin with precision tooling. At Giken, our experienced team of tooling engineers, designers, and mould makers delivers high-quality injection moulds ranging from 30 to over 650 tonnes, supporting both prototype development and high-volume production.</p><p class="dossier-lead">Every tooling project is supported by comprehensive Design for Manufacturing (DFM) analysis and Mould Flow Simulation to validate the design before fabrication. This engineering-driven approach helps identify potential manufacturing issues early, optimize product performance, reduce development lead time, and ensure stable, reliable production during mass manufacturing.</p><p class="dossier-lead">With a comprehensive range of grinding and machining equipment and extensive in-house manufacturing capabilities, Giken maintains stringent quality control, protects design integrity, and ensures reliable delivery schedules.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Injection mould design and fabrication</li><li>DFM analysis</li><li>Prototype and production tooling</li><li>Jigs, fixtures and custom production tooling</li><li>Tool maintenance, modification and engineering support</li></ul>
     `
   },
   'srv-injection': {
     tag: 'SERVICES / INJECTION MOULDING',
-    title: 'Precision Plastic Injection Moulding (18T to 650 Tonnes)',
+    title: 'Precision Plastic Injection Moulding',
     body: `
-      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:10px;">
-        <strong>Engineering Thermoplastics:</strong> ABS, PC, PA, POM, PVC, PSU, LCP, PPSU, PBT, PPS, PP + Gamma Resistance, and glass-filled Nylon.
-      </p>
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>18 to 650 Tonnes (100+ injection units)</li>
-        <li>Class 100K Cleanroom (ISO Class 8) medical moulding</li>
-        <li>In-house CNC, EDM, wire cut, and laser welding</li>
-      </ul>
+      <img class="dossier-img" src="assets/site/proc-injection.jpg" alt="Precision Plastic Injection Moulding">
+      <p class="dossier-lead">Since 1992, precision plastic injection moulding has been one of Giken's core manufacturing capabilities. With more than three decades of industry experience, we have established a strong reputation for delivering high-quality, precision-moulded plastic components to customers across a wide range of industries. Our comprehensive fleet of injection moulding machines, ranging from 18 to 650 tonnes, enables us to support projects from small, high-precision components to large and complex plastic parts.</p><p class="dossier-lead">Giken has extensive experience processing a broad range of engineering-grade thermoplastics, including ABS, PC, PA, POM, PVC, PSU, LCP, PPSU, PBT, PPS, PP + Gamma Resistance, and glass-filled high-temperature Nylon.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Precision plastic injection moulding (18 &ndash; 650 tonnes)</li><li>NPI and production support</li><li>In-house mould maintenance, repair and modification</li><li>Cleanroom injection moulding</li><li>Equipment including CNC, EDM, wire cut, copper drilling and laser welding</li><li>Manufacturing for medical, automotive, consumer electronics, gaming, industrial and other products</li></ul>
     `
   },
   'srv-lpm': {
-    tag: 'SERVICES / LOW PRESSURE MOULDING (LPIM)',
-    title: 'Low Pressure Polyamide Over-Moulding & Encapsulation',
+    tag: 'SERVICES / LOW PRESSURE MOULDING',
+    title: 'Low Pressure Injection Moulding (LPIM)',
     body: `
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Custom aluminium mould design and fabrication</li>
-        <li>PCB over-moulding & sensor encapsulation</li>
-        <li>IC underfill application & Conformal coating</li>
-      </ul>
+      <img class="dossier-img" src="assets/site/proc-lpim.jpg" alt="Low Pressure Injection Moulding (LPIM)">
+      <p class="dossier-lead">Low Pressure Injection Moulding (LPIM) is an advanced over-moulding technology designed to protect sensitive electronic components and assemblies from harsh operating environments. Using specialised polyamide materials, the process encapsulates printed circuit board assemblies (PCBAs), sensors, connectors and cable assemblies within a durable protective housing while applying significantly lower injection pressure than conventional plastic moulding.</p><p class="dossier-lead">This minimises mechanical stress on delicate components and provides excellent protection against moisture, dust, chemicals, vibration and mechanical impact.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Custom aluminium mould design and fabrication</li><li>PCB over-moulding solutions</li><li>Encapsulation of sensors, connectors, cable assemblies and other critical electronic components</li><li>Low-pressure polyamide injection moulding</li><li>IC underfill application</li><li>Conformal coating services</li><li>Prototype development and engineering validation</li><li>Scalable manufacturing</li><li>Integrated assembly, testing and quality inspection</li></ul>
     `
   },
   'srv-pcba': {
     tag: 'SERVICES / PCB ASSEMBLY',
-    title: 'High-Speed SMT & Through-Hole Electronics Assembly',
+    title: 'PCB Assembly (PCBA) &amp; Electronics Manufacturing',
     body: `
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>720M Chip points/mo + 10M Radial + 5M Axial (23 SMT lines)</li>
-        <li>0315 chip components and above; fine pitch down to 0.25 mm</li>
-        <li>12-Zone Nitrogen Reflow, Wave Solder, 3D SPI, 3D AOI & Dage Real-Time X-Ray</li>
-        <li>Bluetooth & Wi-Fi RF testing; Class 100 Cleanroom facility</li>
-      </ul>
+      <img class="dossier-img" src="assets/site/proc-pcba.jpg" alt="PCB Assembly (PCBA) &amp; Electronics Manufacturing">
+      <p class="dossier-lead">Since 1994, Giken has been providing high-quality, flexible-volume PCB Assembly (PCBA) services to customers across various industries. With extensive electronics manufacturing experience, we deliver comprehensive end-to-end solutions covering component sourcing, PCB assembly, testing, inspection, and production support.</p><p class="dossier-lead">Quality is at the core of our manufacturing philosophy. Giken implements robust quality management systems, systematic workforce training, and continuous process improvement initiatives to ensure consistent product reliability and strive towards zero-defect manufacturing.</p>
+      
+      <div class="dossier-spec">
+        <div><strong>Mount Capacity</strong><span>Chip 720M pts/month &bull; Radial 10M pts/month &bull; Axial 5M pts/month</span></div>
+        <div><strong>SMD Components</strong><span>0315 chip and above; SOP, PLCC, QFP, BGA, CSP, SMT/THT connectors</span></div>
+        <div><strong>PCB Types</strong><span>Single-sided, double-sided, multi-layer up to 8 layers</span></div>
+        <div><strong>Fine Pitch</strong><span>Down to 0.25 mm</span></div>
+        <div><strong>Reflow Soldering</strong><span>Lead-free (RoHS) &amp; conventional, 12-Zone Nitrogen Reflow Oven</span></div>
+        <div><strong>Wave Soldering</strong><span>Automatic spray fluxing and wave soldering for THT assemblies</span></div>
+      </div>
+      <h4 class="dossier-h4">Inspection, Test &amp; Engineering Support</h4>
+      <ul class="dossier-list"><li>Solder Paste Inspection (SPI), Automated Optical Inspection (AOI), X-Ray Inspection</li><li>In-Circuit Test (ICT) and Functional Test (FCT)</li><li>Bluetooth &amp; Wi-Fi RF testing (IoT integrated testing)</li><li>A Class 100 cleanroom facility built for unique, high-precision products</li><li>Reliability testing: burn-in, thermal shock, water resistance (IPX4), air leakage</li><li>Customer software development using LabView, Python, Visual Basic, C++, Chroma and Machine Vision</li><li>DFM, NPI, prototype build, process validation, low- and high-volume production</li></ul>
     `
   },
   'srv-assembly': {
     tag: 'SERVICES / PRODUCT ASSEMBLY',
-    title: 'Turnkey Box-Build & Complete Product Integration',
+    title: 'Box Build &amp; Complete Product Integration',
     body: `
-      <ul style="font-size:0.84rem; line-height:1.65; padding-left:18px; list-style:disc; color:var(--text-secondary);">
-        <li>Mechanical & electromechanical assembly</li>
-        <li>Box build & system integration</li>
-        <li>Battery pack & Portable Energy Storage (PESS) assembly</li>
-        <li>Testing, packaging, labelling and global distribution</li>
-      </ul>
+      <img class="dossier-img" src="assets/site/proc-assembly.jpg" alt="Box Build &amp; Complete Product Integration">
+      <p class="dossier-lead">Giken provides comprehensive box build and product assembly services that transform individual components into fully assembled, tested and market-ready products. Leveraging our integrated design, engineering and manufacturing capabilities, we support every stage of the assembly process&mdash;from incoming material verification and quality control to final assembly, testing, packaging, labelling and global distribution.</p><p class="dossier-lead">By combining precision engineering, Electronics Manufacturing Services (EMS), plastic injection moulding and system integration under one roof, we help customers simplify their supply chains, improve manufacturing efficiency and accelerate time-to-market.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Mechanical and electromechanical assembly</li><li>Box build and complete product integration</li><li>Battery pack assembly and integration</li><li>Portable energy storage solution (ESS) assembly</li><li>Prototype, low to high volume production</li><li>Integrated assembly, testing and quality inspection</li></ul>
     `
   },
   'srv-machining': {
     tag: 'SERVICES / PRECISION MACHINING',
-    title: 'Sub-Micron Turning & Precision Motor Shafts',
+    title: 'Sub-Micron Turning &amp; Precision Motor Shafts',
     body: `
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; font-size:0.82rem;">
-        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>OD:</strong> 0.5 mm to 500 mm
-        </div>
-        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Length:</strong> 0.8 mm to 1000 mm
-        </div>
-        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Tolerance:</strong> &plusmn;0.002 mm
-        </div>
-        <div style="background:var(--bg-page-subtle); padding:8px; border-radius:4px; border:1px solid var(--border-color);">
-          <strong>Surface Finish:</strong> Ry 0.4 (Ra 0.025)
-        </div>
+      <img class="dossier-img" src="assets/site/proc-machining.jpg" alt="Sub-Micron Turning &amp; Precision Motor Shafts">
+      <p class="dossier-lead">Precision machining is the foundation of high-performance manufacturing, where every micron matters. At Giken, we specialise in producing complex precision-machined components with exceptionally tight tolerances, superior surface finishes and outstanding dimensional accuracy for applications where quality, consistency and reliability are essential.</p><p class="dossier-lead">With more than 40 years of precision engineering experience, Giken has established a strong reputation as a trusted manufacturing partner for customers across medical technology, automotive, semiconductor equipment, industrial automation, home appliances, aerospace, oil &amp; gas, pumps, motors and consumer products.</p>
+      
+      <div class="dossier-spec">
+        <div><strong>Material Outer Diameter</strong><span>0.5 mm to 500 mm</span></div>
+        <div><strong>Length</strong><span>0.8 mm to 1000 mm</span></div>
+        <div><strong>Diameter Tolerance</strong><span>&plusmn;0.002 mm (2 microns)</span></div>
+        <div><strong>Roundness</strong><span>0.0003 mm (0.3 microns)</span></div>
+        <div><strong>Surface Finish</strong><span>Ry 0.4 (Ra 0.025)</span></div>
+        <div><strong>Run-out / Concentricity</strong><span>0.01 mm / 0.001 mm</span></div>
       </div>
+      <h4 class="dossier-h4">Primary &amp; Secondary Processes</h4>
+      <ul class="dossier-list"><li>Swiss-type automatic lathes (Escomatic)</li><li>Ultra-precision CNC turning</li><li>Multi-axis CNC machining</li><li>High-speed cut-off machining</li><li>Precision milling and secondary machining</li><li>Centreless, cylindrical, step, end-face and radius grinding</li><li>Barrel polishing, knurling, drilling and tapping</li><li>Straightening, heat treatment, ultrasonic cleaning and degreasing, oven annealing and tempering</li></ul>
     `
   },
   'srv-printing': {
-    tag: 'SERVICES / PRINTING',
-    title: 'Pad Printing & Silk Screen Services',
+    tag: 'SERVICES / TEMPO PRINTING',
+    title: 'Pad Printing &amp; Silk Screen Printing',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Pad printing for complex curved surfaces and high-durability silk screen printing for front panels and enclosures.
-      </p>
+      <img class="dossier-img" src="assets/site/proc-printing.jpg" alt="Pad Printing &amp; Silk Screen Printing">
+      <p class="dossier-lead">At Giken, we offer a range of value-added printing services that enhance both the appearance and functionality of finished products. Whether for branding, product identification, traceability or decorative purposes, our in-house printing capabilities provide high-quality, durable markings that complement your product while streamlining the manufacturing process.</p><p class="dossier-lead"><strong>Pad printing</strong> is a versatile and cost-effective method for transferring high-resolution images, logos, symbols and text onto flat, curved or irregular surfaces. <strong>Silk screen printing</strong> suits larger production volumes and applications requiring durable, long-lasting graphics with strong adhesion on plastic, metal and coated surfaces.</p>
+      
+      <h4 class="dossier-h4">Typical Applications</h4>
+      <ul class="dossier-list"><li>Corporate logos and branding</li><li>Product identification</li><li>Control panel markings</li><li>Icons and symbols</li><li>Serial numbers and part identifications</li><li>Decorative graphics, operating instructions and safety labels</li><li>Front panels and equipment enclosures</li></ul>
     `
   },
   'srv-testing': {
-    tag: 'SERVICES / TESTING',
-    title: 'Product Validation & Metrology',
+    tag: 'SERVICES / PRODUCT TESTING',
+    title: 'Testing, Validation &amp; Metrology',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        EMC, wireless RF, cyclic temperature/humidity burn-in aging, vibration, drop impact, IPX4 water spray, and air leakage sealing testing.
-      </p>
+      <img class="dossier-img" src="assets/site/proc-metrology.jpg" alt="Testing, Validation &amp; Metrology">
+      <p class="dossier-lead">At Giken, quality extends beyond manufacturing. As a one-stop manufacturing partner, we provide comprehensive testing and validation services to verify product performance, reliability and compliance with customer and industry requirements. Our testing capabilities enable early identification of potential issues, reduce development risks and support a smooth transition from prototype to volume production.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Electromagnetic compatibility (EMC) testing</li><li>Wireless testing</li><li>Reliability testing</li><li>Temperature &amp; humidity testing</li><li>Vibration testing</li><li>Drop &amp; impact testing</li></ul>
     `
   },
   'srv-cleanroom': {
@@ -636,65 +629,79 @@ const detailContents = {
   // 7 INDUSTRIES
   'ind-automotive': {
     tag: 'MARKETS / AUTOMOTIVE',
-    title: 'Safety-Critical Automotive Components & Assemblies',
+    title: 'Automotive Systems',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Airbag capsules (Takata/Joyson 1M/mo), headlamps, camshafts, and EV/ICE motorcycle assembly under IATF 16949.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-automotive.jpg" alt="Automotive Systems">
+      <p class="dossier-lead">Automotive components must perform consistently under demanding operating conditions while meeting stringent safety, quality and regulatory requirements. Giken combines precision engineering, advanced manufacturing technologies and disciplined process control to produce high-quality components that meet the exacting standards of global automotive manufacturers.</p><p class="dossier-lead">As the industry transitions towards electrification, connectivity and intelligent mobility, our expertise in precision engineering, electronics integration and battery-pack assembly supports next-generation automotive applications.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Precision tool design and manufacturing</li><li>Plastic injection moulding and secondary finishing processes</li><li>Precision shaft machining and high-precision metal components</li><li>Safety-critical components including airbag capsules, headlamp assemblies and other precision parts</li><li>Assembly of electric motorcycles and internal combustion engine (ICE) motorcycles</li><li>Prototype, New Product Introduction (NPI) and high-volume production</li><li>Stringent quality assurance, testing, inspection and process control</li><li>ISO 9001, ISO 14001 and IATF 16949 &ndash; certified sites</li></ul>
     `
   },
   'ind-medical': {
-    tag: 'MARKETS / MEDICAL',
-    title: 'ISO 13485 Medical Devices & Cleanroom Manufacturing',
+    tag: 'MARKETS / HEALTHCARE &amp; MEDICAL',
+    title: 'Healthcare &amp; Medical Equipment',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Olympus surgical light guide cables, JMS medical blood bag accessories, and Class 100K cleanroom medical moulding.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-medical.jpg" alt="Healthcare &amp; Medical Equipment">
+      <p class="dossier-lead">The medical and healthcare industry is one of the world's most advanced and highly regulated sectors. Medical devices and healthcare equipment demand the highest standards of precision, quality, reliability and regulatory compliance, where even the smallest component plays a critical role in patient safety and product performance.</p><p class="dossier-lead">Giken supports these requirements through tightly controlled manufacturing processes, cleanroom production, precision tooling and integrated assembly capabilities.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Product engineering and Design for Manufacturing (DFM) support</li><li>Precision tool and mould design and fabrication</li><li>Plastic injection moulding for medical components and disposable devices</li><li>Cleanroom manufacturing and assembly (Class 100,000 / ISO Class 8)</li><li>Precision machining of medical components</li><li>ISO 9001, ISO 14001 and ISO 13485 &ndash; certified sites</li></ul>
     `
   },
   'ind-consumer': {
     tag: 'MARKETS / CONSUMER ELECTRONICS',
-    title: 'Cosmetic Plastics, SMT & Smart IoT Devices',
+    title: 'Consumer Electronics',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Personal care grooming, smart home wearables, and wireless IoT devices with LPIM encapsulation.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-consumer.jpg" alt="Consumer Electronics">
+      <p class="dossier-lead">The consumer electronics industry is one of the world's most dynamic and fast-evolving sectors, driven by continuous innovation, changing consumer lifestyles and rapid technological advancement. From smart home devices and personal care products to connected IoT devices and portable electronics, manufacturers must deliver innovative design, exceptional quality, reliability and competitive cost within increasingly shorter development cycles.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Product design and engineering support</li><li>Design and manufacture of cosmetic plastic parts, mechanical parts and electronic assemblies</li><li>Plastic injection moulding and value-added secondary processes</li><li>Low Pressure Injection Moulding (LPIM) protecting assemblies against moisture, dust, vibration and shock</li><li>PCB Assembly (PCBA) using advanced SMT and through-hole technologies</li><li>Box build assembly and complete product integration including cable and wire harness installation, battery integration, firmware loading, functional testing and final system verification</li><li>Comprehensive testing, inspection and quality assurance</li><li>Prototype development, New Product Introduction (NPI), scalable manufacturing</li><li>Packaging, labelling and logistics support</li><li>ISO 9001, ISO 14001 &ndash; certified sites</li></ul>
     `
   },
   'ind-home': {
     tag: 'MARKETS / HOME APPLIANCES',
-    title: 'Intelligent Connected Home Appliance Solutions',
+    title: 'Home Appliances',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Ice makers, smart control panels, and durable appliance assemblies.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-home.jpg" alt="Home Appliances">
+      <p class="dossier-lead">The home appliance industry is evolving rapidly as consumers seek smarter, more connected and energy-efficient products. Modern appliances combine mechanical systems, electronics and intelligent connectivity into products that must operate reliably over years of daily use.</p><p class="dossier-lead">Giken integrates precision tooling, plastic injection moulding, electronics manufacturing and complete product assembly to simplify production, improve product quality and optimise manufacturing efficiency.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Product design and engineering support</li><li>High-precision moulds and production tooling for plastic and metal components</li><li>Plastic injection moulding and value-added secondary processes</li><li>Low Pressure Injection Moulding (LPIM)</li><li>PCB Assembly (PCBA) using advanced SMT and through-hole technologies</li><li>Box build assembly and complete product integration</li><li>Comprehensive testing, inspection and quality assurance</li><li>Flexible production and supply chain support</li><li>ISO 9001 and ISO 14001 &ndash; certified sites</li></ul>
     `
   },
   'ind-industrial': {
     tag: 'MARKETS / INDUSTRIAL',
-    title: 'Continuous-Duty Industrial Controls & Sub-Micron Shafts',
+    title: 'Industrial Equipment &amp; Automation',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Precision DC motor shafts, IoT tilt sensors, and automated fare collection (AFC) systems.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-industrial.jpg" alt="Industrial Equipment &amp; Automation">
+      <p class="dossier-lead">The industrial equipment sector requires robust, high-performance products that operate reliably in demanding environments and continuous-duty applications. From industrial automation and control systems to machinery, instrumentation and electromechanical equipment, manufacturers rely on precision-engineered components and assemblies that deliver exceptional durability, dimensional accuracy and long-term operational performance.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Product design and engineering support</li><li>Precision plastic components, mechanical parts and electronic assemblies</li><li>Plastic tool and mould design and fabrication</li><li>Plastic injection moulding and value-added secondary processes</li><li>PCB Assembly (PCBA) using advanced SMT and through-hole technologies</li><li>Box build assembly and complete system integration</li><li>Comprehensive testing, inspection and quality assurance</li><li>Flexible production and supply chain support</li></ul>
     `
   },
   'ind-gaming': {
-    tag: 'MARKETS / GAMING & TOYS',
-    title: 'Game Consoles, Entertainment & Safety-Compliant Toys',
+    tag: 'MARKETS / GAMING &amp; TOYS',
+    title: 'Gaming Consoles &amp; Toys',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        SEGA, Nintendo, Microsoft console integration, optical drive mechanisms, and cash recognition units.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-gaming.jpg" alt="Gaming Consoles &amp; Toys">
+      <p class="dossier-lead">The gaming and toys industry demands products that combine innovative design, outstanding product quality, and uncompromising safety. From traditional toys and educational products to electronic gaming devices and smart connected toys, manufacturers require precision-engineered components and reliable manufacturing processes that ensure durability, consistent performance, and compliance with stringent international safety and regulatory standards.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Plastic tool and mould design and fabrication</li><li>Plastic injection moulding and value-added secondary processes</li><li>PCB Assembly (PCBA)</li><li>Box build assembly and complete system integration</li><li>Prototype development, NPI, flexible production and supply chain support</li><li>Comprehensive testing, inspection and quality assurance</li><li>Manufacturing using phthalate-compliant and food-grade materials where required</li><li>Strict material traceability and compliance with international product safety requirements</li><li>Products such as game consoles, bricks and cash recognition systems for gaming equipment</li><li>ISO 9001 and ISO 14001 &ndash; certified sites</li></ul>
     `
   },
   'ind-energy': {
-    tag: 'MARKETS / ENERGY STORAGE SOLUTIONS',
-    title: 'Lithium Battery Packs & Portable Energy Storage (PESS)',
+    tag: 'MARKETS / ENERGY STORAGE',
+    title: 'Battery Packs &amp; Energy Storage Solutions',
     body: `
-      <p style="font-size:0.88rem; line-height:1.65; color:var(--text-secondary);">
-        Portable Energy Storage Stations (PESS), automated laser cell welding, and battery management system (BMS) integration.
-      </p>
+      <img class="dossier-img" src="assets/site/ind-energy.jpg" alt="Battery Packs &amp; Energy Storage Solutions">
+      <p class="dossier-lead">The rapid growth of electrification and renewable energy has accelerated demand for reliable, high-performance battery systems across electric mobility, portable power, and energy storage applications.</p><p class="dossier-lead">At Giken, we provide integrated manufacturing solutions for lithium battery packs and Portable Energy Storage Stations (PESS), supporting customers from product development and NPI through to high-volume production &mdash; combining precision engineering, plastic injection moulding, EMS, BMS integration, precision metal fabrication, and complete battery pack assembly.</p>
+      
+      <h4 class="dossier-h4">Giken Capabilities</h4>
+      <ul class="dossier-list"><li>Battery pack design support and engineering for custom applications</li><li>Portable Energy Storage Station (PESS) manufacturing and system assembly</li><li>Battery module and battery pack assembly for lithium-ion technologies</li><li>Battery Management System (BMS) integration and PCBA</li><li>Precision plastic injection moulding for battery enclosures and structural components</li><li>Cell matching, battery balancing, auto-welding and battery pack integration</li><li>Functional testing, validation, electrical safety testing and quality assurance</li><li>Global component sourcing and supply chain management</li><li>Engineering support for product optimisation and product lifecycle enhancement</li><li>ISO 9001, ISO 14001, IATF 16949 &ndash; certified sites</li></ul>
     `
   },
 
@@ -778,40 +785,31 @@ const detailContents = {
 
   // QUALITY
   'quality-cert': {
-    tag: 'QUALITY & ESG DOSSIER',
-    title: 'Certified Quality Management & ESG Framework',
+    tag: 'QUALITY',
+    title: 'Quality Management &amp; Certifications',
     body: `
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; font-size:0.84rem;">
-        <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong>ISO 9001 : 2015</strong><br><span style="color:var(--text-muted);">Quality Management</span>
-        </div>
-        <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong>ISO 13485 : 2016</strong><br><span style="color:var(--text-muted);">Medical Devices</span>
-        </div>
-        <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong>ISO 14001 : 2015</strong><br><span style="color:var(--text-muted);">Environmental</span>
-        </div>
-        <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:10px; border-radius:4px;">
-          <strong>IATF 16949 : 2016</strong><br><span style="color:var(--text-muted);">Automotive</span>
-        </div>
-      </div>
-      <p style="font-size:0.86rem; color:var(--text-secondary); line-height:1.6;">
-        Audited and compliant with Amfori BSCI; active participant in the United Nations Global Compact (UNGC). Strict adherence to RoHS and REACH.
-      </p>
+      <p class="dossier-lead">Giken's Quality Management System provides a structured framework for planning, monitoring and continuously improving our manufacturing processes. Through standardised procedures, rigorous quality control, comprehensive inspection and validation, and ongoing performance measurement, we ensure consistent product quality, regulatory compliance and operational excellence.</p>
+      <h4 class="dossier-h4">Quality Certifications</h4>
+      <ul class="dossier-list">
+        <li><strong>ISO 9001</strong> &mdash; Quality Management System</li>
+        <li><strong>ISO 13485</strong> &mdash; Medical Device Quality Management</li>
+        <li><strong>ISO 14001</strong> &mdash; Environmental Management System</li>
+        <li><strong>IATF 16949</strong> &mdash; Automotive Quality Management</li>
+      </ul>
+      <div class="cert-gallery"><img src="assets/site/cert-01.jpg" alt="Giken certificate 1" loading="lazy"><img src="assets/site/cert-02.jpg" alt="Giken certificate 2" loading="lazy"><img src="assets/site/cert-03.jpg" alt="Giken certificate 3" loading="lazy"><img src="assets/site/cert-04.jpg" alt="Giken certificate 4" loading="lazy"><img src="assets/site/cert-05.jpg" alt="Giken certificate 5" loading="lazy"><img src="assets/site/cert-06.jpg" alt="Giken certificate 6" loading="lazy"><img src="assets/site/cert-07.jpg" alt="Giken certificate 7" loading="lazy"><img src="assets/site/cert-08.jpg" alt="Giken certificate 8" loading="lazy"><img src="assets/site/cert-09.jpg" alt="Giken certificate 9" loading="lazy"><img src="assets/site/cert-10.jpg" alt="Giken certificate 10" loading="lazy"><img src="assets/site/cert-11.jpg" alt="Giken certificate 11" loading="lazy"><img src="assets/site/cert-12.jpg" alt="Giken certificate 12" loading="lazy"><img src="assets/site/cert-13.jpg" alt="Giken certificate 13" loading="lazy"><img src="assets/site/cert-14.jpg" alt="Giken certificate 14" loading="lazy"><img src="assets/site/cert-15.jpg" alt="Giken certificate 15" loading="lazy"><img src="assets/site/cert-16.jpg" alt="Giken certificate 16" loading="lazy"><img src="assets/site/cert-17.jpg" alt="Giken certificate 17" loading="lazy"><img src="assets/site/cert-18.jpg" alt="Giken certificate 18" loading="lazy"><img src="assets/site/cert-19.jpg" alt="Giken certificate 19" loading="lazy"></div>
     `
   },
 
   // CAREERS
   'careers-info': {
     tag: 'CAREERS AT GIKEN',
-    title: 'People-Oriented Human Resources & Talent Development',
+    title: 'Careers',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65; margin-bottom:14px;">
-        We create a consultation-and-sharing based team environment with established career progression frameworks and incentive packages.
-      </p>
-      <div style="background:var(--bg-page-subtle); border:1px solid var(--border-color); padding:12px; border-radius:4px; font-size:0.84rem; color:var(--text-muted);">
-        <em>Note: There is currently no job vacancy or job opening available. For future inquiries: hr@giken.com.sg.</em>
-      </div>
+      <img class="dossier-img" src="assets/site/careers-team.jpg" alt="Giken team">
+      <p class="dossier-lead">We are an integrated engineering group with over 40 years of history. Highly people oriented, we take care of every aspect of human resources management.</p>
+      <p class="dossier-lead">We create a consultation-and-sharing based team environment to assist people in learning from each other. We organize competition activities that evoke creativity and initiatives, and spur our people to make an impact in improving production efficiency, cost structure, and overall performance. We have established a career progression framework that people can visualize their growth path in the years ahead. With the well-designed incentive and welfare package, as well as the periodical team building activities, we engineered a multidimensional career development system that brings forth the personal fulfilment of our employees.</p>
+      <p class="dossier-lead"><strong>The company cares about you, and your career growth.</strong></p>
+      <p class="dossier-lead">There is currently no job vacancy or job opening available.</p>
     `
   },
 
@@ -836,8 +834,8 @@ window.openDetailModal = function(key) {
   const content = detailContents[key] || detailContents['about-giken'];
 
   if (modal && tagEl && titleEl && bodyEl) {
-    tagEl.innerText = content.tag;
-    titleEl.innerText = content.title;
+    tagEl.innerHTML = content.tag;
+    titleEl.innerHTML = content.title;
     bodyEl.innerHTML = content.body;
     setModalOpen('detailModal', true);
   }
