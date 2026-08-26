@@ -50,8 +50,8 @@ function applyTheme(theme) {
    One scroll = jump to next/previous section with smooth transition + easing
    ========================================================================== */
 function initFullPageScroll() {
-  const sectionIds = ['hero','metrics','about','capabilities','expansion','industries','quality','facilities','careers'];
-  const sectionLabels = ['Intro','Key Metrics','About Us','Capabilities','Batam Expansion','Industries','Quality & ESG','Facilities','Careers'];
+  const sectionIds = ['hero','about','capabilities','expansion','industries','quality','facilities','careers'];
+  const sectionLabels = ['Intro','About Us','Capabilities','Batam Expansion','Industries','Quality & ESG','Facilities','Careers'];
   const header = document.getElementById('corpHeader');
   const backToTopBtn = document.getElementById('btnBackToTop');
   const navLabel = document.getElementById('sideNavLabel');

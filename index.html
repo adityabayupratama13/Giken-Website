@@ -171,7 +171,6 @@
       <div class="side-nav-line"><span class="side-nav-progress" id="sideNavProgress"></span></div>
       <div class="side-nav-dots">
         <button class="side-nav-dot active" data-section="hero" title="Intro"></button>
-        <button class="side-nav-dot" data-section="metrics" title="Key Metrics"></button>
         <button class="side-nav-dot" data-section="about" title="About Us"></button>
         <button class="side-nav-dot" data-section="capabilities" title="Capabilities"></button>
         <button class="side-nav-dot" data-section="expansion" title="Batam Expansion"></button>
@@ -209,75 +208,42 @@
         </div>
       </div>
 
-      <!-- Hero Key Metrics Bar -->
-      <div class="hero-stats-bar">
-        <div class="stat-item">
-          <span class="stat-number">45+ Years</span>
-          <span class="stat-label">Craftsmanship & Heritage</span>
+      <!-- Compact Metrics Strip (embedded in hero) -->
+      <div class="hero-metrics-strip">
+        <div class="hero-metric-item" onclick="openDetailModal('about-giken')">
+          <span class="hero-metric-val">1979</span>
+          <span class="hero-metric-lbl">Founded in Singapore</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">2,500+</span>
-          <span class="stat-label">Global Workforce (250+ Engineers)</span>
+        <div class="hero-metric-sep"></div>
+        <div class="hero-metric-item" onclick="openDetailModal('about-giken')">
+          <span class="hero-metric-val">2,500+</span>
+          <span class="hero-metric-lbl">Employees</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">562K+ sq. ft</span>
-          <span class="stat-label">Combined Manufacturing Area</span>
+        <div class="hero-metric-sep"></div>
+        <div class="hero-metric-item" onclick="openDetailModal('fac-sg-hq')">
+          <span class="hero-metric-val">9 Plants</span>
+          <span class="hero-metric-lbl">Global Facilities</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">IATF 16949 / ISO 13485</span>
-          <span class="stat-label">Automotive & Medical Certified</span>
+        <div class="hero-metric-sep"></div>
+        <div class="hero-metric-item" onclick="openDetailModal('srv-pcba')">
+          <span class="hero-metric-val">720M+</span>
+          <span class="hero-metric-lbl">SMT pts/mo</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       SECTION 2: CORPORATE METRICS STRIP
-       ========================================================================= -->
-  <section class="section-metrics" id="metrics">
-    <div class="section-container">
-      <div class="metrics-grid">
-        <div class="metric-box" onclick="openDetailModal('about-giken')">
-          <div class="metric-value"><span class="counter" data-target="1979">1979</span></div>
-          <div class="metric-heading">Founded in Singapore</div>
-          <div class="metric-detail">Over 40 Years of Manufacturing Heritage</div>
+        <div class="hero-metric-sep"></div>
+        <div class="hero-metric-item" onclick="openDetailModal('srv-injection')">
+          <span class="hero-metric-val">100+</span>
+          <span class="hero-metric-lbl">Injection Machines</span>
         </div>
-
-        <div class="metric-box" onclick="openDetailModal('about-giken')">
-          <div class="metric-value"><span class="counter" data-target="2500">2,500</span>+</div>
-          <div class="metric-heading">Employee Strength</div>
-          <div class="metric-detail">Including 250+ QA & R&D Engineers</div>
-        </div>
-
-        <div class="metric-box" onclick="openDetailModal('fac-sg-hq')">
-          <div class="metric-value"><span class="counter" data-target="9">9</span> Plants</div>
-          <div class="metric-heading">Global Facilities</div>
-          <div class="metric-detail">Singapore, Batam Indonesia & Changzhou China</div>
-        </div>
-
-        <div class="metric-box" onclick="openDetailModal('srv-pcba')">
-          <div class="metric-value"><span class="counter" data-target="720">720</span>M+</div>
-          <div class="metric-heading">SMT Points / Month</div>
-          <div class="metric-detail">23 SMT Lines & 0315 Chip Mounting</div>
-        </div>
-
-        <div class="metric-box" onclick="openDetailModal('srv-injection')">
-          <div class="metric-value"><span class="counter" data-target="100">100</span>+</div>
-          <div class="metric-heading">Injection Machines</div>
-          <div class="metric-detail">18T to 650T & Class 100K Cleanroom</div>
-        </div>
-
-        <div class="metric-box metric-box-featured" onclick="smoothScrollTo('#expansion')">
-          <div class="metric-value"><span class="counter" data-target="78000">78,000</span> m²</div>
-          <div class="metric-heading">Batam 2026 Expansion</div>
-          <div class="metric-detail">Solar Modules, ESS & High-Tech Lines</div>
+        <div class="hero-metric-sep"></div>
+        <div class="hero-metric-item" onclick="smoothScrollTo('#expansion')">
+          <span class="hero-metric-val">78,000 m²</span>
+          <span class="hero-metric-lbl">Batam 2026 Expansion</span>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <!-- =========================================================================
        SECTION 3: ABOUT GIKEN SAKATA

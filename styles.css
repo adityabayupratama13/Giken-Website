@@ -739,7 +739,60 @@ button {
 }
 
 
-/* Hero Content Container */
+/* Compact Metrics Strip embedded in hero bottom */
+.hero-metrics-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(10, 25, 47, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-top: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 1040px;
+}
+
+.hero-metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 4px 18px 4px 0;
+  cursor: pointer;
+  flex: 1;
+  min-width: 100px;
+  transition: opacity 0.2s;
+}
+
+.hero-metric-item:hover { opacity: 0.75; }
+
+.hero-metric-val {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+.hero-metric-lbl {
+  font-size: 0.68rem;
+  color: #94A3B8;
+  white-space: nowrap;
+}
+
+.hero-metric-sep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+  margin-right: 18px;
+}
+
 .hero-container {
   position: relative;
   z-index: 10;
