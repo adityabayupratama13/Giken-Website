@@ -7,8 +7,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeEngine();
-  initHeroKineticGiken();
-  initNavigation();
+  initFullPageScroll();
   initMatrixTabs();
   initCounters();
   initLanguageEngine();
@@ -47,372 +46,143 @@ function applyTheme(theme) {
 }
 
 /* ==========================================================================
-   2. PEGATRON-STYLE GIKEN KINETIC TYPOGRAPHY & SPHERE PHYSICS CANVAS
+   2. FULL-PAGE SCROLL SNAP ENGINE
+   One scroll = jump to next/previous section with smooth transition + easing
    ========================================================================== */
-function initHeroKineticGiken() {
-  const canvas = document.getElementById('heroGikenCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  let width = 0;
-  let height = 0;
-  let dpr = window.devicePixelRatio || 1;
-  let particles = [];
-  let animId = null;
-  let mouse = { x: -1000, y: -1000, active: false };
-
-  // 5 Letters geometry definitions (relative to canvas dimensions)
-  const letters = ['G', 'I', 'K', 'E', 'N'];
-  let letterBounds = [];
-
-  function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
-    dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.scale(dpr, dpr);
-
-    computeLetterBounds();
-    initParticles();
-  }
-
-  function computeLetterBounds() {
-    letterBounds = [];
-    const isMobile = width < 768;
-    const marginX = isMobile ? width * 0.04 : width * 0.08;
-    const availW = width - marginX * 2;
-    const gap = isMobile ? availW * 0.02 : availW * 0.035;
-    const letterW = (availW - gap * (letters.length - 1)) / letters.length;
-    
-    // Vertical placement: center-upper half of the hero
-    const letterH = isMobile ? height * 0.38 : Math.min(height * 0.58, letterW * 1.55);
-    const topY = isMobile ? height * 0.16 : height * 0.18;
-
-    letters.forEach((char, i) => {
-      const leftX = marginX + i * (letterW + gap);
-      const chuteX = leftX + letterW * 0.5;
-      letterBounds.push({
-        char: char,
-        x: leftX,
-        y: topY,
-        w: letterW,
-        h: letterH,
-        bottomY: topY + letterH,
-        chuteX: chuteX,
-        chuteTop: 0,
-        chuteBottom: topY
-      });
-    });
-  }
-
-  class SphereParticle {
-    constructor(bound, initial = false) {
-      this.bound = bound;
-      this.radius = Math.max(3.5, Math.min(8.5, width * 0.0055));
-      this.reset(initial);
-    }
-
-    reset(initial = false) {
-      // Spawn either inside top dropper chute or scattered initially
-      const b = this.bound;
-      this.x = b.chuteX + (Math.random() - 0.5) * (b.w * 0.25);
-      this.y = initial ? b.y + Math.random() * b.h : b.chuteTop - Math.random() * (height * 0.4);
-      this.vx = (Math.random() - 0.5) * 1.2;
-      this.vy = initial ? (Math.random() * 2) : (2.5 + Math.random() * 3.5);
-      this.gravity = 0.18 + Math.random() * 0.06;
-      this.bounce = 0.45;
-      this.friction = 0.985;
-      this.settled = false;
-      this.settleTime = 0;
-      this.alpha = 1;
-      
-      // Color tone: Steel metallic, ice blue, and subtle titanium
-      const randType = Math.random();
-      if (randType < 0.55) {
-        this.baseColor = '#CBD5E1'; // Steel Silver
-        this.highlightColor = '#FFFFFF';
-        this.shadowColor = '#475569';
-      } else if (randType < 0.85) {
-        this.baseColor = '#93C5FD'; // Ice Navy Blue
-        this.highlightColor = '#FFFFFF';
-        this.shadowColor = '#1E3A8A';
-      } else {
-        this.baseColor = '#E2E8F0'; // White Pearl
-        this.highlightColor = '#FFFFFF';
-        this.shadowColor = '#64748B';
-      }
-    }
-
-    update() {
-      const b = this.bound;
-
-      // Mouse interactivity (gentle magnetic / dispersion effect)
-      if (mouse.active) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxDist = 90;
-        if (dist < maxDist && dist > 0) {
-          const force = (1 - dist / maxDist) * 3;
-          this.vx += (dx / dist) * force;
-          this.vy += (dy / dist) * force;
-          this.settled = false;
-          this.settleTime = 0;
-        }
-      }
-
-      this.vy += this.gravity;
-      this.vx *= this.friction;
-      this.vy *= this.friction;
-
-      this.x += this.vx;
-      this.y += this.vy;
-
-      // Chute descent constraint
-      if (this.y < b.y) {
-        const chuteHalfW = b.w * 0.18;
-        if (this.x < b.chuteX - chuteHalfW) {
-          this.x = b.chuteX - chuteHalfW;
-          this.vx = Math.abs(this.vx) * 0.5;
-        } else if (this.x > b.chuteX + chuteHalfW) {
-          this.x = b.chuteX + chuteHalfW;
-          this.vx = -Math.abs(this.vx) * 0.5;
-        }
-      } else {
-        // Inside letter boundary
-        const padding = this.radius + 4;
-        const minX = b.x + padding;
-        const maxX = b.x + b.w - padding;
-        const maxY = b.bottomY - padding;
-
-        if (this.x < minX) {
-          this.x = minX;
-          this.vx = Math.abs(this.vx) * this.bounce;
-        } else if (this.x > maxX) {
-          this.x = maxX;
-          this.vx = -Math.abs(this.vx) * this.bounce;
-        }
-
-        // Bottom floor bounce & settling
-        if (this.y >= maxY) {
-          this.y = maxY;
-          this.vy = -this.vy * this.bounce;
-          if (Math.abs(this.vy) < 0.6) {
-            this.vy = 0;
-            this.settled = true;
-          }
-        }
-      }
-
-      // Settled circulation / continuous loop
-      if (this.settled) {
-        this.settleTime++;
-        if (this.settleTime > 320 + Math.random() * 200) {
-          this.alpha -= 0.03;
-          if (this.alpha <= 0) {
-            this.reset(false);
-          }
-        }
-      }
-    }
-
-    draw(ctx) {
-      if (this.alpha <= 0) return;
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
-
-      // 3D Realistic Metallic Sphere Gradient
-      const grad = ctx.createRadialGradient(
-        this.x - this.radius * 0.35,
-        this.y - this.radius * 0.35,
-        this.radius * 0.1,
-        this.x,
-        this.y,
-        this.radius
-      );
-      grad.addColorStop(0, this.highlightColor);
-      grad.addColorStop(0.4, this.baseColor);
-      grad.addColorStop(1, this.shadowColor);
-
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // Specular highlight spot
-      ctx.beginPath();
-      ctx.arc(
-        this.x - this.radius * 0.35,
-        this.y - this.radius * 0.35,
-        this.radius * 0.28,
-        0,
-        Math.PI * 2
-      );
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-      ctx.fill();
-
-      ctx.restore();
-    }
-  }
-
-  function initParticles() {
-    particles = [];
-    const countPerLetter = width < 768 ? 24 : 50;
-    letterBounds.forEach(b => {
-      for (let i = 0; i < countPerLetter; i++) {
-        particles.push(new SphereParticle(b, true));
-      }
-    });
-  }
-
-  // Render the glassmorphic GIKEN letter tubes and top chutes
-  function drawGlassChutes() {
-    letterBounds.forEach(b => {
-      ctx.save();
-
-      // 1. Top Dropper Feeder Tube
-      const chuteHalfW = b.w * 0.16;
-      ctx.fillStyle = 'rgba(10, 37, 64, 0.15)';
-      ctx.fillRect(b.chuteX - chuteHalfW, 0, chuteHalfW * 2, b.y);
-
-      // Chute Glass Borders
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(b.chuteX - chuteHalfW, 0);
-      ctx.lineTo(b.chuteX - chuteHalfW, b.y);
-      ctx.moveTo(b.chuteX + chuteHalfW, 0);
-      ctx.lineTo(b.chuteX + chuteHalfW, b.y);
-      ctx.stroke();
-
-      // Metal Mounting Collar Bracket at Top of Letter
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.roundRect(b.chuteX - chuteHalfW - 4, b.y - 12, chuteHalfW * 2 + 8, 12, 3);
-      ctx.fill();
-      ctx.stroke();
-
-      // 2. Main Glass Letter Channel Outline
-      const fontSize = Math.floor(b.h * 0.96);
-      ctx.font = `900 ${fontSize}px "Outfit", "Inter", sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      const centerX = b.x + b.w * 0.5;
-      const centerY = b.y + b.h * 0.5;
-
-      // Inner subtle glass wash
-      ctx.fillStyle = 'rgba(10, 37, 64, 0.2)';
-      ctx.fillText(b.char, centerX, centerY);
-
-      // Outer thick glass tube wall
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
-      ctx.lineWidth = 6;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.strokeText(b.char, centerX, centerY);
-
-      // Inner crisp neon glass highlight
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
-      ctx.lineWidth = 1.5;
-      ctx.strokeText(b.char, centerX, centerY);
-
-      ctx.restore();
-    });
-  }
-
-  function loop() {
-    ctx.clearRect(0, 0, width, height);
-
-    // 1. Draw Glass Tubes
-    drawGlassChutes();
-
-    // 2. Update & Draw Rolling Particles
-    particles.forEach(p => {
-      p.update();
-      p.draw(ctx);
-    });
-
-    animId = requestAnimationFrame(loop);
-  }
-
-  // Mouse Listener
-  canvas.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-    mouse.active = true;
-  });
-
-  canvas.addEventListener('mouseleave', () => {
-    mouse.active = false;
-  });
-
-  window.addEventListener('resize', () => {
-    resize();
-  });
-
-  resize();
-  loop();
-}
-
-/* ==========================================================================
-   3. NAVIGATION & SMOOTH SCROLL
-   ========================================================================== */
-function initNavigation() {
+function initFullPageScroll() {
+  const sectionIds = ['hero','metrics','about','capabilities','expansion','industries','quality','facilities','careers'];
+  const sectionLabels = ['Intro','Key Metrics','About Us','Capabilities','Batam Expansion','Industries','Quality & ESG','Facilities','Careers'];
   const header = document.getElementById('corpHeader');
   const backToTopBtn = document.getElementById('btnBackToTop');
+  const navLabel = document.getElementById('sideNavLabel');
 
-  window.smoothScrollTo = function(targetSelector) {
-    const target = document.querySelector(targetSelector);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+  let currentIndex = 0;
+  let isScrolling = false;
+  const SCROLL_COOLDOWN = 900; // ms between snaps
+
+  // Helper: get section element by index
+  function getSection(idx) {
+    return document.getElementById(sectionIds[idx]);
+  }
+
+  // Snap to a specific section index
+  function snapTo(idx) {
+    if (idx < 0 || idx >= sectionIds.length) return;
+    const target = getSection(idx);
+    if (!target) return;
+
+    currentIndex = idx;
+    isScrolling = true;
+
+    // Smooth scroll to target
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Update UI
+    updateSideNav(idx);
+    updateHeader();
+
+    // Release lock after animation completes
+    setTimeout(() => { isScrolling = false; }, SCROLL_COOLDOWN);
+  }
+
+  // Public smoothScrollTo (used by buttons)
+  window.smoothScrollTo = function(selector) {
+    const id = selector.replace('#', '');
+    const idx = sectionIds.indexOf(id);
+    if (idx !== -1) {
+      snapTo(idx);
+    } else {
+      const el = document.querySelector(selector);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
+  // Wheel event: intercept and snap
+  let wheelDelta = 0;
+  let wheelTimer = null;
 
-    if (scrollY > 40) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (isScrolling) return;
 
-    if (backToTopBtn) {
-      if (scrollY > 400) {
-        backToTopBtn.style.display = 'flex';
+    wheelDelta += e.deltaY;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { wheelDelta = 0; }, 150);
+
+    if (Math.abs(wheelDelta) >= 30) {
+      wheelDelta = 0;
+      if (e.deltaY > 0) {
+        snapTo(currentIndex + 1); // scroll down → next
       } else {
-        backToTopBtn.style.display = 'none';
+        snapTo(currentIndex - 1); // scroll up → previous
       }
     }
+  }, { passive: false });
 
-    // Update side indicator active state
-    updateSideIndicator(scrollY);
+  // Keyboard arrow navigation
+  window.addEventListener('keydown', (e) => {
+    if (isScrolling) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); snapTo(currentIndex + 1); }
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); snapTo(currentIndex - 1); }
   });
-}
 
-function updateSideIndicator(scrollY) {
-  const dots = document.querySelectorAll('.indicator-dot');
-  const sections = ['#hero', '#about', '#capabilities', '#expansion', '#industries'];
-  if (!dots.length) return;
+  // Touch swipe support
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchend', (e) => {
+    if (isScrolling) return;
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? snapTo(currentIndex + 1) : snapTo(currentIndex - 1);
+    }
+  }, { passive: true });
 
-  sections.forEach((secId, i) => {
-    const sec = document.querySelector(secId);
-    if (sec) {
-      const top = sec.offsetTop - 120;
-      const bottom = top + sec.offsetHeight;
-      if (scrollY >= top && scrollY < bottom) {
-        dots.forEach(d => d.classList.remove('active'));
-        if (dots[i]) dots[i].classList.add('active');
+  // Dot clicks in side navigator
+  document.querySelectorAll('.side-nav-dot').forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const secId = dot.getAttribute('data-section');
+      const idx = sectionIds.indexOf(secId);
+      if (idx !== -1) snapTo(idx);
+    });
+  });
+
+  // Update side navigator dots + label
+  function updateSideNav(idx) {
+    const dots = document.querySelectorAll('.side-nav-dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    if (navLabel) navLabel.textContent = sectionLabels[idx] || '';
+  }
+
+  // Update header style on scroll
+  function updateHeader() {
+    const scrollY = window.scrollY;
+    if (header) header.classList.toggle('scrolled', scrollY > 40);
+    if (backToTopBtn) backToTopBtn.style.display = scrollY > 400 ? 'flex' : 'none';
+  }
+
+  // Passive scroll listener just for header & back-to-top state
+  // (actual page movement is handled by snapTo)
+  window.addEventListener('scroll', () => {
+    updateHeader();
+    // Re-sync currentIndex when browser scrolls (e.g. hash links)
+    if (!isScrolling) {
+      const scrollY = window.scrollY;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const sec = document.getElementById(sectionIds[i]);
+        if (sec && sec.offsetTop <= scrollY + window.innerHeight * 0.4) {
+          if (i !== currentIndex) {
+            currentIndex = i;
+            updateSideNav(i);
+          }
+          break;
+        }
       }
     }
   });
+
+  // Initial state
+  updateSideNav(0);
+  updateHeader();
 }
 
 function initMobileMenu() {

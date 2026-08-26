@@ -157,27 +157,28 @@
        SECTION 1: HERO SECTION (PEGATRON-STYLE GIKEN KINETIC TYPOGRAPHY)
        ========================================================================= -->
   <section class="section-hero" id="hero">
-    <!-- Hero Background Video & Canvas Layer -->
+    <!-- Hero Background Video -->
     <div class="hero-media-wrapper">
       <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/giken_web/sliderman2.jpg">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-technology-digital-cube-loop-42867-large.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
-      
-      <!-- Interactive Kinetic GIKEN Glass Chute & Sphere Canvas -->
-      <canvas id="heroGikenCanvas" class="hero-kinetic-canvas"></canvas>
     </div>
 
-    <!-- Right Side Section Slider Indicator (Pegatron Style) -->
-    <div class="hero-side-indicator">
-      <span class="indicator-tag">Intro</span>
-      <div class="indicator-line"><span class="indicator-progress"></span></div>
-      <div class="indicator-dots">
-        <button class="indicator-dot active" onclick="smoothScrollTo('#hero')" title="Intro"></button>
-        <button class="indicator-dot" onclick="smoothScrollTo('#about')" title="About Us"></button>
-        <button class="indicator-dot" onclick="smoothScrollTo('#capabilities')" title="Capabilities"></button>
-        <button class="indicator-dot" onclick="smoothScrollTo('#expansion')" title="Batam Expansion"></button>
-        <button class="indicator-dot" onclick="smoothScrollTo('#industries')" title="Industries"></button>
+    <!-- Side Section Navigator (visible in light & dark mode) -->
+    <div class="side-navigator" id="sideNavigator">
+      <span class="side-nav-label" id="sideNavLabel">Intro</span>
+      <div class="side-nav-line"><span class="side-nav-progress" id="sideNavProgress"></span></div>
+      <div class="side-nav-dots">
+        <button class="side-nav-dot active" data-section="hero" title="Intro"></button>
+        <button class="side-nav-dot" data-section="metrics" title="Key Metrics"></button>
+        <button class="side-nav-dot" data-section="about" title="About Us"></button>
+        <button class="side-nav-dot" data-section="capabilities" title="Capabilities"></button>
+        <button class="side-nav-dot" data-section="expansion" title="Batam Expansion"></button>
+        <button class="side-nav-dot" data-section="industries" title="Industries"></button>
+        <button class="side-nav-dot" data-section="quality" title="Quality & ESG"></button>
+        <button class="side-nav-dot" data-section="facilities" title="Facilities"></button>
+        <button class="side-nav-dot" data-section="careers" title="Careers"></button>
       </div>
     </div>
 
