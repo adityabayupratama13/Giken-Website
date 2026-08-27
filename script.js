@@ -419,10 +419,10 @@ function initCounters() {
    ========================================================================== */
 const cinemaStreams = {
   cad: {
-    tag: 'PRODUCT DESIGN & TOOLING FABRICATION',
-    title: 'Panasonic ODM Co-Development & 3D DFM Simulation',
-    desc: 'Co-developing high-precision ODM products with Panasonic Global Product Development Centre. Comprehensive mechanical ID/CAD, Moldflow simulation, FMEA, and rapid functional prototyping for tooling ranging from 30T to over 650 tonnes.',
-    video: 'https://assets.mixkit.co/videos/preview/mixkit-automated-assembly-line-in-a-modern-factory-42998-large.mp4'
+    tag: 'CORPORATE SHOWCASE',
+    title: 'Concept to Scale: The Blueprint of a Trusted Partner',
+    desc: 'Giken’s end-to-end manufacturing story, from product concept and tooling through injection moulding, SMT assembly, precision machining and turnkey box-build across Singapore, Batam and Changzhou.',
+    video: 'assets/video/giken-concept-to-scale.mp4'
   },
   smt: {
     tag: '23 HIGH-SPEED SMT LINES & PCBA',
