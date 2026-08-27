@@ -383,22 +383,23 @@ button {
 }
 
 /* Theme Switcher Button */
+/* Mirrors .btn-floating-top, pinned to the opposite corner. */
 .theme-toggle-btn {
   position: fixed;
   left: 24px;
   bottom: 24px;
   z-index: 950;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  font-size: 1rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-  background: var(--bg-card);
-  box-shadow: var(--shadow-md, 0 6px 18px rgba(15, 30, 60, 0.18));
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-sm);
   transition: var(--transition-fast);
 }
 
@@ -409,7 +410,7 @@ button {
 }
 
 .theme-toggle-btn i {
-  font-size: 0.82rem;
+  font-size: inherit;
 }
 
 /* Language Selector */
