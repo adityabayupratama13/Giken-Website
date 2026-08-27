@@ -187,10 +187,27 @@ button {
   width: 100%;
   height: 78px;
   z-index: 1000;
-  /* Over the hero: no panel, just a scrim so the white nav stays readable. */
-  background: linear-gradient(180deg, rgba(6, 21, 43, 0.55) 0%, rgba(6, 21, 43, 0) 100%);
+  background: transparent;
   border-bottom: 1px solid transparent;
   transition: var(--transition-normal);
+}
+
+/* Over the hero: no panel, just a soft scrim that fades out well below the
+   header so there is no visible seam where it ends. */
+.corp-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 21, 43, 0.55) 0%, rgba(6, 21, 43, 0.22) 45%, rgba(6, 21, 43, 0) 100%);
+  transition: opacity 0.3s ease;
+}
+
+.corp-header.scrolled::before {
+  opacity: 0;
 }
 
 .corp-header.scrolled {
@@ -206,7 +223,6 @@ button {
 .corp-header:not(.scrolled) .logo-text,
 .corp-header:not(.scrolled) .corp-nav-link,
 .corp-header:not(.scrolled) .corp-lang-btn,
-.corp-header:not(.scrolled) .theme-toggle-btn,
 .corp-header:not(.scrolled) .corp-mobile-toggle span {
   color: #FFFFFF;
 }
@@ -216,20 +232,20 @@ button {
 }
 
 .corp-header:not(.scrolled) .corp-nav-link:hover,
-.corp-header:not(.scrolled) .corp-lang-btn:hover,
-.corp-header:not(.scrolled) .theme-toggle-btn:hover {
+.corp-header:not(.scrolled) .corp-lang-btn:hover {
   color: #FFFFFF;
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.45);
 }
 
-.corp-header:not(.scrolled) .theme-toggle-btn,
 .corp-header:not(.scrolled) .corp-lang-btn {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
 .corp-header-inner {
+  position: relative;
+  z-index: 1;
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
@@ -368,17 +384,21 @@ button {
 
 /* Theme Switcher Button */
 .theme-toggle-btn {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 950;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  flex: none;
-  font-size: 0.95rem;
+  width: 44px;
+  height: 44px;
+  font-size: 1rem;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 50%;
-  background: var(--bg-page-subtle);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(15, 30, 60, 0.18));
   transition: var(--transition-fast);
 }
 
