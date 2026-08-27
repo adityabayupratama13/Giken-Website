@@ -1788,6 +1788,17 @@ button {
   max-height: 46px;
 }
 
+/* Marks supplied as white artwork: darken them on the light theme so they
+   do not disappear against the card. The dark-theme rules already suit them. */
+.marquee-logo-light-mark img {
+  filter: brightness(0);
+}
+
+.marquee-logo-light-mark:hover img {
+  filter: brightness(0.3);
+  opacity: 1;
+}
+
 /* Most of these marks are dark; on the dark theme show them as white. */
 [data-theme="dark"] .marquee-logo img {
   filter: brightness(0) invert(1);
