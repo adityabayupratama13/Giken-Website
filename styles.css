@@ -2777,9 +2777,16 @@ body.modal-open {
 
 .cert-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
   margin-top: 12px;
+}
+
+.cert-gallery figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .cert-gallery img {
@@ -2788,6 +2795,17 @@ body.modal-open {
   background: #FFFFFF;
   border: 1px solid var(--border-card);
   border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.cert-gallery figure:hover img {
+  border-color: var(--brand-primary);
+}
+
+.cert-gallery figcaption {
+  font-size: 0.64rem;
+  line-height: 1.35;
+  color: var(--text-muted);
 }
 
 @media (max-width: 640px) {
