@@ -1769,9 +1769,11 @@ button {
 }
 
 .marquee-logo img {
-  max-height: 30px;
+  /* Definite height: the box must hold its place even before the file lands. */
+  height: 30px;
   max-width: 124px;
   width: auto;
+  object-fit: contain;
   /* Muted by default so the row reads as one band; brand colour on hover. */
   filter: grayscale(1);
   opacity: 0.55;
@@ -1785,7 +1787,7 @@ button {
 
 /* Portrait marks need more height to stay legible next to the wordmarks. */
 .marquee-logo-tall img {
-  max-height: 46px;
+  height: 46px;
 }
 
 /* Marks supplied as white artwork: darken them on the light theme so they
