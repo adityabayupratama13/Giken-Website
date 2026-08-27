@@ -13,7 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initLanguageEngine();
   initMobileMenu();
+  initLightbox();
 });
+
+/* ==========================================================================
+   IMAGE LIGHTBOX
+   Any certificate or facility photo opens full size; Esc or a click closes it.
+   ========================================================================== */
+function initLightbox() {
+  const box = document.getElementById('lightbox');
+  if (!box) return;
+  const img = document.getElementById('lightboxImg');
+  const cap = document.getElementById('lightboxCaption');
+
+  document.addEventListener('click', (e) => {
+    const hit = e.target.closest('.cert-gallery img, .dossier-gallery img');
+    if (!hit) return;
+    img.src = hit.currentSrc || hit.src;
+    img.alt = hit.alt || '';
+    cap.textContent = hit.alt || '';
+    box.classList.add('open');
+  });
+
+  box.addEventListener('click', (e) => {
+    if (e.target === box || e.target === img.parentElement) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && box.classList.contains('open')) closeLightbox();
+  });
+}
+
+window.closeLightbox = function() {
+  const box = document.getElementById('lightbox');
+  if (box) box.classList.remove('open');
+  const img = document.getElementById('lightboxImg');
+  if (img) img.src = '';
+};
 
 /* ==========================================================================
    0. BOOT SEQUENCE
