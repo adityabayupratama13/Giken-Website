@@ -3169,3 +3169,13 @@ body.preloading {
 .lightbox-close:hover {
   background: rgba(255, 255, 255, 0.26);
 }
+
+
+/* YouTube-hosted film inside the cinema modal */
+#modalCinemaFrame {
+  display: none;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #000000;
+}

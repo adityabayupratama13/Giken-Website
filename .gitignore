@@ -18,3 +18,6 @@ extracted_pptx_8.2.txt
 
 # Raw carved images from the Word brief (optimised copies live in assets/site)
 assets/doc_2026/
+
+# Corporate film now streams from YouTube; local master copy stays out of git
+assets/video/

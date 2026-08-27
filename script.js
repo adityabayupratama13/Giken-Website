@@ -422,7 +422,7 @@ const cinemaStreams = {
     tag: 'CORPORATE SHOWCASE',
     title: 'Concept to Scale: The Blueprint of a Trusted Partner',
     desc: 'Giken’s end-to-end manufacturing story, from product concept and tooling through injection moulding, SMT assembly, precision machining and turnkey box-build across Singapore, Batam and Changzhou.',
-    video: 'assets/video/giken-concept-to-scale.mp4'
+    youtube: '3lAGZC41kwk'
   },
   smt: {
     tag: '23 HIGH-SPEED SMT LINES & PCBA',
@@ -466,23 +466,40 @@ window.openCinemaStream = function(type) {
   const descEl = document.getElementById('cinemaDesc');
   const videoEl = document.getElementById('modalCinemaVideo');
 
+  const frameEl = document.getElementById('modalCinemaFrame');
+
   if (modal && tagEl && titleEl && descEl && videoEl) {
     tagEl.innerText = data.tag;
     titleEl.innerText = data.title;
     descEl.innerText = data.desc;
-    videoEl.src = data.video;
+
+    // YouTube-hosted films play in the iframe; local clips in the <video>.
+    if (data.youtube) {
+      videoEl.removeAttribute('src');
+      videoEl.style.display = 'none';
+      frameEl.style.display = 'block';
+      frameEl.src = 'https://www.youtube-nocookie.com/embed/' + data.youtube + '?autoplay=1&rel=0&modestbranding=1';
+    } else {
+      frameEl.removeAttribute('src');
+      frameEl.style.display = 'none';
+      videoEl.style.display = 'block';
+      videoEl.src = data.video;
+      videoEl.currentTime = 0;
+      videoEl.play().catch(() => {});
+    }
     setModalOpen('cinemaModal', true);
-    videoEl.currentTime = 0;
-    videoEl.play().catch(() => {});
   }
 };
 
 window.closeCinemaStream = function() {
   const modal = document.getElementById('cinemaModal');
   const videoEl = document.getElementById('modalCinemaVideo');
+  const frameEl = document.getElementById('modalCinemaFrame');
   if (modal) {
     setModalOpen('cinemaModal', false);
     if (videoEl) videoEl.pause();
+    // Clearing the iframe stops YouTube playback; pausing is not enough.
+    if (frameEl) frameEl.removeAttribute('src');
   }
 };
 
