@@ -1990,6 +1990,8 @@ button {
 }
 
 .facility-item {
+  display: flex;
+  flex-direction: column;
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 8px;
@@ -2005,6 +2007,7 @@ button {
 }
 
 .facility-thumb {
+  flex: none;
   height: 160px;
   background-size: cover;
   background-position: center;
@@ -2016,6 +2019,9 @@ button {
 }
 
 .facility-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 18px 16px;
 }
 
@@ -2050,7 +2056,9 @@ button {
   font-size: 0.68rem;
   color: var(--text-muted);
   border-top: 1px solid var(--border-color);
-  padding-top: 8px;
+  /* Cards carry different amounts of copy: keep the badge rows aligned. */
+  margin-top: auto;
+  padding-top: 10px;
 }
 
 .facility-chips span {
