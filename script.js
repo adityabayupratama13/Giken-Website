@@ -32,16 +32,8 @@ window.toggleTheme = function() {
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const iconEl = document.getElementById('themeIcon');
-  const labelEl = document.getElementById('themeLabel');
-
-  if (iconEl && labelEl) {
-    if (theme === 'dark') {
-      iconEl.className = 'fa-solid fa-sun';
-      labelEl.innerText = 'Light';
-    } else {
-      iconEl.className = 'fa-solid fa-moon';
-      labelEl.innerText = 'Dark';
-    }
+  if (iconEl) {
+    iconEl.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
   }
 }
 
@@ -88,7 +80,10 @@ function initFullPageScroll() {
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    if (header) header.classList.toggle('scrolled', y > 40);
+    // Header stays transparent over the hero, then takes on its background.
+    const hero = document.getElementById('hero');
+    const threshold = hero ? hero.offsetHeight - 80 : 40;
+    if (header) header.classList.toggle('scrolled', y > threshold);
     if (backToTopBtn) backToTopBtn.style.display = y > 400 ? 'flex' : 'none';
     if (progress) {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -97,6 +92,7 @@ function initFullPageScroll() {
   }, { passive: true });
 
   setActive(0);
+  window.dispatchEvent(new Event('scroll'));   // set header state on load / deep link
 }
 
 function initMobileMenu() {

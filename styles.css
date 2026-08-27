@@ -185,19 +185,48 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-  height: 72px;
+  height: 78px;
   z-index: 1000;
-  background: var(--bg-header);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-color);
+  /* Over the hero: no panel, just a scrim so the white nav stays readable. */
+  background: linear-gradient(180deg, rgba(6, 21, 43, 0.55) 0%, rgba(6, 21, 43, 0) 100%);
+  border-bottom: 1px solid transparent;
   transition: var(--transition-normal);
 }
 
 .corp-header.scrolled {
   height: 64px;
   background: var(--bg-header-scrolled);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--border-color);
   box-shadow: var(--shadow-sm);
+}
+
+/* White nav on the hero; normal colours once the header has its panel. */
+.corp-header:not(.scrolled) .logo-text,
+.corp-header:not(.scrolled) .corp-nav-link,
+.corp-header:not(.scrolled) .corp-lang-btn,
+.corp-header:not(.scrolled) .theme-toggle-btn,
+.corp-header:not(.scrolled) .corp-mobile-toggle span {
+  color: #FFFFFF;
+}
+
+.corp-header:not(.scrolled) .corp-mobile-toggle span {
+  background: #FFFFFF;
+}
+
+.corp-header:not(.scrolled) .corp-nav-link:hover,
+.corp-header:not(.scrolled) .corp-lang-btn:hover,
+.corp-header:not(.scrolled) .theme-toggle-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.corp-header:not(.scrolled) .theme-toggle-btn,
+.corp-header:not(.scrolled) .corp-lang-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .corp-header-inner {
@@ -207,7 +236,12 @@ button {
   padding: 0 28px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Nav sits on the right; theme toggle and logo lead on the left. */
+.corp-nav {
+  margin-left: auto;
 }
 
 /* GIKEN Logo */
@@ -336,14 +370,14 @@ button {
 .theme-toggle-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-main);
-  font-size: 0.82rem;
-  font-weight: 600;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  padding: 7px 12px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 50%;
   background: var(--bg-page-subtle);
   transition: var(--transition-fast);
 }
