@@ -2964,9 +2964,11 @@ body.preloading {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Navy settling into white, so the plate hands over to the page softly. */
   background:
-    radial-gradient(120% 90% at 50% 0%, #0E2B4F 0%, #061325 55%, #04101F 100%);
-  transition: opacity 0.55s ease, visibility 0.55s ease;
+    radial-gradient(80% 60% at 50% 28%, rgba(23, 62, 105, 0.85) 0%, rgba(10, 37, 64, 0) 70%),
+    linear-gradient(170deg, #0A2540 0%, #12365C 34%, #4C7BA8 62%, #C9DAEA 84%, #FFFFFF 100%);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
 }
 
 .preloader.done {
@@ -2978,7 +2980,9 @@ body.preloading {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
+  /* Sit above centre, where the plate is still deep navy. */
+  margin-bottom: 12vh;
   padding: 0 24px;
   text-align: center;
 }
@@ -2987,73 +2991,79 @@ body.preloading {
 .preloader-rule {
   width: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0) 0%, #3B82F6 50%, rgba(59, 130, 246, 0) 100%);
-  animation: preRule 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
+  animation: preRule 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .preloader-mark {
   position: relative;
   overflow: hidden;
-  padding: 2px 4px;
+  padding: 4px 6px;
 }
 
 .preloader-logo {
   display: block;
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 8vw, 4.2rem);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.22em;
+  font-size: clamp(2.3rem, 7.5vw, 3.9rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;             /* balance the trailing letter-space */
   color: #FFFFFF;
-  transform: translateY(105%);
-  animation: preRise 0.7s 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  text-shadow: 0 2px 26px rgba(4, 16, 31, 0.45);
+  opacity: 0;
+  transform: translateY(38%);
+  animation: preRise 1.5s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Single light pass across the wordmark, like an inspection scan. */
+/* One slow, low-contrast pass across the wordmark. */
 .preloader-sweep {
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.55) 50%, transparent 58%);
-  transform: translateX(-120%);
-  animation: preSweep 0.9s 0.95s ease-in-out forwards;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.28) 50%, transparent 60%);
+  transform: translateX(-130%);
+  animation: preSweep 1.6s 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .preloader-sub {
   font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.34em;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.62rem;
+  letter-spacing: 0.38em;
+  text-indent: 0.38em;
+  color: rgba(255, 255, 255, 0.62);
   opacity: 0;
-  animation: preFade 0.6s 0.85s ease forwards;
+  animation: preFade 1.1s 1s ease forwards;
 }
 
 .preloader-bar {
-  width: 190px;
+  width: 168px;
   height: 2px;
-  margin-top: 6px;
-  background: rgba(255, 255, 255, 0.12);
+  margin-top: 4px;
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 2px;
   overflow: hidden;
+  opacity: 0;
+  animation: preFade 0.8s 0.9s ease forwards;
 }
 
 .preloader-bar span {
   display: block;
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, #3B82F6, #93C5FD);
-  transition: width 0.25s ease;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.55), #FFFFFF);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes preRule {
-  to { width: 210px; }
+  to { width: 220px; }
 }
 
 @keyframes preRise {
-  to { transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes preSweep {
-  to { transform: translateX(120%); }
+  to { transform: translateX(130%); }
 }
 
 @keyframes preFade {
@@ -3062,9 +3072,10 @@ body.preloading {
 
 /* No motion: show the plate briefly, no animation at all. */
 @media (prefers-reduced-motion: reduce) {
-  .preloader-rule { width: 210px; animation: none; }
-  .preloader-logo { transform: none; animation: none; }
+  .preloader-rule { width: 220px; animation: none; }
+  .preloader-logo { opacity: 1; transform: none; animation: none; }
   .preloader-sweep { display: none; }
-  .preloader-sub { opacity: 1; animation: none; }
-  .preloader { transition: opacity 0.2s ease, visibility 0.2s ease; }
+  .preloader-sub,
+  .preloader-bar { opacity: 1; animation: none; }
+  .preloader { transition: opacity 0.25s ease, visibility 0.25s ease; }
 }

@@ -26,8 +26,8 @@ function initPreloader() {
 
   const fill = document.getElementById('preloaderBarFill');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const MIN_MS = reduced ? 300 : 1700;   // let the wordmark finish its sweep
-  const MAX_MS = 3500;                   // never hold the page longer than this
+  const MIN_MS = reduced ? 400 : 2400;   // let the wordmark settle and the sweep pass
+  const MAX_MS = 4200;                   // never hold the page longer than this
   const start = Date.now();
   let cleared = false;
 
