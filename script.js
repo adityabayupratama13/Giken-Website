@@ -708,40 +708,58 @@ const detailContents = {
   // FACILITIES
   'fac-sg-hq': {
     tag: 'FACILITIES / SINGAPORE (HQ)',
-    title: 'Giken Sakata (Singapore) Ltd – 4K+ sq. ft',
+    title: 'Giken Sakata (Singapore) Ltd &mdash; 4K+ sq. ft',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65;">
-        4012 Ang Mo Kio Ave 10, #05-01 Techplace 1, Singapore 569628.<br>
-        Governance, R&D Product Development, DFM, Customer Service, Testing, and Global Supply Chain.
-      </p>
+      <div class="dossier-gallery"><figure><img src="assets/site/site-gss.jpg" alt="Giken Sakata (S) Limited, Techplace 1 Singapore" loading="lazy"><figcaption>Giken Sakata (S) Limited, Techplace 1 Singapore</figcaption></figure><figure><img src="assets/site/office.jpg" alt="Group headquarters office" loading="lazy"><figcaption>Group headquarters office</figcaption></figure></div>
+      <p class="dossier-address"><i class="fa-solid fa-location-dot"></i> 4012 Ang Mo Kio Ave 10, #05-01 Techplace 1, Singapore 569628 &middot; (65) 6354 6661</p>
+      <p class="dossier-lead">The Group headquarters and the customer-facing engineering front end: consultancy, product design and development, Design for Manufacturing, product testing and validation, and global logistics and supply chain management.</p>
+      <h4 class="dossier-h4">On-site Capabilities</h4>
+      <ul class="dossier-list"><li>Consultancy and customer service</li><li>Product design and development</li><li>Design for Manufacturing (DFM)</li><li>Product testing and validation</li><li>Global logistics and supply chain management</li><li>Listed on SGX as GSS Energy Limited</li></ul>
+      <h4 class="dossier-h4">Location</h4>
+      <iframe class="dossier-map" src="https://maps.google.com/maps?q=4012+Ang+Mo+Kio+Ave+10+Techplace+1+Singapore+569628&hl=en&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of Giken Sakata (S) Ltd, Singapore"></iframe>
+      <a class="dossier-map-link" href="https://www.google.com/maps/search/?api=1&query=4012+Ang+Mo+Kio+Ave+10+Techplace+1+Singapore+569628" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
     `
   },
   'fac-sg-gpe': {
     tag: 'FACILITIES / SINGAPORE (GPE)',
-    title: 'Giken Precision Engineering (S) Pte. Ltd. – 14K sq. ft',
+    title: 'Giken Precision Engineering (S) Pte. Ltd. &mdash; 14K sq. ft',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65;">
-        Ang Mo Kio Industrial Park, Singapore. Precision shafts, induction quenching heat treatment, centreless grinding. Certified ISO 9001, ISO 14001, IATF 16949.
-      </p>
+      <div class="dossier-gallery"><figure><img src="assets/site/site-gpe.jpg" alt="Giken Precision Engineering (S) Pte Ltd, Singapore" loading="lazy"><figcaption>Giken Precision Engineering (S) Pte Ltd, Singapore</figcaption></figure><figure><img src="assets/site/proc-metrology.jpg" alt="Precision inspection and metrology" loading="lazy"><figcaption>Precision inspection and metrology</figcaption></figure></div>
+      <p class="dossier-address"><i class="fa-solid fa-location-dot"></i> Ang Mo Kio Industrial Park, Singapore</p>
+      <p class="dossier-lead">The Group's precision shaft and turned-parts plant, running Swiss-type automatic lathes with in-house heat treatment and grinding, from prototype and New Product Introduction through to volume production.</p>
+      <h4 class="dossier-h4">On-site Capabilities</h4>
+      <ul class="dossier-list"><li>Precision shafts and customised turned parts</li><li>Heat treatment</li><li>Centreless and step grinding</li><li>Secondary machining processes</li><li>Precision inspection and quality control</li><li>Prototype and New Product Introduction (NPI)</li><li>Certified to ISO 9001, ISO 14001 and IATF 16949</li></ul>
+      <h4 class="dossier-h4">Location</h4>
+      <iframe class="dossier-map" src="https://maps.google.com/maps?q=Giken+Precision+Engineering+Ang+Mo+Kio+Singapore&hl=en&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of Giken Precision Engineering, Singapore"></iframe>
+      <a class="dossier-map-link" href="https://www.google.com/maps/search/?api=1&query=Giken+Precision+Engineering+Ang+Mo+Kio+Singapore" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
     `
   },
   'fac-batam': {
     tag: 'FACILITIES / BATAM, INDONESIA',
-    title: 'PT Giken Precision & PT Giken Technology Indonesia – 393K sq. ft',
+    title: 'PT Giken Precision Indonesia &amp; PT Giken Technology Indonesia &mdash; 393K sq. ft',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65;">
-        Batamindo Industrial Park, Mukakuning & Citra Buana / Horizon Industrial Parks, Batam.<br>
-        Plastic injection (18T–650T), 100K medical cleanroom, 23 SMT lines, Class 100 cleanroom PCBA, box-build, battery packs, PESS. Certified ISO 9001, ISO 13485, ISO 14001, IATF 16949.
-      </p>
+      <div class="dossier-gallery"><figure><img src="assets/site/site-gpi.jpg" alt="PT Giken Precision Indonesia, Batam" loading="lazy"><figcaption>PT Giken Precision Indonesia, Batam</figcaption></figure><figure><img src="assets/site/site-gti.jpg" alt="PT Giken Technology Indonesia, Batam" loading="lazy"><figcaption>PT Giken Technology Indonesia, Batam</figcaption></figure><figure><img src="assets/site/proc-line.jpg" alt="Assembly and test lines, Batam" loading="lazy"><figcaption>Assembly and test lines, Batam</figcaption></figure></div>
+      <p class="dossier-address"><i class="fa-solid fa-location-dot"></i> Citra Buana Industrial Park &amp; Horizon Industrial Park, Batam, Indonesia</p>
+      <p class="dossier-lead">The Group's largest manufacturing campus and the centre of its high-volume work: precision and medical moulding, PCB assembly in a Class 100 cleanroom, box build, battery packs and Portable Energy Storage Stations, and electric motorcycle assembly.</p>
+      <h4 class="dossier-h4">On-site Capabilities</h4>
+      <ul class="dossier-list"><li>Precision plastic injection moulding</li><li>Medical moulding (100K cleanroom)</li><li>PCB assembly (PCBA) with a Class 100 cleanroom facility built for unique, high-precision products</li><li>Box-build and system assembly</li><li>Battery pack and Portable Energy Storage Station (PESS) assembly</li><li>Electric motorcycle assembly</li><li>Prototype and New Product Introduction (NPI)</li><li>High-volume manufacturing, export manufacturing and supply chain support</li><li>Certified to ISO 9001, ISO 13485, ISO 14001 and IATF 16949</li></ul>
+      <h4 class="dossier-h4">Location</h4>
+      <iframe class="dossier-map" src="https://maps.google.com/maps?q=Citra+Buana+Industrial+Park+Batam+Indonesia&hl=en&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of PT Giken Precision Indonesia, Batam"></iframe>
+      <a class="dossier-map-link" href="https://www.google.com/maps/search/?api=1&query=Citra+Buana+Industrial+Park+Batam+Indonesia" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
     `
   },
   'fac-china': {
     tag: 'FACILITIES / CHANGZHOU, CHINA',
-    title: 'Changzhou Giken Precision & Tech Co., Ltd – 151K sq. ft',
+    title: 'Changzhou Giken Precision &amp; Changzhou Giken Technology &mdash; 151K sq. ft',
     body: `
-      <p style="font-size:0.92rem; line-height:1.65;">
-        Changzhou City, Jiangsu Province, China. 5-axis CNC milling, precision motor shafts, injection moulding, and product assembly. Certified ISO 9001, ISO 14001, IATF 16949.
-      </p>
+      <div class="dossier-gallery"><figure><img src="assets/site/site-cgp.jpg" alt="Changzhou Giken Precision Co., Ltd, Jiangsu" loading="lazy"><figcaption>Changzhou Giken Precision Co., Ltd, Jiangsu</figcaption></figure></div>
+      <p class="dossier-address"><i class="fa-solid fa-location-dot"></i> Changzhou, Jiangsu Province, China</p>
+      <p class="dossier-lead">The Group's China operation, serving customers across Asia-Pacific with 5-axis milling, precision shafts and machined components, injection moulding and product assembly, backed by export manufacturing and supply chain support.</p>
+      <h4 class="dossier-h4">On-site Capabilities</h4>
+      <ul class="dossier-list"><li>Precision 5-axis CNC milling</li><li>Precision shafts and machining components</li><li>Plastic injection moulding</li><li>Product assembly</li><li>Export manufacturing and supply chain support</li><li>Precision inspection and quality control</li><li>Certified to ISO 9001, ISO 14001 and IATF 16949</li></ul>
+      <h4 class="dossier-h4">Location</h4>
+      <iframe class="dossier-map" src="https://maps.google.com/maps?q=Changzhou+Giken+Precision+Co+Ltd+Changzhou+Jiangsu+China&hl=en&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of Changzhou Giken Precision, China"></iframe>
+      <a class="dossier-map-link" href="https://www.google.com/maps/search/?api=1&query=Changzhou+Giken+Precision+Co+Ltd+Changzhou+Jiangsu+China" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
     `
   },
 

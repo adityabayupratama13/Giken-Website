@@ -2750,3 +2750,86 @@ body.modal-open {
   border-radius: 6px;
   border: 1px solid var(--border-card);
 }
+
+
+/* ==========================================================================
+   FACILITY DOSSIER: PHOTO GALLERY, ADDRESS & GOOGLE MAP
+   ========================================================================== */
+.dossier-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.dossier-gallery figure {
+  margin: 0;
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-page-alt);
+}
+
+.dossier-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.dossier-gallery figcaption {
+  padding: 7px 10px;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.dossier-address {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-body);
+  background: var(--bg-page-alt);
+  border: 1px solid var(--border-card);
+  border-left: 3px solid var(--brand-primary);
+  border-radius: 5px;
+}
+
+.dossier-address i { color: var(--brand-primary); }
+
+.dossier-map {
+  display: block;
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+}
+
+.dossier-map-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+}
+
+.dossier-map-link:hover { text-decoration: underline; }
+
+/* Contact card action */
+.contact-card-link {
+  align-self: flex-start;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.contact-card-link:hover { text-decoration: underline; }
