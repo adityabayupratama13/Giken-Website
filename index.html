@@ -15,9 +15,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20260827b">
+  <link rel="stylesheet" href="styles.css?v=20260827c">
 </head>
-<body class="corporate-body">
+<body class="corporate-body preloading">
+
+  <!-- =========================================================================
+       0. BOOT SEQUENCE / PRELOADER
+       ========================================================================= -->
+  <div class="preloader" id="preloader" role="status" aria-label="Loading Giken Sakata">
+    <div class="preloader-inner">
+      <div class="preloader-rule"></div>
+      <div class="preloader-mark">
+        <span class="preloader-logo">GIKEN</span>
+        <span class="preloader-sweep" aria-hidden="true"></span>
+      </div>
+      <div class="preloader-sub">PRECISION MANUFACTURING &middot; SINCE 1979</div>
+      <div class="preloader-bar"><span id="preloaderBarFill"></span></div>
+    </div>
+  </div>
+
 
   <!-- =========================================================================
        1. FIXED CORPORATE HEADER & NAVIGATION
@@ -1192,6 +1208,6 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- JavaScript Controller -->
-  <script src="script.js?v=20260827b"></script>
+  <script src="script.js?v=20260827c"></script>
 </body>
 </html>

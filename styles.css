@@ -2947,3 +2947,124 @@ body.modal-open {
 }
 
 .contact-card-link:hover { text-decoration: underline; }
+
+
+/* ==========================================================================
+   BOOT SEQUENCE / PRELOADER
+   Deep navy plate, wordmark revealed under a light sweep, thin progress rule.
+   ========================================================================== */
+body.preloading {
+  overflow: hidden;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #0E2B4F 0%, #061325 55%, #04101F 100%);
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.preloader.done {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* Hairline that draws outward before the wordmark lands. */
+.preloader-rule {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0) 0%, #3B82F6 50%, rgba(59, 130, 246, 0) 100%);
+  animation: preRule 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.preloader-mark {
+  position: relative;
+  overflow: hidden;
+  padding: 2px 4px;
+}
+
+.preloader-logo {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 8vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  color: #FFFFFF;
+  transform: translateY(105%);
+  animation: preRise 0.7s 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Single light pass across the wordmark, like an inspection scan. */
+.preloader-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.55) 50%, transparent 58%);
+  transform: translateX(-120%);
+  animation: preSweep 0.9s 0.95s ease-in-out forwards;
+}
+
+.preloader-sub {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.34em;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  animation: preFade 0.6s 0.85s ease forwards;
+}
+
+.preloader-bar {
+  width: 190px;
+  height: 2px;
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.preloader-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #93C5FD);
+  transition: width 0.25s ease;
+}
+
+@keyframes preRule {
+  to { width: 210px; }
+}
+
+@keyframes preRise {
+  to { transform: translateY(0); }
+}
+
+@keyframes preSweep {
+  to { transform: translateX(120%); }
+}
+
+@keyframes preFade {
+  to { opacity: 1; }
+}
+
+/* No motion: show the plate briefly, no animation at all. */
+@media (prefers-reduced-motion: reduce) {
+  .preloader-rule { width: 210px; animation: none; }
+  .preloader-logo { transform: none; animation: none; }
+  .preloader-sweep { display: none; }
+  .preloader-sub { opacity: 1; animation: none; }
+  .preloader { transition: opacity 0.2s ease, visibility 0.2s ease; }
+}

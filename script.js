@@ -6,6 +6,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPreloader();
   initThemeEngine();
   initFullPageScroll();
   initMatrixTabs();
@@ -13,6 +14,50 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguageEngine();
   initMobileMenu();
 });
+
+/* ==========================================================================
+   0. BOOT SEQUENCE
+   Runs the plate for a short beat, then clears it. It never outstays its
+   welcome: the hard timeout dismisses it even if an asset hangs.
+   ========================================================================== */
+function initPreloader() {
+  const plate = document.getElementById('preloader');
+  if (!plate) return;
+
+  const fill = document.getElementById('preloaderBarFill');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MIN_MS = reduced ? 300 : 1700;   // let the wordmark finish its sweep
+  const MAX_MS = 3500;                   // never hold the page longer than this
+  const start = Date.now();
+  let cleared = false;
+
+  const progress = setInterval(() => {
+    if (!fill) return;
+    const pct = Math.min(96, ((Date.now() - start) / MIN_MS) * 100);
+    fill.style.width = pct + '%';
+  }, 60);
+
+  function clear() {
+    if (cleared) return;
+    cleared = true;
+    clearInterval(progress);
+    if (fill) fill.style.width = '100%';
+    plate.classList.add('done');
+    document.body.classList.remove('preloading');
+    setTimeout(() => plate.remove(), 600);
+  }
+
+  function clearWhenReady() {
+    setTimeout(clear, Math.max(0, MIN_MS - (Date.now() - start)));
+  }
+
+  if (document.readyState === 'complete') {
+    clearWhenReady();
+  } else {
+    window.addEventListener('load', clearWhenReady, { once: true });
+  }
+  setTimeout(clear, MAX_MS);
+}
 
 /* ==========================================================================
    1. THEME ENGINE (LIGHT MODE DEFAULT & DARK MODE TOGGLE)
