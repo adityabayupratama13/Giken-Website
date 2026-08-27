@@ -2936,7 +2936,9 @@ body.modal-open {
 /* Contact card action */
 .contact-card-link {
   align-self: flex-start;
-  margin-top: 10px;
+  /* Push to the card floor so the links line up across the row. */
+  margin-top: auto;
+  padding-top: 14px;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--brand-primary);
