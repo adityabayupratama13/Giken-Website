@@ -332,6 +332,7 @@ window.switchMatrixTab = function(tabKey) {
   event.target.classList.add('active');
 
   contentBox.innerHTML = matrixData[tabKey] || matrixData['pcba'];
+  applyLanguage(contentBox);
 };
 
 function initMatrixTabs() {
@@ -896,6 +897,7 @@ window.openDetailModal = function(key) {
     tagEl.innerHTML = content.tag;
     titleEl.innerHTML = content.title;
     bodyEl.innerHTML = content.body;
+    applyLanguage(modal);
     setModalOpen('detailModal', true);
   }
 };
@@ -955,75 +957,49 @@ document.addEventListener('click', (e) => {
 /* ==========================================================================
    9. MULTI-LANGUAGE TRANSLATION (EN / CN / ID / JP)
    ========================================================================= */
-const translations = {
-  EN: {
-    nav_about: 'About Us',
-    nav_capabilities: 'Services & Capabilities',
-    nav_markets: 'Industries',
-    nav_facilities: 'Facilities',
-    nav_quality: 'Quality & ESG',
-    nav_careers: 'Careers',
-    hero_headline_sub: 'INNOVATIVE MINDSET,',
-    hero_headline_main: 'STRIVING FOR EXCELLENCE.',
-    hero_subtitle: 'A Trusted Manufacturing Partner Built on Engineering Excellence since 1979. Providing integrated precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and turnkey product integration across Singapore, Indonesia, and China.',
-    hero_btn_capabilities: 'Our Capabilities',
-    hero_btn_rfq: 'Request a Quote'
-  },
-  CN: {
-    nav_about: '关于我们',
-    nav_capabilities: '制造服务与能力',
-    nav_markets: '应用市场',
-    nav_facilities: '全球制造基地',
-    nav_quality: '质量与ESG',
-    nav_careers: '人才发展',
-    hero_headline_sub: '创新思维，',
-    hero_headline_main: '追求卓越制造。',
-    hero_subtitle: '自1979年在新加坡成立以来，技研坂田为全球客户提供精密工程、电子制造服务（EMS）、模具开发、注塑成型、电池包组装及整机系统集成的一站式制造解决方案。',
-    hero_btn_capabilities: '探索制造能力',
-    hero_btn_rfq: '获取工程报价'
-  },
-  ID: {
-    nav_about: 'Tentang Kami',
-    nav_capabilities: 'Layanan & Kapabilitas',
-    nav_markets: 'Industri',
-    nav_facilities: 'Fasilitas Global',
-    nav_quality: 'Kualitas & ESG',
-    nav_careers: 'Karir',
-    hero_headline_sub: 'POLA PIKIR INOVATIF,',
-    hero_headline_main: 'MENGEJAR KEUNGGULAN.',
-    hero_subtitle: 'Mitra Manufaktur Tepercaya Berlandaskan Keunggulan Rekayasa sejak 1979. Menghadirkan solusi manufaktur terintegrasi yang menggabungkan rekayasa presisi, Electronics Manufacturing Services (EMS), perkakas cetakan, injeksi plastik, perakitan baterai, dan integrasi produk lengkap di Singapura, Indonesia, dan Tiongkok.',
-    hero_btn_capabilities: 'Kapabilitas Kami',
-    hero_btn_rfq: 'Minta Penawaran'
-  },
-  JP: {
-    nav_about: '企業情報',
-    nav_capabilities: '製造サービスと能力',
-    nav_markets: '主要市場',
-    nav_facilities: '生産拠点',
-    nav_quality: '品質とESG',
-    nav_careers: '採用情報',
-    hero_headline_sub: '革新的なマインドセット、',
-    hero_headline_main: '卓越性の追求。',
-    hero_subtitle: '1979年のシンガポール設立以来、精密エンジニアリング、EMS、金型製作、プラスチック射出成形、バッテリー組立、および完成品組立を統合したワンストップ製造ソリューションをシンガポール、インドネシア、中国から提供しています。',
-    hero_btn_capabilities: '製造能力を見る',
-    hero_btn_rfq: 'お見積り依頼'
+/* Translation works off the English source text, so dynamically rendered
+   copy (dossiers, spec tables) translates too without any markup changes. */
+const I18N_SOURCE = new Map();
+const I18N_LOCALE = { EN: 'en', CN: 'zh-Hans', ID: 'id', JP: 'ja' };
+
+function translatable(node) {
+  if (!node.nodeValue || !node.nodeValue.trim()) return false;
+  const el = node.parentElement;
+  return !!el && !el.closest('script, style, noscript, .no-i18n');
+}
+
+function applyLanguage(root) {
+  const lang = window.currentLang || 'EN';
+  const dict = (window.I18N && window.I18N[lang]) || null;
+  const walker = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) {
+    if (translatable(walker.currentNode)) nodes.push(walker.currentNode);
   }
-};
+  nodes.forEach(node => {
+    if (!I18N_SOURCE.has(node)) I18N_SOURCE.set(node, node.nodeValue);
+    const source = I18N_SOURCE.get(node);
+    const key = source.trim();
+    const hit = dict && dict[key];
+    node.nodeValue = hit ? source.replace(key, hit) : source;
+  });
+
+  (root || document).querySelectorAll('[placeholder]').forEach(el => {
+    if (!el.dataset.i18nPh) el.dataset.i18nPh = el.getAttribute('placeholder');
+    const hit = dict && dict[el.dataset.i18nPh];
+    el.setAttribute('placeholder', hit || el.dataset.i18nPh);
+  });
+}
 
 window.switchLanguage = function(lang) {
-  const data = translations[lang] || translations['EN'];
+  window.currentLang = ['EN', 'CN', 'ID', 'JP'].includes(lang) ? lang : 'EN';
   const labelEl = document.getElementById('navLangLabel');
-  if (labelEl) labelEl.innerText = lang;
-
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (data[key]) {
-      el.innerHTML = data[key];
-    }
-  });
+  if (labelEl) labelEl.innerText = window.currentLang;
+  document.documentElement.setAttribute('lang', I18N_LOCALE[window.currentLang] || 'en');
+  localStorage.setItem('giken_lang', window.currentLang);
+  applyLanguage(document.body);
 };
 
 function initLanguageEngine() {
-  const defaultLang = 'EN';
-  switchLanguage(defaultLang);
+  switchLanguage(localStorage.getItem('giken_lang') || 'EN');
 }

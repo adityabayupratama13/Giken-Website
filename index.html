@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0A2540">
 
-  <link rel="stylesheet" href="styles.css?v=20260827f">
+  <link rel="stylesheet" href="styles.css?v=20260827h">
 </head>
 <body class="corporate-body preloading">
 
@@ -54,7 +54,7 @@
       <nav class="corp-nav" id="corpNav">
         <!-- ABOUT US -->
         <div class="corp-nav-item corp-dropdown">
-          <a href="#about" class="corp-nav-link" data-i18n="nav_about">About Us <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <a href="#about" class="corp-nav-link">About Us <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
           <div class="corp-dropdown-menu">
             <a href="javascript:void(0)" onclick="openDetailModal('about-giken')">About Giken</a>
             <a href="javascript:void(0)" onclick="openDetailModal('company-policies')">Company Policies & Missions</a>
@@ -66,7 +66,7 @@
 
         <!-- CAPABILITIES -->
         <div class="corp-nav-item corp-dropdown">
-          <a href="#capabilities" class="corp-nav-link" data-i18n="nav_capabilities">Services & Capabilities <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <a href="#capabilities" class="corp-nav-link">Services & Capabilities <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
           <div class="corp-dropdown-menu dropdown-wide">
             <div class="dropdown-grid-2col">
               <div>
@@ -89,7 +89,7 @@
 
         <!-- INDUSTRIES / MARKETS -->
         <div class="corp-nav-item corp-dropdown">
-          <a href="#industries" class="corp-nav-link" data-i18n="nav_markets">Industries <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <a href="#industries" class="corp-nav-link">Industries <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
           <div class="corp-dropdown-menu">
             <a href="javascript:void(0)" onclick="openDetailModal('ind-automotive')">Automotive Systems</a>
             <a href="javascript:void(0)" onclick="openDetailModal('ind-medical')">Healthcare & Medical Equipment</a>
@@ -103,7 +103,7 @@
 
         <!-- FACILITIES -->
         <div class="corp-nav-item corp-dropdown">
-          <a href="#facilities" class="corp-nav-link" data-i18n="nav_facilities">Facilities <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
+          <a href="#facilities" class="corp-nav-link">Facilities <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
           <div class="corp-dropdown-menu">
             <a href="javascript:void(0)" onclick="openDetailModal('fac-sg-hq')">Singapore (Global HQ) – 4K+ sq. ft</a>
             <a href="javascript:void(0)" onclick="openDetailModal('fac-sg-gpe')">Singapore (GPE Precision) – 14K sq. ft</a>
@@ -115,12 +115,12 @@
 
         <!-- QUALITY -->
         <div class="corp-nav-item">
-          <a href="#quality" class="corp-nav-link" onclick="smoothScrollTo('#quality')" data-i18n="nav_quality">Quality & ESG</a>
+          <a href="#quality" class="corp-nav-link" onclick="smoothScrollTo('#quality')">Quality & ESG</a>
         </div>
 
         <!-- CAREERS -->
         <div class="corp-nav-item">
-          <a href="#careers" class="corp-nav-link" onclick="smoothScrollTo('#careers')" data-i18n="nav_careers">Careers</a>
+          <a href="#careers" class="corp-nav-link" onclick="smoothScrollTo('#careers')">Careers</a>
         </div>
 
         <!-- LANGUAGE SELECTOR -->
@@ -200,22 +200,22 @@
       </div>
 
       <div class="hero-slogan-box">
-        <h2 class="hero-headline-sub" data-i18n="hero_headline_sub">INNOVATIVE MINDSET,</h2>
-        <h1 class="hero-headline-main" data-i18n="hero_headline_main">STRIVING FOR EXCELLENCE.</h1>
+        <h2 class="hero-headline-sub">INNOVATIVE MINDSET,</h2>
+        <h1 class="hero-headline-main">STRIVING FOR EXCELLENCE.</h1>
         
-        <p class="hero-description" data-i18n="hero_subtitle">
+        <p class="hero-description">
           A Trusted Manufacturing Partner Built on Engineering Excellence since 1979. Providing integrated precision engineering, Electronics Manufacturing Services (EMS), tooling, plastic injection moulding, battery pack assembly, and turnkey product integration across Singapore, Indonesia, and China.
         </p>
 
         <div class="hero-btn-group">
           <button class="btn-primary" onclick="smoothScrollTo('#capabilities')">
-            <span data-i18n="hero_btn_capabilities">Our Capabilities</span>
+            <span>Our Capabilities</span>
           </button>
           <button class="btn-secondary" onclick="openCinemaStream('cad')">
             <i class="fa-solid fa-circle-play"></i> <span>Watch Process Showcase</span>
           </button>
           <button class="btn-outline-hero" onclick="openRfqModal()">
-            <span data-i18n="hero_btn_rfq">Request a Quote</span>
+            <span>Request a Quote</span>
           </button>
         </div>
       </div>
@@ -1214,6 +1214,7 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- JavaScript Controller -->
-  <script src="script.js?v=20260827d"></script>
+  <script src="i18n.js?v=20260827b"></script>
+  <script src="script.js?v=20260827i"></script>
 </body>
 </html>

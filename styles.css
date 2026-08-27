@@ -2827,7 +2827,12 @@ body.modal-open {
 }
 
 .service-tile span {
-  padding: 10px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Two-line labels must not push their tile taller than the one-line ones. */
+  min-height: 3.2em;
+  padding: 8px;
   font-size: 0.76rem;
   font-weight: 600;
   line-height: 1.3;
